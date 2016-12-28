@@ -1,4 +1,5 @@
 INPUT_FILE=main
+OUTPUT_DIR=dist
 
 all:
 	latex $(INPUT_FILE)
@@ -9,7 +10,10 @@ all:
 	pdflatex $(INPUT_FILE)
 
 	$(MAKE) clean
-	open $(INPUT_FILE).pdf
+
+	mkdir $(OUTPUT_DIR)
+	mv $(INPUT_FILE).pdf $(OUTPUT_DIR)
+	open $(OUTPUT_DIR)/$(INPUT_FILE).pdf
 
 clean:
 	rm *.aux *.bbl *.dvi *.blg *.lof *.lot *.toc *.log
