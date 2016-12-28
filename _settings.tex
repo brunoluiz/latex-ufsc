@@ -1,0 +1,27 @@
+\newcommand{\ABNTbibliographyname}{REFERÊNCIAS} % Necess�rio para abnTeX 0.8.2
+
+\bibliographystyle{ufscThesis/ufsc-alf}
+
+\addto\captionsbrazilian{
+  \renewcommand{\appendixname}{Anexo}
+}
+
+\lstset{
+  basicstyle=\small\ttfamily,
+  frame=lrtb,
+  numbers=left,
+  tabsize=2,
+  breaklines=true,                  % automatic line breaking
+    columns=fullflexible,
+    breakautoindent=false,
+    framerule=1pt,
+    xleftmargin=0pt,
+    xrightmargin=0pt,
+    breakindent=0pt,
+    resetmargins=true
+}
+
+% Comandos criados pelo usuário
+\newcommand{\afazer}[1]{{\color{red}{#1}}} % Para destacar uma parte a ser trabalhada
+\newcommand{\psc}[1]{\ensuremath{^{\textrm{#1}}}}
+\newcommand{\bsc}[1]{\ensuremath{_{\textrm{#1}}}}
