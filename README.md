@@ -10,6 +10,12 @@ Caso desejar utilizar este projeto como base para seu TCC basta:
 - Adicionar seus capítulos à pasta chapters (e incluí-los no arquivo chapters/chapters)
 - Executar o Makefile na raiz do projeto
 
+## Pequenos detalhes:
+
+Os arquivos aqui estão todos codificados em UTF8, logo modifiquei a lib da ufscThesis para funcionar em UTF8 também. Se você usa um editor Latex que não tem suporte a UTF8, provavelmente você terá problemas na acentuação do projeto. Para resolver isso é necessário:
+- Mudar o encoding de todos arquivos para ANSI
+- Mudar os inputenc e fontenc para ANSI
+
 ## TODO:
 
 - Tentar achar alguma adaptação que utilize a abntex mais recente
