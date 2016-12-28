@@ -4,7 +4,7 @@ Esse repositório contém meu TCC, realizado entre 2016-2017 no curso de Engenha
 
 Caso desejar utilizar este projeto como base para seu TCC basta:
 - Clonar esse repositório
-- Modificar os dados da ficha catalográfica (ufscThesis/BUUFSCthesis)
+- Modificar os dados da ficha catalográfica (\_catalog)
 - Modificar os arquivos \_includes e \_settings com seus pacotes e configurações
 - Instalar a abntex antiga (está na pasta lib)
 - Adicionar seus capítulos à pasta chapters (e incluí-los no arquivo chapters/chapters)

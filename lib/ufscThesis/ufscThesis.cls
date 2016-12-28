@@ -40,7 +40,7 @@
 
 %---------------------------------------------------------------------------
 % Pacote de definicoes da tese padrao UFSC
-\RequirePackage{ufscThesis/BUUFSCthesis}
+\RequirePackage{lib/ufscThesis/BUUFSCthesis}
 
 %---------------------------------------------------------------------------
 % Definicoes de fontes usadas no documento
@@ -280,7 +280,7 @@
     \@dottedchaptocline{1}{0pt}{\espacosumario}%{1.2em}
 	{\normalsize\ABNTtocchapterfont{#1}}
 	{#2}}
-	
+
 
 \renewcommand*\l@section[2]{
     \@dottedtocline{1}{0pt}{\espacosumario}%{2em}
