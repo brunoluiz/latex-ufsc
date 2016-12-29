@@ -1,8 +1,10 @@
 INPUT_FILE=main
 OUTPUT_DIR=dist
+PDF_PROGRAM=Preview
 
 all:
 	$(MAKE) clean
+	@-killall $(PDF_PROGRAM)
 
 	latex $(INPUT_FILE)
 
