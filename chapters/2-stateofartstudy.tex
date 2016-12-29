@@ -16,6 +16,12 @@ As estações de carregamento normalmente se comunicam com um servidor central, 
 
 \subsection{OCPP}
 
+O OCPP - Open Charge Point Protocol - foi criado pela Open Charge Alliance e hoje está presente em 50 países e em mais de 10000 estações de carregamento. Na Europa, todas estações comercializadas precisam ser compatíveis com o OCCP.
+
+O protocolo prevê um sistema central que recebe dados de N estações. Caso for necessário, o sistema central pode atuar sob tais estações com ações como reservar a estação, cancelar algum carregamento ou até desligar a estação. Caso a estação perca conectividade, o protocolo prevê que ela deve funcionar de modo autônomo, somente registrando alguns dados para envio posterior (início e finalização de carregamentos).
+
+As requisições da versão 1.5 podem ser via SOAP ou WebSocket, enquanto a versão 1.6 já adiciona suporte a JSON.
+
 \section{Protocolo MODBUS}
 
 Em projetos industriais, é requisito que dispositivos diversos consigam comunicar-se entre si. Para tal, existem dezenas de protocolos que permitem a realização dessa tarefa, sendo o MODBUS um dos mais comuns \cite{modbusspec}. Sua implementação inicial era sob serial, porém hoje também é possível utilizar o stack TCP/IP e outras implementações menos comuns - UDP, PEMEX, Enron.
