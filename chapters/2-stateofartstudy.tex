@@ -96,3 +96,16 @@ Cada implementação possui algumas diferenças, porém o meio que as informaç�
 Como pode se notar, somente no MODBUS-RTU há o SlavID (endereço). Esse endereço é substituído por um UnitID no caso do TCP/IP. O campo CRC é um dado que permite checar se o pacote obtido possui ou não algum erro. Como o protocolo TCP/IP já possui um meio para isso, tal campo não é incluído na requisição.
 
 Esse formato de envio de informações é mantido tanto para requisição quanto para resposta, sendo que as respostas sempre possuíram o mesmo function code da requisição. Caso o function code diferir, provavelmente ocorreu um erro e este pode ser processado pelo mestre posteriormente.
+
+\section{WSDL e SOAP}
+
+O WSDL \cite{wsdlspec} permite descrever serviços web por meio de um arquivo XML. É possível definir os \textit{endpoints} - pontos de entrada para requisições - assim como o que devem retornar e o que devem receber como parâmetro. Isso permite que um serviço web seja desenvolvido por uma equipe que, posteriormente, exporta um WSDL do seu \textit{software}, descrevendo de maneira fácil quais são seus endpoints e facilitando a criação de clientes para o serviço.
+
+Os arquivos WSDL definem suas interfaces em SOAP \cite{soapspec}, um protocolo que permite trocas de informações entre clientes e servidores de forma padronizada. Ele é baseado em XML e é montado em três partes:
+\begin{itemize}
+  \item Envolpe: identifica o que é a mensagem e como processá-la
+  \item Cabeçalho: define informações extras sobre a mensagem
+  \item Corpo: define o o procedimento a ser chamado e os dados de sua resposta
+\end{itemize}
+
+Como ele foi idealizado em XML, ele é facilmente processado por qualquer linguagem de programação, o que garante uma boa portabilidade.
