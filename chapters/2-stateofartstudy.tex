@@ -93,7 +93,7 @@ Cada implementação possui algumas diferenças, porém o meio que as informaç�
         \end{center}
 \end{figure}
 
-Como pode se notar, somente no MODBUS-RTU há o SlavID (endereço). Esse endereço é substituído por um UnitID no caso do TCP/IP. O campo CRC é um dado que permite checar se o pacote obtido possui ou não algum erro. Como o protocolo TCP/IP já possui um meio para isso, tal campo não é incluído na requisição.
+Como pode-se notar, somente no MODBUS-RTU há o SlavID (endereço), já que os dispositivos MODBUS-TCP são endereçados por seus IPs. O campo CRC é um dado que permite checar se o pacote obtido possui ou não algum erro. Como o protocolo TCP/IP já possui um meio para isso, tal campo não é incluído na requisição.
 
 Esse formato de envio de informações é mantido tanto para requisição quanto para resposta, sendo que as respostas sempre possuíram o mesmo function code da requisição. Caso o function code diferir, provavelmente ocorreu um erro e este pode ser processado pelo mestre posteriormente.
 
