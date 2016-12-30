@@ -145,6 +145,8 @@ Alguns testes unitários foram desenvolvidos sob o framework de testes \textit{J
 
 Como as cargas utilizadas durante o teste consumiam pouca energia (fontes AC-DC de dispositivos como notebooks), o medidor de energia teve seu multiplicador de corrente configurado em 100, possibilitando assim simular um consumo alto de forma rápida (sem ter que aguardar várias horas para chegar em 1kWh).
 
+Todos arquivos, incluindo o sistema operacional, são colocados no cartão SD, o que facilita a cópia desses dados para backup (criação de imagens) como para uso na estação protótipo.
+
 \begin{figure}[H]
         \begin{center}
                 \includegraphics[width=0.6\textwidth,natwidth=2130,natheight=1420,angle=-90]{assets/images/prototype-setup.jpg}
@@ -154,6 +156,8 @@ Como as cargas utilizadas durante o teste consumiam pouca energia (fontes AC-DC 
 \end{figure}
 
 \subsection{Testes na estação protótipo}
+
+Após diversos testes na configuração mostrada na \ref{fig:prototype-setup}, o sistema foi levado para a estação protótipo, disponível no estacionamento da Fundação CERTI. A disposição difere da estação difere com a do teste inicial, porém visto que os dispositivos são os mesmos e o sistema embarcado foi colocado em um cartão SD, só é necessário inserir o cartão na BeagleBone da estação e configurá-la para dar boot pelo cartão, caso já não estiver configurada por fábrica assim.
 
 \begin{figure}[H]
         \begin{center}
