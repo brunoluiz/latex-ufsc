@@ -7,10 +7,12 @@ UNAME := $(shell uname)
 
 ifeq ($(UNAME), Linux)
 PDFVIEWER = evince
+OPEN=$(PDFVIEWER)
 endif
 
 ifeq ($(UNAME), Darwin)
-PDFVIEWER = open
+PDFVIEWER = Preview
+OPEN=open -a $(PDFVIEWER)
 endif
 
 INPUT_FILE=main
@@ -20,14 +22,14 @@ all:
 	# Clean previous builds
 	$(MAKE) clean
 
-	# Kill any instance of the specified PDF Viewer
+	# Close the PDF Viewer (if it is open)
 	@-killall $(PDFVIEWER)
 
 	# Usual process to generate the PDF
 	pdflatex -halt-on-error $(INPUT_FILE)
-	@-bibtex $(INPUT_FILE)
-	pdflatex -halt-on-error $(INPUT_FILE)
-	pdflatex -halt-on-error $(INPUT_FILE)
+	bibtex $(INPUT_FILE)
+	pdflatex -halt-on-error  $(INPUT_FILE)
+	pdflatex -halt-on-error  $(INPUT_FILE)
 
 	# Remove all generated files (and keep only the PDF)
 	$(MAKE) clean
@@ -37,8 +39,8 @@ all:
 	mv $(INPUT_FILE).pdf $(OUTPUT_DIR)
 
 	# HABEMUS PDF
-	$(PDFVIEWER) $(OUTPUT_DIR)/$(INPUT_FILE).pdf
+	$(OPEN) $(OUTPUT_DIR)/$(INPUT_FILE).pdf
 
 clean:
-	@-rm *.aux *.bbl *.dvi *.blg *.lof *.lot *.toc *.log
+	@-rm *.aux *.bbl *.dvi *.blg *.lof *.lot *.toc *.log *.out
 	@-rm -rf dist
