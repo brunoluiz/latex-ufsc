@@ -79,7 +79,7 @@
          \typeout{\@chapapp\space\thechapter.}%
          % gambiarra usada para definir maiusculas para capitulos comuns e normal para anexos e apêndices
          \ifthenelse{\boolean{ABNTcapchap}}
-               {\renewcommand{\nometoc}{\MakeUppercase{#1}}}
+               {\renewcommand{\nometoc}{\uppercase{#1}}}
                {\renewcommand{\nometoc}{#1}}
          \ifthenelse{\boolean{ABNTaftertoc}}
            {\ABNTaddcontentsline{toc}{chapter}%
@@ -112,7 +112,7 @@
     \parbox[t]{\textwidth-4ex-1ex}%
       {\interlinepenalty\@M\raggedright%
         \ifthenelse{\boolean{ABNTcapchap}}%
-          {\MakeUppercase{#1}}%
+          {\uppercase{#1}}%
           {#1}
       }%
     \vspace*{0cm}
@@ -126,7 +126,7 @@
   \vspace*{0pt}\par
   {\centering\normalfont\ABNTchaptersize\ABNTchapterfont%
    \ifthenelse{\boolean{ABNTcapchap}}%
-     {\MakeUppercase{#1}}%
+     {\uppercase{#1}}%
      {#1}
     \par}%
   \vspace{21pt}%
@@ -185,7 +185,7 @@
         \@hangfrom{\hskip #3\relax \@svsec}%
           \interlinepenalty \@M
           \ifthenelse{\boolean{ABNTcapsec}\and\equal{#2}{1}}
-             {\MakeUppercase{#8}}{#8}\@@par}%
+             {\uppercase{#8}}{#8}\@@par}%
     \endgroup
     \@ifundefined{ABNT#1mark}{}{\csname ABNT#1mark\endcsname{#7}}
     \ABNTaddcontentsline{toc}{#1}{%
@@ -197,7 +197,7 @@
     \def\@svsechd{%
       #6{\hskip #3\relax
       \@svsec \ifthenelse{\boolean{ABNTcapsec}}
-             {\MakeUppercase{#8}}{#8}}%
+             {\uppercase{#8}}{#8}}%
       \@ifundefined{ABNT#1mark}{}{\csname ABNT#1mark\endcsname{#7}}
       \ABNTaddcontentsline{toc}{#1}{%
         \ifnum #2>\c@secnumdepth \else
@@ -286,7 +286,7 @@
     \@dottedtocline{1}{0pt}{\espacosumario}%{2em}
 	{\normalsize\ABNTsectionfont
 	 \ifthenelse{\boolean{ABNTcapchap}}%
-	    {\MakeUppercase{#1}}%
+	    {\uppercase{#1}}%
 	    {#1}}
 	{#2}}
 
@@ -454,9 +454,9 @@
          \ifthenelse{\boolean{ABNTAnApName}}{
            \ifthenelse{\equal{#1}{}}
               {\ABNTaddcontentsline{toc}{chapter}%
-                  {\hspace{\espacosumario}\MakeUppercase{\anapchaptername{}} \thechapter}}
+                  {\hspace{\espacosumario}\uppercase{\anapchaptername{}} \thechapter}}
               {\ABNTaddcontentsline{toc}{chapter}%
-                  {\hspace{\espacosumario}\MakeUppercase{\anapchaptername{}} \thechapter{} \ABNTtravessao{} #1}}
+                  {\hspace{\espacosumario}\uppercase{\anapchaptername{}} \thechapter{} \ABNTtravessao{} #1}}
          }
          {
           \ABNTaddcontentsline{toc}{chapter}%
@@ -476,7 +476,7 @@
   \mbox{}
   \vfill
   \begin{center}
-   \MakeUppercase{\anapchaptername}
+   \uppercase{\anapchaptername}
    \thechapter{} \ABNTtravessao{} \ABNTaposindicativoanap {#1}
   \end{center}
   \vfill
@@ -527,7 +527,7 @@
         \@hangfrom{\hskip #3\relax \@svsec}%
           \interlinepenalty \@M
           \ifthenelse{\boolean{ABNTcapsec}\and\equal{#2}{1}}
-             {\MakeUppercase{#8}}{#8}\@@par}%
+             {\uppercase{#8}}{#8}\@@par}%
     \endgroup
     \@ifundefined{ABNT#1mark}{}{\csname ABNT#1mark\endcsname{#7}}
 %     \ABNTaddcontentsline{toc}{#1}{%
@@ -539,7 +539,7 @@
     \def\@svsechd{%
       #6{\hskip #3\relax
       \@svsec \ifthenelse{\boolean{ABNTcapsec}}
-             {\MakeUppercase{#8}}{#8}}%
+             {\uppercase{#8}}{#8}}%
       \@ifundefined{ABNT#1mark}{}{\csname ABNT#1mark\endcsname{#7}}
 %       \ABNTaddcontentsline{toc}{#1}{%
 %         \ifnum #2>\c@secnumdepth \else
