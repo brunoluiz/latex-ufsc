@@ -1,0 +1,9 @@
+Operação, Function Code
+Leitura de Coils, 1
+Escrita em 1 Coil, 5
+Escrita em N Coils, 15
+Leitura de Inputs, 2
+Leitura de Input Registers, 4
+Leitura de Holding Registers, 3
+Escrita em 1 Holding Register, 6
+Escrita em N Holding Registers, 16

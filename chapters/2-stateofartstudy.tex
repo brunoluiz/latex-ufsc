@@ -61,12 +61,12 @@ Toda requisição realizada pelo mestre endereçará um dado no mapa de memória
   \item Holding Register: registrador com 16 bits (inteiro) que permite leitura e escrita
 \end{itemize}
 
-Para a realização de operações nesse mapa de memória, o mestre necessita informar nas suas requisições um function code. Este indicará qual dado deseja-se requisitar e se será executada uma operação de leitura ou escrita. A tabela mostra os mais comuns, porém existem mais códigos, aos quais podem ser usados para diagnósticos e entre outras funções.
+Para a realização de operações nesse mapa de memória, o mestre necessita informar nas suas requisições um function code. Este indicará qual dado deseja-se requisitar e se será executada uma operação de leitura ou escrita. A tabela \ref{table:modbus-funccodes} mostra os mais comuns, porém existem mais códigos, aos quais podem ser usados para diagnósticos e entre outras funções.
 
 \begin{table}[]
 \centering
 \caption{Function codes / Operações do MODBUS}
-\label{modbus-funccodes}
+\label{table:modbus-funccodes}
 \begin{tabular}{@{}ll@{}}
 \toprule
 \textbf{Operação}              & \textbf{Function code} \\ \midrule

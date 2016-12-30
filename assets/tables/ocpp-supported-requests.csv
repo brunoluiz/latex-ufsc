@@ -1,0 +1,13 @@
+Enviada/Recebida, Operação
+Enviada pela Estação, BootNotification
+Enviada pela Estação, Heartbeat
+Enviada pela Estação, StartTransaction
+Enviada pela Estação, StopTransaction
+Enviada pela Estação, MeterValues
+Enviada pela Estação, StatusNotification
+Enviada pela Estação, Authorize
+Recebida pela Estação, RemoteStartTransaction
+Recebida pela Estação, RemoteStopTransaction
+Recebida pela Estação, ChangeConfiguration
+Recebida pela Estação, GetConfiguration
+Recebida pela Estação, ChangeAvailability
