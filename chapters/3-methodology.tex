@@ -41,7 +41,7 @@ Os padrões de carregamento rápido utilizam protocolos de comunicação entre c
 
 \subsection{IHM WEG MT}
 
-Para o usuário utilizar a EVSE, é necessária uma interface que apresente informações de forma descomplicada e, além disso, seja robusta a intempéries como calor excessivo e chuva. Para tal, foi escolhida a \ac{IHM} da WEG, linha MT.
+Para o usuário utilizar a \ac{EVSE}, é necessária uma interface que apresente informações de forma descomplicada e, além disso, seja robusta a intempéries como calor excessivo e chuva. Para tal, foi escolhida a \ac{IHM} da WEG, linha MT.
 
 Utilizando o \textit{software EasyBuilder 8000}, é possível definir as telas que serão exibidas para o usuário, assim como os dados que serão exibidos. Os dados e o controle da IHM podem ser realizados por meio de diversos protocolos, dentre eles o MODBUS-TCP, o qual foi escolhido para o projeto.
 
@@ -76,7 +76,7 @@ A estação possui dois medidores, sendo um de carregamento normal/lento e outro
 \begin{figure}[H]
         \begin{center}
                 \includegraphics[width=0.8\textwidth,natwidth=400,natheight=288]{assets/images/devices-diagram.png}
-                \caption{Diagrama de conexão entre os dispositivos da EVSE}
+                \caption{Diagrama de conexão entre os dispositivos da \ac{EVSE}}
                 \label{fig:proj-diagram}
         \end{center}
 \end{figure}
@@ -93,13 +93,13 @@ Visto que todos dispositivos escolhidos suportam MODBUS, esse foi o protocolo es
 
 \subsection{Comunicação entre estação e servidores}
 
-A estação implementa o protocolo \ac{OCPP} 1.5, ao qual é suportado por outras estações comerciais vendidas no Brasil, permitindo comunicação com equipamentos e \texit{softwares} já existentes. A \ac{OCA}, responsável pelo protocolo, disponibiliza um arquivo WSDL, onde é possível criar tanto um servidor quanto um cliente OCPP facilmente.
+A estação implementa o protocolo \ac{OCPP} 1.5, ao qual é suportado por outras estações comerciais vendidas no Brasil, permitindo comunicação com equipamentos e \textit{softwares} já existentes. A \ac{OCA}, responsável pelo protocolo, disponibiliza um arquivo WSDL, onde é possível criar tanto um servidor quanto um cliente OCPP facilmente.
 
 Para a utilização desse arquivo em Java, foi utilizada a ferramenta \textit{wsimport}. Ela importa os arquivos e cria classes \textit{Java} correspondentes a cada \textit{endpoint}. Nem todas funções especificadas pelo protocolo foram implementadas, sendo somente as da tabela \ref{table:ocpp} são suportadas.
 
 \begin{table}[]
   \centering
-  \caption{Operações OCPP suportadas pela EVSE}
+  \caption{Operações OCPP suportadas pela \ac{EVSE}}
   \label{table:ocpp}
   \begin{tabular}{@{}ll@{}}
     \toprule
