@@ -6,9 +6,25 @@
 
 O carregamento de veículos elétricos é realizado por meio de estações de carregamento (EVSE). O padrão IEC 62196 \cite{iec-62196} tenta padronizar alguns dos conectores já usados no mercado, assim como os modos de operações de uma estação de carregamento.
 
-\subsection{Padrões de Conectores}
+\subsection{Modos de Carregamento}
 
-\subsection{Modos de Operação}
+\subsubsection{Modos de Carregamento Europeu}
+
+Os modos de carregamento disponíveis hoje no mercado são dados em forma crescente de velocidade de carregamento.
+
+\begin{itemize}
+  \item Modo 1: utiliza plug de tomada residenciais, o qual não pode exceder 16 A de corrente e 250 V AC de tensão monofásica ou 480 V AC de tensão trifásica. Normalmente ele toma de 6 à 8 horas para carregar completamente o veículo. Como é utilizada uma tomada comum, não é necessária uma EVSE para fazer o controle desse carregamento. Porém, como esse padrão utiliza uma proteção diferencial e requer uma proteção aterrada, muitos países não o adotam, visto que há muitos cidadãos que não possuem aterramento em sua residência.
+
+  \item Modo 2: é necessária uma caixa de controle no plug ou no cabo, sendo que esta faz a comunicação com o veículo (via PWM). Graças a essa comunicação, o carro pode informar o status de sua bateria e assim o carregamento pode ser adaptado de acordo com esse dado. Ele utiliza o mesmo plug do Modo 1 e possui as mesmas limitações elétricas de tensão, porém ele permite um máximo de até 32 A de corrente. Dentro dessa caixa de controle há também um circuito de proteção, o que permite o uso desse modo em locais não aterrados. Ele é utilizado em alguns locais públicos da Europa e é considerado uma solução de transição nos EUA.
+
+  \item Modo 3: o cabo é conectado à uma EVSE, sendo que ela precisa estar habilitada à comunicação PWM e possuir uma proteção elétrica. O carregamento pode ser ajustado de acordo com os dados recebidos pelo pino de controle da estação, possibilitando assim carregamentos lentos e rápidos. Usando uma tensão de 400 V trifásica com 63 A de corrente, é possível carregar certos carros em menos de uma hora. Esse modo está se tornando cada vez mais comum, porém requer um equipamento de eletrônica de potência adequado a tensão e corrente máxima desejadas.
+
+  \item Modo 4 - \ac{CC}: este modo ultra-rápido permite tensões de 400 V e corrente de 200 A. Esse modo requer um inversor para converter a entrada da rede de AC para CC. Estações que permitem carregamento no modo 4 normalmente custarão muito mais caro que estações modo 3, sem contar que o projeto precisa de uma atenção especial no quesito segurança.
+
+  \item Tesla Supercharger: modo proprietário da fabricante Tesla, que permite o carregamento de 50\% da bateria do modelo Tesla S (85kWh) em menos de 20 minutos. Para possibilitar tal carregamento, esse modo utiliza corrente contínua
+\end{itemize}
+
+\subsection{Padrões de Conectores}
 
 \section{Protocolos OCPP}
 
@@ -18,7 +34,7 @@ Mantido e criado pela \ac{OCA}, o OCPP está presente em mais de 50 países. Na 
 
 O protocolo prevê um sistema central que recebe dados de N estações. Caso for necessário, o sistema central pode atuar sob tais estações com ações como reservar a estação, cancelar algum carregamento ou até desligar a estação. Caso a estação perca conectividade, o protocolo prevê que ela deve funcionar de modo autônomo, somente registrando alguns dados para envio posterior (início e finalização de carregamentos) \cite{ocpp-spec-15}.
 
-As requisições da versão 1.5 podem ser via SOAP ou WebSocket, enquanto a versão 1.6 já adiciona suporte a JSON. A versão 2.0 está em desenvolvimento, tendo em mente a padronização do protocolo e retrocompatibilidade com versões anteriores. 
+As requisições da versão 1.5 podem ser via SOAP ou WebSocket, enquanto a versão 1.6 já adiciona suporte a JSON. A versão 2.0 está em desenvolvimento, tendo em mente a padronização do protocolo e retrocompatibilidade com versões anteriores.
 
 \section{Protocolo MODBUS}
 
