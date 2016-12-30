@@ -4,27 +4,25 @@
 
 \section{Estações de carregamento - EVSE}
 
-O carregamento de veículos elétricos é realizado por meio de estações de carregamento (EVSE). O padrão IEC 62196 \cite{iec62196} tenta padronizar alguns dos conectores já usados no mercado, assim como os modos de operações de uma estação de carregamento.
+O carregamento de veículos elétricos é realizado por meio de estações de carregamento (EVSE). O padrão IEC 62196 \cite{iec-62196} tenta padronizar alguns dos conectores já usados no mercado, assim como os modos de operações de uma estação de carregamento.
 
 \subsection{Padrões de Conectores}
 
 \subsection{Modos de Operação}
 
-\section{Protocolos de Comunicação - EVSE}
+\section{Protocolos OCPP}
 
-As estações de carregamento normalmente se comunicam com um servidor central, que pode gerenciar N estações. Para tal tarefa, é necessário um protocolo de comunicação. Embora não haja um padrão oficial, alguns protocolos já se sobressaem em questões de utilização pelo indústria.
+As estações de carregamento normalmente se comunicam com um servidor central, que pode gerenciar N estações. Para tal tarefa, é necessário um protocolo de comunicação. Embora ainda não exista um padrão oficial, o \ac{OCPP} é um padrão \textit{de facto} e já existem esforços para o tornar um padrão oficial junto a \ac{OASIS} \cite{ocpp-news-standardization}.
 
-\subsection{OCPP}
+Mantido e criado pela \ac{OCA}, o OCPP está presente em mais de 50 países. Na Europa, todas estações comercializadas precisam ser compatíveis com o OCCP e, além disso, o interesse da indústria americana no protocolo também é alto \cite{ocpp-news-forbes}.
 
-O OCPP - Open Charge Point Protocol - foi criado pela Open Charge Alliance e hoje está presente em 50 países e em mais de 10000 estações de carregamento. Na Europa, todas estações comercializadas precisam ser compatíveis com o OCCP.
+O protocolo prevê um sistema central que recebe dados de N estações. Caso for necessário, o sistema central pode atuar sob tais estações com ações como reservar a estação, cancelar algum carregamento ou até desligar a estação. Caso a estação perca conectividade, o protocolo prevê que ela deve funcionar de modo autônomo, somente registrando alguns dados para envio posterior (início e finalização de carregamentos) \cite{ocpp-spec-15}.
 
-O protocolo prevê um sistema central que recebe dados de N estações. Caso for necessário, o sistema central pode atuar sob tais estações com ações como reservar a estação, cancelar algum carregamento ou até desligar a estação. Caso a estação perca conectividade, o protocolo prevê que ela deve funcionar de modo autônomo, somente registrando alguns dados para envio posterior (início e finalização de carregamentos).
-
-As requisições da versão 1.5 podem ser via SOAP ou WebSocket, enquanto a versão 1.6 já adiciona suporte a JSON.
+As requisições da versão 1.5 podem ser via SOAP ou WebSocket, enquanto a versão 1.6 já adiciona suporte a JSON. A versão 2.0 está em desenvolvimento, tendo em mente a padronização do protocolo e retrocompatibilidade com versões anteriores. 
 
 \section{Protocolo MODBUS}
 
-Em projetos industriais, é requisito que dispositivos diversos consigam comunicar-se entre si. Para tal, existem dezenas de protocolos que permitem a realização dessa tarefa, sendo o MODBUS um dos mais comuns \cite{modbusspec}. Sua implementação inicial era sob serial, porém hoje também é possível utilizar o stack TCP/IP e outras implementações menos comuns - UDP, PEMEX, Enron.
+Em projetos industriais, é requisito que dispositivos diversos consigam comunicar-se entre si. Para tal, existem dezenas de protocolos que permitem a realização dessa tarefa, sendo o MODBUS um dos mais comuns \cite{modbus-spec-application}. Sua implementação inicial era sob serial, porém hoje também é possível utilizar o stack TCP/IP e outras implementações menos comuns - UDP, PEMEX, Enron.
 
 \subsection{Funcionamento}
 
@@ -99,9 +97,9 @@ Esse formato de envio de informações é mantido tanto para requisição quanto
 
 \section{WSDL e SOAP}
 
-O WSDL \cite{wsdlspec} permite descrever serviços web por meio de um arquivo XML. É possível definir os \textit{endpoints} - pontos de entrada para requisições - assim como o que devem retornar e o que devem receber como parâmetro. Isso permite que um serviço web seja desenvolvido por uma equipe que, posteriormente, exporta um WSDL do seu \textit{software}, descrevendo de maneira fácil quais são seus endpoints e facilitando a criação de clientes para o serviço.
+O WSDL \cite{w3c-spec-wsdl} permite descrever serviços web por meio de um arquivo XML. É possível definir os \textit{endpoints} - pontos de entrada para requisições - assim como o que devem retornar e o que devem receber como parâmetro. Isso permite que um serviço web seja desenvolvido por uma equipe que, posteriormente, exporta um WSDL do seu \textit{software}, descrevendo de maneira fácil quais são seus endpoints e facilitando a criação de clientes para o serviço.
 
-Os arquivos WSDL definem suas interfaces em SOAP \cite{soapspec}, um protocolo que permite trocas de informações entre clientes e servidores de forma padronizada. Ele é baseado em XML e é montado em três partes:
+Os arquivos WSDL definem suas interfaces em SOAP \cite{w3c-spec-soapspec}, um protocolo que permite trocas de informações entre clientes e servidores de forma padronizada. Ele é baseado em XML e é montado em três partes:
 \begin{itemize}
   \item Envolpe: identifica o que é a mensagem e como processá-la
   \item Cabeçalho: define informações extras sobre a mensagem
