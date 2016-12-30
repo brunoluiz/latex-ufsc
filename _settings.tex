@@ -1,9 +1,10 @@
-\newcommand{\ABNTbibliographyname}{REFERÊNCIAS} % Necess�rio para abnTeX 0.8.2
+\newcommand{\ABNTbibliographyname}{Referências} % Necess�rio para abnTeX 0.8.2
 
 \addto\captionsbrazilian{
   \renewcommand{\appendixname}{Anexo}
 }
 
+% Configurações do pacote listings
 \lstset{
   basicstyle=\small\ttfamily,
   frame=lrtb,
@@ -23,3 +24,11 @@
 \newcommand{\afazer}[1]{{\color{red}{#1}}} % Para destacar uma parte a ser trabalhada
 \newcommand{\psc}[1]{\ensuremath{^{\textrm{#1}}}}
 \newcommand{\bsc}[1]{\ensuremath{_{\textrm{#1}}}}
+
+% Configurações das URLs
+\hypersetup{
+  breaklinks=true,
+  bookmarks=true,
+  colorlinks=false,
+  pdfstartview={FitH},
+}
