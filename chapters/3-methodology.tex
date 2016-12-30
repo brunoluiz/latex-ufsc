@@ -157,6 +157,16 @@
 
       Como ele foi idealizado em XML, ele é facilmente processado por qualquer linguagem de programação, o que garante uma boa portabilidade.
 
+    \subsection{JUnit e Automação de testes}
+
+      O JUnit é um framework que facilita a criação de código para a automação de testes com apresentação dos resultados. Com ele, pode ser verificado se cada método de uma classe funciona da forma esperada, exibindo possíveis erros ou falhas podendo ser utilizado tanto para a execução de baterias de testes como para extensão \cite{wikipedia-junit}.
+
+      Caso os testes falhem, o projeto não é enviado para o ambiente de produção (exemplo: servidor ou placa de desenvolvimento). Isso é de extrema importância para casos onde a equipe precisa modificar diversas classes, porém precisa manter suas funcionalidades. Assim, caso alguma modificação criar alguma falha nos testes, o desenvolvedor rapidamente poderá analisar e corrigir o erro, não deixando este se propagar no meio de produção, minimizando a chance de bugs.
+
+      Um dos problemas da utilização de frameworks de automação de teste é que é exigida uma boa dedicação para a criação dos testes, algo nem sempre possível devido a limitações de projeto, como prazos de entrega. Outro é que é necessária uma boa experiência para a criação de testes úteis e assertivos, pois é necessário um balanço entre quanto tempo dedicar e quais funcionalidades são críticas (e devem ser testadas).
+
+    \subsection{Guice e Dependency Injection}
+
   \section{Estrutura do Projeto}
 
     A figura \ref{fig:proj-diagram} apresenta o diagrama de conexão dos dispositivos. Como todos os dispositivos são compatíveis com MODBUS, esse foi o protocolo escolhido para a comunicação entre eles. Para a comunicação entre servidor e estação, foi escolhido o protocolo \ac{OCPP} 1.5.
@@ -217,7 +227,7 @@
 
       O software foi desenvolvido em Java [...]
 
-  \section{Testes}
+  \section{Testes e Resultados}
 
     \subsection{Ferramentas de teste}
 
