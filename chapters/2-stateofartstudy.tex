@@ -60,11 +60,11 @@
       O protocolo é baseado no modelo mestre-escravo, onde um dispositivo mestre requisita os dados dos dispositivos escravos. Essa analogia é muito semelhante ao modelo cliente-servidor, onde o cliente seria o mestre e o servidor o escravo.
 
       \begin{figure}[H]
-              \begin{center}
-                      \includegraphics[width=\textwidth,natwidth=1024,natheight=768]{assets/images/modbus-req-1.png}
-                      \caption{Requisição MODBUS do mestre para o escravo}
-                      \label{fig:modbus-req-1}
-              \end{center}
+        \begin{center}
+          \includegraphics[width=\textwidth,natwidth=1024,natheight=768]{assets/images/modbus-req-1.png}
+          \caption{Requisição MODBUS do mestre para o escravo}
+          \label{fig:modbus-req-1}
+        \end{center}
       \end{figure}
 
       Como uma rede pode ter N escravos, cada escravo possui um endereço atribuído. O mestre envia a requisição para o barramento e todos os escravos a recebem, porém somente o endereçado responderá. Há também a opção de se fazer um broadcast - endereço 0 - onde todos escravos recebem a requisição, porém nesse caso nenhum escravo deve responde-lá.
@@ -72,11 +72,11 @@
       Vale notar que em uma rede MODBUS-RTU há somente um mestre, enquanto em uma rede MODBUS-TCP é possível que cada mestre seja um escravo, e vice-versa.
 
       \begin{figure}[H]
-              \begin{center}
-                      \includegraphics[width=\textwidth,natwidth=1024,natheight=768]{assets/images/modbus-req-2.png}
-                      \caption{Resposta MODBUS do escravo para o mestre}
-                      \label{fig:modbus-req-2}
-              \end{center}
+        \begin{center}
+          \includegraphics[width=\textwidth,natwidth=1024,natheight=768]{assets/images/modbus-req-2.png}
+          \caption{Resposta MODBUS do escravo para o mestre}
+          \label{fig:modbus-req-2}
+        \end{center}
       \end{figure}
 
     \subsection{Mapa de Memória}
