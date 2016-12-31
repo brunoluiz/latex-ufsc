@@ -2,6 +2,24 @@
 
   \section{Mercado de Veículos Elétricos}
 
+    O mercado de veículos elétricos, desde o início da década, está muito aquecido. Nos Estados Unidos, de 2010 à 2014 ouve um aumento de 71\% no volume de vendas (286.390 mil veículos em números absolutos) \cite{fsec-report-ev}. Na China, em 2015, houve um aumento de 4.2 vezes na produção de carros movidos a bateria, e 3.3 vezes quando incluir outras categorias de \ac{EV} \cite{caam-report-ev}.
+
+    Já na União Européia, de 2013 para 2014 houve um crescimento de 31.5\%, com a venda de 22.6 mil veículos. Embora o crescimento seja grande, está longe de ser maioria no mercado: menos de 1\% da atual frota é constituída de veículos elétricos e a adoção destes depende muito dos incentivos dados em cada país. No contexto Europeu, porém fora da União Européia, a Noruega se destaca, com uma fatia de 22.5 \% em elétricos na vendas de veículos novos. \cite{mckinsey-report-ev}
+
+    Embora esse mercado apresente potencial, ele ainda depende muito de fatores externos. Isso pode ser visto quando analisamos que as atuais fabricantes possuem poucos modelos, sendo em alguns casos somente uma adaptação de um modelo movido a combustão, pois elas ainda estão testando o mercado e avaliando seus investimentos nele.
+
+    Dos fatores que podem influenciar a adoção, são:
+
+    \begin{itemize}
+      \item Regulamentações exigindo os fabricantes automotores a reduzir emissões de CO2
+      \item Incentivos fiscais e financeiros para a aquisição de veículos e operações relacionadas
+      \item Preços de combustíveis
+      \item Custos de baterias e evolução da tecnologia
+      \item Infraestrutura do ecossistema de veículos elétricos (pontos de carregamento e manutenção)
+    \end{itemize}
+
+    Alguns países Europeus, como a Alemanha, já afirmaram que desejam abolir vendas de veículos a combustão \cite{forbes-news-germany}. Outros países planejam seguir a mesma linha, o que força as fabricantes a iniciarem pesquisas na área e desenvolver as tecnologias relacionadas a esse mercado.
+
   \section{Modos de Operação de \ac{EVSE}}
 
     \subsection{Modos Europeus}
@@ -113,7 +131,7 @@
 
     As estações de carregamento normalmente se comunicam com um servidor central, que pode gerenciar N estações. Para tal tarefa, é necessário um protocolo de comunicação. Embora ainda não exista um padrão oficial, o \ac{OCPP} é um padrão \textit{de facto} e já existem esforços para o tornar um padrão oficial junto a \ac{OASIS} \cite{ocpp-news-standardization}.
 
-    Mantido e criado pela \ac{OCA}, o OCPP está presente em mais de 50 países. Na Europa, todas estações comercializadas precisam ser compatíveis com o OCCP e, na América, o interesse da indústria está aumentado \cite{ocpp-news-forbes}.
+    Mantido e criado pela \ac{OCA}, o OCPP está presente em mais de 50 países. Na Europa, todas estações comercializadas precisam ser compatíveis com o OCCP e, na América, o interesse da indústria está aumentado \cite{forbes-news-ocpp}.
 
     O protocolo prevê um sistema central que recebe dados de N estações. Caso for necessário, o sistema central pode atuar sob \ac{EVSE} específicas com ações como reservar a estação, cancelar algum carregamento ou até desligá-la. Caso a estação perca conectividade, o protocolo prevê que ela deve funcionar de modo autônomo, somente registrando alguns dados para envio posterior (início e finalização de carregamentos) \cite{ocpp-spec-15}.
 
