@@ -204,7 +204,7 @@
     \subsection{Especificações da estação}
     \label{methodology:structure:specs}
 
-      % TODO: Escrever sobre a parte elétrica da estação
+      % TODO: Escrever sobre a parte elétrica da estação e suas especificações
 
       Como a ideia do projeto é o aprendizado e implementação de \textit{softwares} para \ac{EVSE}, o conector Mennekes não foi implementado nesse projeto acadêmico devido ao tempo limitado de execução. Ele já está presente na estação protótipo e posteriormente será integrado ao \textit{software} desenvolvido.
 
@@ -258,6 +258,29 @@
     \label{methodology:structure:sw}
 
       O software foi desenvolvido em Java [...]
+
+      \subsubsection{Principais Classes}
+
+      Devido a complexidade do projeto de software e suas diversas classes e implementações, a lista abaixo resume as principais classes que permitem o funcionamento da estação. Essas serão referidas nas seguintes seções sobre o funcionamento da estação. 
+
+        \begin{itemize}
+          \item AuthHandler: gerencia autenticação via RFID. Primeiramente checa se o usuário está habilitado por meio de uma \textit{whitelist} e, caso não encontre nenhum dado nela, faz uma requisição ao servidor OCPP para a verificação.
+          \item OcppManager: roda em uma instância própria e, a cada período de tempo, executa a lista de comandos que foram criados pelo programa. Implementa o \textit{Dispatcher} do \textit{Command Pattern} \cite{book-gof}, onde os seus comandos são implementações das requisições da tabela \ref{table:ocpp}.
+          \item ChargePointServer: implementação da classe WSDL gerada pelo wsimport. Roda em uma instância própria e cria um servidor ao qual o \textit{Central System} pode requisitar dados.
+          \item ChargePointClient: implementação da classe WSDL gerada pelo wsimport. Permite enviar requisições para o \textit{Central System} e é chamado apenas por comandos despachados pelo OcppManager.
+          \item HmiManager: gerencia os estados da \ac{IHM}, sendo que todos estados são representados por classes. Implementa o \textit{Context} do \textit{State Pattern} \cite{book-gof}, sendo que cada estado (implementações da classe \textit{ScreenState}) pode modificar qual será o estado da próxima iteração por meio de informações adquiridas do dispositivo \ac{IHM} ou de dados vindos de outras dependências. Roda em uma instância própria.
+          \item ConnectorSupervisor: roda em uma instância, onde checa periodicamente o status dos conectores, envia informações para o servidor sobre dados de medição destes e expira antigas reservas (esse último será implementado em versões futuras).
+          \item ConnectorManager e Connector: classe que armazena todos conectores, estes instancias da classe Connector. As classes \textit{Connector} gerenciam cada conector da estação, o que possibilita a obtenção de dados e controle por meio de diferentes interfaces (\ac{IO} e MODBUS no momento).
+          \item TransactionManager e Transaction: classe que armazena transações ativas, sendo que transações são instancias da classe Transaction. Cada transação roda em uma instância individual, sendo que estas são responsáveis pelos processos de inicialização e finalização junto ao OCPP, assim como envio periódico de dados da transação.
+        \end{itemize}
+
+      % \begin{figure}[H]
+      %   \begin{center}
+      %     \includegraphics[width=\textwidth]{assets/pdfs/sw-init.pdf}
+      %     \caption{Sequência de Inicialização}
+      %     \label{fig:sw-init}
+      %   \end{center}
+      % \end{figure}
 
   \section{Testes e Resultados}
   \label{methodology:tests}

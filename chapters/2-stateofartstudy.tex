@@ -96,25 +96,25 @@
       \subsection{Tipo 2 - Mennekes}
       \label{stateofart:plugs:mennekes}
 
-        Proposto pela empresa Mennekes, permite carregamentos \ac{CA} monofásicos/trifásicos e \ac{CC}, além de ser retrocompatível com conectores Tipo 1, mesmo possuindo 7 pinos (contra 5 do tipo 1). Ele permite que a corrente flua de forma bi-direcional, o que permite que os \ac{EV} possam fornecer energia para a estação, previsto no modelo de \textit{Vehicle-to-Grid}. Ele é muito utilizado em carregamentos de modo 1 e modo 2, porém no modo 3 outros conectores são necessários.
+        Proposto pela empresa Mennekes, permite carregamentos \ac{CA} monofásicos/trifásicos e \ac{CC} (de baixa e média potências), além de ser retro-compatível com conectores Tipo 1, mesmo possuindo 7 pinos (contra 5 do tipo 1). Ele permite que a corrente flua de forma bi-direcional, o que permite que os \ac{EV} possam fornecer energia para a estação, previsto no modelo de \textit{Vehicle-to-Grid}. Ele é muito utilizado em carregamentos de modo 2 e modo 3, o que o tornou padrão na Europa \cite{mennekes-news-standardplug}, porém para o modo 4 outros tipos são necessários.
 
         \begin{figure}[H]
           \begin{center}
             \includegraphics[width=0.50\textwidth,natwidth=1024,natheight=755]{assets/images/connectors-mennekes.jpg}
-            \caption{Conector Mennekes}
+            \caption{Conector Tipo 2 - Mennekes}
             \label{fig:mennekes}
           \end{center}
         \end{figure}
 
-      \subsection{CCS Combo}
+      \subsection{Tipo 2 - CCS Combo}
       \label{stateofart:plugs:combo}
 
-        Permite carregamentos rápidos em \ac{CC} e \ac{CA}. O conector possui uma parte eletrônica para garantir a segurança do usuário, onde o conector checa se foi conectado corretamente antes de a operação, além de previnir a desconecção durante o carregamento ou antes do pagamento ser efetivado.
+        Permite carregamentos rápidos em \ac{CC} e \ac{CA}, sendo uma evolução do Tipo 2 - Mennekes. O conector possui o mesmo layout de pinos do Mennekes, porém é acrescido de dois pinos extras na sua parte inferior para permitir carregamentos \ac{CC}.
 
         \begin{figure}[H]
           \begin{center}
             \includegraphics[width=0.40\textwidth,natwidth=1024,natheight=973]{assets/images/connectors-combo.jpg}
-            \caption{Conector CCS Combo}
+            \caption{Conector Tipo 2 - CCS Combo}
             \label{fig:combo}
           \end{center}
         \end{figure}
@@ -122,7 +122,7 @@
       \subsection{CHAdeMO}
       \label{stateofart:plugs:chademo}
 
-        Utilizado junto ao carregamento modo 3 e 4, foi o primeiro conector que possibilitou carregamentos rápidos e \ac{CC}. Hoje, porém, outros padrões como o CCS Combo estão oferecendo um suporte satisfatório para carregamentos rápidos \cite{ieee-review-evse}. Visto a preocupação da CHAdeMO com segurança e o alto nível de tensão, esse conector possui 10 pinos.
+        Utilizado em carregamentos modo 3 e 4, foi o primeiro conector que possibilitou carregamentos rápidos e \ac{CC}. Hoje, porém, outros padrões como o CCS Combo (\ref{stateofart:plugs:combo}) estão oferecendo um suporte satisfatório para carregamentos rápidos \cite{ieee-review-evse}. Visto a preocupação da CHAdeMO com segurança e o alto nível de tensão, esse conector possui 10 pinos.
 
         \begin{figure}[H]
           \begin{center}
@@ -135,7 +135,7 @@
       \subsection{Tesla Supercharger}
       \label{stateofart:plugs:tesla}
 
-        Fornecido pela Tesla Motors, ele foca em carregamentos rápidos em \ac{CC} - modo 4 - e empresas como Nissan e BMW já negociam um acordo com a Tesla para a utilização do conector em seus veículos, permitindo que sua frota utilize a infra-estrutura de carregamentos Tesla Supercharge.
+        Fornecido pela Tesla Motors, ele foca em carregamentos rápidos em \ac{CC} - modo 4 - e empresas como Nissan e BMW já negociam um acordo com a Tesla para a utilização do conector em seus veículos, o que permite que sua frota utilize a infra-estrutura de carregamentos Tesla Supercharge.
 
         \begin{figure}[H]
           \begin{center}
