@@ -1,8 +1,8 @@
 # TODO:
-- Escrever seção de software
+- Fazer diagrama de inicialização e finalização de transações
+- Escrever sobre inicialização e finalização de transações
 - Escrever resumo
 - Escrever conclusão
-- Inserir foto do programa de testes desenvolvido?
 - Comparar com a estação da EFACEC (comercial)?
 
 # DOING:
