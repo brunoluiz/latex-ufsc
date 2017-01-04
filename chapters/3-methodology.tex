@@ -1,8 +1,11 @@
 \chapter{Desenvolvimento}
+\label{methodology}
 
-  \section{Dispositivos utilizados} \label{methodology:devices}
+  \section{Dispositivos utilizados} 
+  \label{methodology:devices}
 
-    \subsection{BeagleBone Black e OSSO Cape}
+    \subsection{BeagleBone Black e OSSO Cape} 
+    \label{methodology:devices:bbb}
 
       A BeagleBone Black é uma placa de desenvolvimento \textit{open-source}, desenvolvida pela \textit{Texas Instruments}, do tamanho aproximado de um cartão de crédito. Embora possua um tamanho diminuto, seu hardware é competente o suficiente para permitir rodar distribuições de \textit{Linux} como o Debian (a escolhida para esse projeto).
 
@@ -24,6 +27,7 @@
       \end{itemize}
 
     \subsection{Medidor de Energia Kron Mult-K}
+    \label{methodology:devices:kron}
 
       O medidor de energia é essencial para informar tanto ao usuário, quanto ao sistema central, quanta energia foi consumida durante os carregamentos. O dispositivo escolhido foi o Kron Mult-K, pois esse permite a medição da energia consumida e outros dados, todos disponibilizados via MODBUS-RTU (conexão RS-485).
 
@@ -36,10 +40,12 @@
       \end{figure}
 
     \subsection{Phoenix EM-CP-PP-ETH Controller}
+    \label{methodology:devices:phoenix}
 
       Os padrões de carregamento rápido utilizam protocolos de comunicação entre carro e estação e, visto a variedade destes, foi escolhido utilizar um controlador externo para agilizar o desenvolvimento do protótipo. O Phoenix EM-CP-PP-ETH permite gerenciar carregamentos AC trifásicos e realizar todo controle necessário para o sequenciamento de inicialização e finalização dos carregamentos.
 
     \subsection{IHM WEG MT}
+    \label{methodology:devices:ihm}
 
       Para o usuário utilizar a \ac{EVSE}, é necessária uma interface que apresente informações de forma descomplicada e, além disso, seja robusta a intempéries como calor excessivo e chuva. Para tal, foi escolhida a \ac{IHM} da WEG, linha MT.
 
@@ -54,6 +60,7 @@
       \end{figure}
 
     \subsection{Leitor de RFID LotusSmart}
+    \label{methodology:devices:rfid}
 
       De acordo com a especificação do \ac{OCPP}, para iniciar o carregamento na estação é necessária a utilização de cartões \ac{RFID}, sendo necessário a utilização de um leitor compatível. O dispositivo escolhido, \textit{LotusSmart}, permite apenas a leitura de cartões de 13.56 MHz, visto que há uma variedade de frequências de operação.
 
@@ -63,17 +70,20 @@
         \begin{center}
           \includegraphics[width=0.75\textwidth,natwidth=655,natheight=368]{assets/images/devices-rfid.jpg}
           \caption{Leitor RFID LotusSmart}
-          \label{fig:ihm}
+          \label{fig:rfid}
         \end{center}
       \end{figure}
 
   \section{Métodos e Ferramentas utilizadas}
+  \label{methodology:tools}
 
     \subsection{MODBUS}
+    \label{methodology:tools:modbus}
 
       Em projetos industriais, é requisito que dispositivos diversos consigam comunicar-se entre si. Para tal, existem dezenas de protocolos que permitem a realização dessa tarefa, sendo o MODBUS um dos mais comuns \cite{modbus-spec-application}. Sua implementação inicial era sob serial, porém hoje também é possível utilizar o stack TCP/IP e outras implementações menos comuns - UDP, PEMEX, Enron.
 
       \subsubsection{Funcionamento}
+      \label{methodology:tools:modbus:how}
 
         O protocolo é baseado no modelo mestre-escravo, onde um dispositivo mestre requisita os dados dos dispositivos escravos. Essa analogia é muito semelhante ao modelo cliente-servidor, onde o cliente seria o mestre e o servidor o escravo.
 
@@ -98,6 +108,7 @@
         \end{figure}
 
       \subsubsection{Mapa de Memória}
+      \label{methodology:tools:modbus:memorymap}
 
         Toda requisição realizada pelo mestre endereçará um dado no mapa de memória do dispositivo escravo, sendo que tal mapa de memória normalmente deve ser indicado por uma documentação. Os dados requisitados podem possuir quatro tipos distintos:
 
@@ -129,6 +140,7 @@
         \end{table}
 
       \subsubsection{Envio de informações}
+      \label{methodology:tools:modbus:frame}
 
         Cada modo possui alguma diferença, porém o meio que as informações são organizadas e enviadas é o mesmo. Na figura \ref{fig:modbus-frame} é possível observar que em ambas implementações é necessária a definição de um \textit{FCode (function code)}. Logo após vem o campo \textit{Data}, onde devem ser indicado o endereço inicial do mapa de memória, quantos registradores deseja-se requisitar e quais dados serão escritos (no caso de escrita).
 
@@ -145,6 +157,7 @@
         Esse formato de envio de informações é mantido tanto para requisição quanto para resposta, sendo que as respostas sempre possuem o mesmo \textit{function code} da requisição. Caso diferir, provavelmente ocorreu um erro e este pode ser processado pelo mestre posteriormente.
 
     \subsection{WSDL e SOAP}
+    \label{methodology:tools:wsdlsoap}
 
       O WSDL \cite{w3c-spec-wsdl} permite descrever serviços web por meio de um arquivo \ac{XML}. É possível definir os \textit{endpoints} - pontos de entrada para requisições - com o que devem retornar e o que devem receber como parâmetros. Isso permite que um serviço web seja desenvolvido por uma equipe que, posteriormente, exporta um WSDL descrevendo de maneira fácil quais são seus endpoints, facilitando a criação de clientes ou servidores compatíveis com o serviço.
 
@@ -158,6 +171,7 @@
       Como ele foi idealizado em \ac{XML}, ele é facilmente processado por qualquer linguagem de programação, o que garante uma boa portabilidade.
 
     \subsection{JUnit e Automação de testes}
+    \label{methodology:tools:junit}
 
       O JUnit é um framework que facilita a criação de código para a automação de testes com apresentação dos resultados. Com ele, pode ser verificado se cada método de uma classe funciona da forma esperada, exibindo possíveis erros ou falhas podendo ser utilizado tanto para a execução de baterias de testes como para extensão \cite{wikipedia-junit}.
 
@@ -166,12 +180,14 @@
       Um dos problemas da utilização de frameworks de automação de teste é que é exigida uma boa dedicação para a criação dos testes, algo nem sempre possível devido a limitações de projeto, como prazos de entrega. Outro é que é necessária uma boa experiência para a criação de testes úteis e assertivos, pois é necessário um balanço entre quanto tempo dedicar e quais funcionalidades são críticas (e devem ser testadas).
 
     \subsection{Guice e Injeção de Dependências}
+    \label{methodology:tools:guice}
 
       A injeção de dependências permite que as classes sejam pouco acopladas acopladas entre si. Para tal, a lógicas de instanciação das dependências não é gerenciada pela classe que as utiliza. O desenvolvedor só necessitará declarar quais dependências (outras classes) deseja e se preocupar em como utilizá-las na classe.
 
       A tarefa de instanciação e injeção dessas dependências é feita por um \textit{service container}, retirando a responsabilidade das instanciações das classes (o que as torna menos acopladas). Existem algumas ferramentas disponíveis que implementam isso de forma eficiente. A escolhida foi a \textit{Guice}, desenvolvida e mantida pelo \textit{Google}.
 
   \section{Estrutura do Projeto}
+  \label{methodology:structure}
 
     A figura \ref{fig:proj-diagram} apresenta o diagrama de conexão dos dispositivos. Como todos os dispositivos são compatíveis com MODBUS, esse foi o protocolo escolhido para a comunicação entre eles. Para a comunicação entre servidor e estação, foi escolhido o protocolo \ac{OCPP} 1.5.
 
@@ -186,22 +202,26 @@
     \end{figure}
 
     \subsection{Especificações da estação}
+    \label{methodology:structure:specs}
 
       % TODO: Escrever sobre a parte elétrica da estação
 
       Como a ideia do projeto é o aprendizado e implementação de \textit{softwares} para \ac{EVSE}, o conector Mennekes não foi implementado nesse projeto acadêmico devido ao tempo limitado de execução. Ele já está presente na estação protótipo e posteriormente será integrado ao \textit{software} desenvolvido.
 
     \subsection{Sistema operacional}
+    \label{methodology:structure:os}
 
       O sistema que roda na BeagleBone é o Debian 8.6 (Jessie) com kernel Linux específico para a \textit{BeagleBone}. Foi instalado o Java 1.7 e houveram modificações em sua \textit{device tree} para permitir a manipulação das entradas e saídas digitais.
 
       Foram adicionados alguns scripts no boot do sistema para ativar o acesso à internet e executar o programa logo após a inicialização do sistema.
 
     \subsection{Comunicação entre periféricos}
+    \label{methodology:structure:com}
 
       Visto que todos dispositivos escolhidos suportam MODBUS, esse foi o protocolo escolhido como padrão. A biblioteca \textit{Jamod} foi utilizada para realizar a implementação do protocolo no projeto.
 
     \subsection{Comunicação entre estação e servidores}
+    \label{methodology:structure:ocpp}
 
       A estação implementa o protocolo \ac{OCPP} 1.5, ao qual é suportado por outras estações comerciais vendidas no Brasil, permitindo comunicação com equipamentos e \textit{softwares} já existentes. A \ac{OCA}, responsável pelo protocolo, disponibiliza um arquivo WSDL, onde é possível criar tanto um servidor quanto um cliente OCPP facilmente.
 
@@ -230,16 +250,20 @@
       \end{table}
 
     \subsection{\ac{IHM} e do sistema central}
+    \label{methodology:structure:others}
 
       O desenvolvimento da IHM e do sistema central não foi desenvolvido pelo acadêmico, porém são de importância fundamental para o projeto.
 
     \subsection{Software}
+    \label{methodology:structure:sw}
 
       O software foi desenvolvido em Java [...]
 
   \section{Testes e Resultados}
+  \label{methodology:tests}
 
     \subsection{Ferramentas de teste}
+    \label{methodology:tests:tools}
 
       Para testar a implementação realizada, é necessária uma ferramenta para simular um servidor central. Inicialmente, testou-se a ferramenta \href{http://www.gir.fr/ocppjs/}{GIR OCPPJS}, porém essa apresentou problemas ao lidar com algumas das requisições vindas da \ac{EVSE}.
 
@@ -248,6 +272,7 @@
       Após aberta, a ferramenta ouve todas requisições das estações que estão conectadas à ela e responde com dados genéricos, o que possibilita o funcionamento da estação protótipo. Caso o desenvolvedor precise executar alguma requisição às estações, é possível utilizar a \ac{CLI} para tal (os comandos disponíveis são dados pelo manual da ferramenta).
 
     \subsection{Implementações e testes iniciais}
+    \label{methodology:tests:initial}
 
       O desenvolvimento inicial se deu no estudo da base de código anterior, que ainda não implementava nada da \ac{EVSE} funcionalmente, apenas possibilitava o teste de cada dispositivo isoladamente. Após esse período inicial, iniciou-se a implementação do software da estação.
 
@@ -266,6 +291,7 @@
       \end{figure}
 
     \subsection{Testes na estação protótipo}
+    \label{methodology:tests:evse}
 
       Após diversos testes, o sistema foi levado para a \ac{EVSE} protótipo, situada no estacionamento da Fundação CERTI. A disposição dos dispositivos da estação difere com a da bancada de testes (figura \ref{fig:setup-evse}), porém visto que os dispositivos são os mesmos e o sistema embarcado foi colocado em um cartão SD, só é necessário inserir o cartão na BeagleBone da estação e configurá-la para dar boot pelo cartão, caso já não estiver configurada de fábrica assim.
 

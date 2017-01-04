@@ -11,3 +11,4 @@
 # DONE:
 - Reescrever Testes na estação protótipo
 - Explicar que o conector rápido não foi desenvolvido
+- Label em tudo
