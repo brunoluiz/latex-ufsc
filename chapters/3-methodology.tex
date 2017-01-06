@@ -264,9 +264,9 @@
         \subsubsection{AuthHandler}
           Gerencia autenticação via RFID. Primeiramente checa se o usuário está habilitado por meio de uma \textit{whitelist} e, caso não encontre nenhum dado nela, faz uma requisição ao servidor OCPP para a verificação.
         \subsubsection{OcppManager}
-          Roda em uma instância própria e, a cada período de tempo, executa a lista de comandos que foram criados pelo programa. Implementa o \textit{Dispatcher} do \textit{Command Pattern} \cite{book-gof}, onde os seus comandos são implementações das requisições da tabela \ref{table:ocpp}.
+          Roda em uma instância própria e, a cada período de tempo, executa a lista de comandos que foram criados pelo programa. Implementa o \textit{Dispatcher} do \textit{Command Pattern} \cite{book-gof}, onde os seus comandos são implementações das requisições da tabela \ref{table:ocpp}, e roda em uma instância individual.
         \subsubsection{ChargePointServer}
-          Implementação da classe WSDL gerada pelo wsimport. Roda em uma instância própria e cria um servidor ao qual o \textit{Central System} pode requisitar dados.
+          Implementação da classe WSDL gerada pelo wsimport. Roda em uma instância individual e cria um servidor ao qual o \textit{Central System} pode requisitar dados.
         \subsubsection{ChargePointClient}
           Implementação da classe WSDL gerada pelo wsimport. Permite enviar requisições para o \textit{Central System} e é chamado apenas por comandos despachados pelo OcppManager.
         \subsubsection{HmiManager}
@@ -290,9 +290,37 @@
         \end{center}
       \end{figure}
 
-      \subsection {Inicialização e Finalização de Transações}
+      Todas classes que são instâncias independentes são inicializadas menos a classe Transaction, que só é inicializada quando há uma transação à ser iniciada. Por fins de agilidade, as configurações dos conectores são declaradas no corpo da classe que contém o \textit{main()}, porém foi observado que poderia ser criada uma classe que adquirisse os dados da configuração do conector (atualmente em \textit{settings.properties}) e adicionasse esses conectores ao \textit{ConnectorManager}.
 
+    \subsection{Inicialização e Finalização de Transações pelo Usuário}
 
+      Para inicializar uma transação (carregamento), o usuário precisa ser registrado no sistema, sendo que este é validado por meio de uma \textit{tag RFID}. A figura \ref{fig:sw-starttransaction} demonstra o processo que o usuário deve executar para inicializar a transação com uma \textit{tag RFID}.
+
+      Após encostar a \textit{tag} no leitor, o \textit{HmiManager} chama o \textit{AuthHandler} para verificar se o usuário está ou não habilitado para carregar veículos na estação. Caso não, uma mensagem de erro é exibida e a \ac{IHM} retorna para a tela inicial.
+
+      Após autenticar, o usuário precisa escolher um dos conectores disponíveis. Assim que escolhido, o \textit{HmiManager} chama o \textit{TransactionManager}, ao qual se encarrega de inicializar uma transação (\textit{Transaction}). Ao inicializar a transação, uma \textit{Thread} é criada. A primeira tarefa desta é habilitar o carregamento, chamando a classe \textit{Conector} relacionada para tal. Por fim, o servidor \ac{OCPP} é notificado da transação e o usuário recebe uma mensagem notificando que seu carregamento foi iniciado.
+
+      Também é possível inicializar uma transação por meio de um aplicativo, por exemplo. Nesse caso, o servidor OCPP mandará uma \textit{RemoteStartTransaction}, que iniciaria o mesmo processo como se fosse uma \textit{tag RFID}, porém feito por meio de um servidor e não fisicamente.
+
+      A finalização de um carregamento é dada basicamente da mesma maneira e é apresentada na figura \ref{fig:sw-stoptransaction}. Uma das diferenças é que, após o usuário ser autenticado, é checado se ele possui uma transação ativa. Caso houver, aparecerá o conector que ele pode cancelar o carregamento. Os outros processos são o inverso da inicialização (para a \textit{Thread} e desabilita carregamento).
+
+      Um carregamento pode também ser automaticamente finalizado pelo \textit{ConnectorSupervisor}, caso algum erro for detectado ou se o veículo já não estiver mais consumindo nenhuma carga.
+
+      \begin{figure}[H]
+        \begin{center}
+          \includegraphics[height=\textheight]{assets/pdfs/sw-starttransaction.pdf}
+          \caption{Diagrama de Inicialização de uma Transação pelo usuário}
+          \label{fig:sw-starttransaction}
+        \end{center}
+      \end{figure}
+
+      \begin{figure}[H]
+        \begin{center}
+          \includegraphics[height=\textheight]{assets/pdfs/sw-stoptransaction.pdf}
+          \caption{Diagrama de Finalização de uma Transação pelo usuário}
+          \label{fig:sw-stoptransaction}
+        \end{center}
+      \end{figure}
 
   \section{Testes e Resultados}
   \label{methodology:tests}
@@ -340,4 +368,4 @@
 
       Inicialmente, houveram problemas relativos à configurações de IP estático da BeagleBone da estação e endereçamento dos medidores de energia. O primeiro foi resolvido com entradas no arquivo /etc/network/interfaces do Linux embarcado. Já o segundo era um problema na configuração do endereço MODBUS e das configurações seriais, onde foi necessário readequar os parâmetros do sistema embarcado para os da \ac{EVSE}. 
 
-      Após resolvidos, ela funcionou da mesma maneira que funcionava na bancada de testes.
+      Após resolvidos, ela funcionou da mesma maneira que funcionava na bancada de testes, o que finaliza as entregas do projeto.
