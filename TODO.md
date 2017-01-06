@@ -1,6 +1,4 @@
 # TODO:
-- Fazer diagrama de inicialização e finalização de transações
-- Escrever sobre inicialização e finalização de transações
 - Escrever resumo
 - Escrever conclusão
 - Comparar com a estação da EFACEC (comercial)?
@@ -9,6 +7,8 @@
 - Checar qual é o modo de carregamento que a estação suporta
 
 # DONE:
+- Fazer diagrama de inicialização e finalização de transações
+- Escrever sobre inicialização e finalização de transações
 - Reescrever Testes na estação protótipo
 - Explicar que o conector rápido não foi desenvolvido
 - Label em tudo

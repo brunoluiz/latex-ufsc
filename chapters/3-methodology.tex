@@ -189,7 +189,7 @@
   \section{Estrutura do Projeto}
   \label{methodology:structure}
 
-    A figura \ref{fig:proj-diagram} apresenta o diagrama de conexão dos dispositivos. Como todos os dispositivos são compatíveis com MODBUS, esse foi o protocolo escolhido para a comunicação entre eles. Para a comunicação entre servidor e estação, foi escolhido o protocolo \ac{OCPP} 1.5.
+    A figura \ref{fig:proj-diagram} apresenta o diagrama de conexão dos dispositivos. Como todos os dispositivos são compatíveis com MODBUS, esse foi o protocolo escolhido para a comunicação entre eles. Para a comunicação entre servidor e estação, foi escolhido o protocolo \ac{OCPP} 1.5. O \textit{software} foi desenvolvido em \textit{Java} 7.
 
     A estação possui dois medidores, sendo um de carregamento normal/lento e outro de carregamento rápido. Cada conector possui seu próprio medidor de energia, porém seus controles se dão de forma diferente: o de carregamento rápido utiliza o controlador Phoenix, enquanto o conector normal é controlado pela \textit{BeagleBone} e um relê, visto que ele é somente uma tomada comum e não necessita de nada muito elaborado para inicializar carregamentos (diferente do rápido, onde há um protocolo entre estação e carro).
 
@@ -204,7 +204,7 @@
     \subsection{Especificações da estação}
     \label{methodology:structure:specs}
 
-      % TODO: Escrever sobre a parte elétrica da estação e suas especificações
+      TODO: Escrever sobre a parte elétrica da estação e suas especificações
 
       Como a ideia do projeto é o aprendizado e implementação de \textit{softwares} para \ac{EVSE}, o conector Mennekes não foi implementado nesse projeto acadêmico devido ao tempo limitado de execução. Ele já está presente na estação protótipo e posteriormente será integrado ao \textit{software} desenvolvido.
 
@@ -266,21 +266,21 @@
         \subsubsection{OcppManager}
           Roda em uma instância própria e, a cada período de tempo, executa a lista de comandos que foram criados pelo programa. Implementa o \textit{Dispatcher} do \textit{Command Pattern} \cite{book-gof}, onde os seus comandos são implementações das requisições da tabela \ref{table:ocpp}, e roda em uma instância individual.
         \subsubsection{ChargePointServer}
-          Implementação da classe WSDL gerada pelo wsimport. Roda em uma instância individual e cria um servidor ao qual o \textit{Central System} pode requisitar dados.
+          Implementação da classe \ac{WSDL} gerada pelo \textit{wsimport}. Roda em uma instância individual e cria um servidor ao qual o \textit{Central System} pode requisitar dados.
         \subsubsection{ChargePointClient}
-          Implementação da classe WSDL gerada pelo wsimport. Permite enviar requisições para o \textit{Central System} e é chamado apenas por comandos despachados pelo OcppManager.
+          Implementação da classe \ac{WSDL} gerada pelo \textit{wsimport}. Permite enviar requisições para o \textit{Central System} e é chamado apenas por comandos despachados pelo \textit{OcppManager}.
         \subsubsection{HmiManager}
           Gerencia os estados da \ac{IHM}, sendo que todos estados são representados por classes. Implementa o \textit{Context} do \textit{State Pattern} \cite{book-gof}, sendo que cada estado (implementações da classe \textit{ScreenState}) pode modificar qual será o estado da próxima iteração por meio de informações adquiridas do dispositivo \ac{IHM} ou de dados vindos de outras dependências. Roda em uma instância própria.
         \subsubsection{ConnectorSupervisor}
           Roda em uma instância, onde checa periodicamente o status dos conectores, envia informações para o servidor sobre dados de medição destes e expira antigas reservas (esse último será implementado em versões futuras).
         \subsubsection{ConnectorManager e Connector}
-          Classe que armazena todos conectores, estes instancias da classe Connector. As classes \textit{Connector} gerenciam cada conector da estação, o que possibilita a obtenção de dados e controle por meio de diferentes interfaces (\ac{IO} e MODBUS no momento).
+          Classe que armazena todos conectores, estes instancias da classe \textit{Connector}. As classes \textit{Connector} gerenciam cada conector da estação, o que possibilita a obtenção de dados e controle por meio de diferentes interfaces (\ac{IO} e MODBUS no momento).
         \subsubsection{TransactionManager e Transaction}
-          Classe que armazena transações ativas, sendo que transações são instancias da classe Transaction. Cada transação roda em uma instância individual, sendo que estas são responsáveis pelos processos de inicialização e finalização junto ao OCPP, assim como envio periódico de dados da transação.
+          Classe que armazena transações ativas, sendo que transações são instancias da classe \textit{Transaction}. Cada transação roda em uma instância individual, sendo que estas são responsáveis pelos processos de inicialização e finalização junto ao \ac{OCPP}, assim como envio periódico de dados da transação.
 
     \subsection{Inicialização}
 
-      A figura \ref{fig:sw-init} apresenta como o programa é inicializado. Deve se levar em conta que a primeira coisa a ser executada, antes mesmo da sequência definida no \textit{main()}, é a inicialização do Guice. Ele faz todos \textit{check-ups} iniciais para ver se não há nenhuma declaração errada na sua configuração.
+      A figura \ref{fig:sw-init} apresenta como o programa é inicializado. Deve se levar em conta que a primeira coisa a ser executada, antes mesmo da sequência definida no \textit{main()}, é a inicialização do \textit{Guice}. Ele faz todos \textit{check-ups} iniciais para ver se não há nenhuma declaração errada em sua configuração.
 
       \begin{figure}[H]
         \begin{center}
@@ -290,7 +290,7 @@
         \end{center}
       \end{figure}
 
-      Todas classes que são instâncias independentes são inicializadas menos a classe Transaction, que só é inicializada quando há uma transação à ser iniciada. Por fins de agilidade, as configurações dos conectores são declaradas no corpo da classe que contém o \textit{main()}, porém foi observado que poderia ser criada uma classe que adquirisse os dados da configuração do conector (atualmente em \textit{settings.properties}) e adicionasse esses conectores ao \textit{ConnectorManager}.
+      Todas classes que são instâncias independentes são inicializadas, menos a classe \textit{Transaction} que só é inicializada quando há uma transação à ser iniciada. Por fins de agilidade, as configurações dos conectores são declaradas no corpo da classe que contém o \textit{main()}, porém foi observado que poderia ser criada uma classe que adquirisse os dados da configuração do conector (atualmente em \textit{settings.properties}) e adicionasse esses conectores ao \textit{ConnectorManager}.
 
     \subsection{Inicialização e Finalização de Transações pelo Usuário}
 
