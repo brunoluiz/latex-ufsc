@@ -7,7 +7,7 @@
     \subsection{BeagleBone Black e OSSO Cape} 
     \label{methodology:devices:bbb}
 
-      A BeagleBone Black é uma placa de desenvolvimento \textit{open-source}, desenvolvida pela \textit{Texas Instruments}, do tamanho aproximado de um cartão de crédito. Embora possua um tamanho diminuto, seu hardware é competente o suficiente para permitir rodar distribuições de \textit{Linux} como o Debian (a escolhida para esse projeto).
+      A BeagleBone Black é uma placa de desenvolvimento \textit{open-source}, desenvolvida pela \textit{Texas Instruments}, do tamanho aproximado de um cartão de crédito. Embora possua um tamanho reduzido, possui os recursos de hardware necessários para viabilizar a execução de distribuições \textit{Linux} como, por exemplo, o Debian (que foi a utilizada nesse projeto).
 
       \begin{figure}[H]
         \begin{center}
@@ -21,7 +21,7 @@
 
       \begin{itemize}
         \item Oito entradas digitais opto-acopladas
-        \item Oito saídas digitais por meio de relês
+        \item Oito saídas digitais por meio de relés
         \item Saída RS-485 integrada
         \item Alimentação de fontes externas com tensões entre 5 à 24V
       \end{itemize}
@@ -64,7 +64,7 @@
 
       De acordo com a especificação do \ac{OCPP}, para iniciar o carregamento na estação é necessária a utilização de cartões \ac{RFID}, sendo necessário a utilização de um leitor compatível. O dispositivo escolhido, \textit{LotusSmart}, permite apenas a leitura de cartões de 13.56 MHz, visto que há uma variedade de frequências de operação.
 
-      O funcionamento de leitores \ac{RFID} se dá como se fosse um teclado: ao receber os dados do cartão, o leitor envia seus dados para o computador como se esses fossem digitados pelo usuário. Eles são entregues em formato \textit{ASCII}.
+      Os dados da \textit{tag} são armazenados em um \textit{buffer}, semelhante ao \textit{buffer} de teclado de computadores, e enviados serialmente para o sistema, sendo entregues em formato \textit{ASCII}.
 
       \begin{figure}[H]
         \begin{center}
@@ -80,12 +80,12 @@
     \subsection{MODBUS}
     \label{methodology:tools:modbus}
 
-      Em projetos industriais, é requisito que dispositivos diversos consigam comunicar-se entre si. Para tal, existem dezenas de protocolos que permitem a realização dessa tarefa, sendo o MODBUS um dos mais comuns \cite{modbus-spec-application}. Sua implementação inicial era sob serial, porém hoje também é possível utilizar o stack TCP/IP e outras implementações menos comuns - UDP, PEMEX, Enron.
+      Em projetos industriais, é requisito que dispositivos diversos consigam comunicar-se entre si. Para tal, existem dezenas de protocolos que permitem a realização dessa tarefa, sendo o MODBUS um dos mais comuns \cite{modbus-spec-application}. Sua implementação inicial era apenas no modo serial, porém hoje também é possível utilizar o stack TCP/IP e outras implementações menos comuns - UDP, PEMEX, Enron.
 
       \subsubsection{Funcionamento}
       \label{methodology:tools:modbus:how}
 
-        O protocolo é baseado no modelo mestre-escravo, onde um dispositivo mestre requisita os dados dos dispositivos escravos. Essa analogia é muito semelhante ao modelo cliente-servidor, onde o cliente seria o mestre e o servidor o escravo.
+        O protocolo é baseado no modelo mestre-escravo, onde um dispositivo mestre requisita os dados dos dispositivos escravos.
 
         \begin{figure}[H]
           \begin{center}
@@ -95,7 +95,7 @@
           \end{center}
         \end{figure}
 
-        Como uma rede pode ter N escravos, cada escravo possui um endereço atribuído. O mestre envia a requisição para o barramento e todos os escravos a recebem, porém somente o endereçado responderá. Há também a opção de se fazer um broadcast - endereço 0 - onde todos escravos recebem a requisição, porém nesse caso nenhum escravo deve responde-lá.
+        Como uma rede pode ter N escravos, cada escravo possui um endereço atribuído. O mestre envia a requisição para o barramento e todos os escravos a recebem, porém somente o endereçado responderá. Há também a opção de se fazer um \textit{broadcast} - endereço 0 - onde todos escravos recebem a requisição, porém nesse caso nenhum escravo deve responde-lá.
 
         Vale notar que em uma rede MODBUS-RTU há somente um mestre, enquanto em uma rede MODBUS-TCP é possível que cada mestre seja um escravo, e vice-versa.
 
@@ -142,7 +142,7 @@
       \subsubsection{Envio de informações}
       \label{methodology:tools:modbus:frame}
 
-        Cada modo possui alguma diferença, porém o meio que as informações são organizadas e enviadas é o mesmo. Na figura \ref{fig:modbus-frame} é possível observar que em ambas implementações é necessária a definição de um \textit{FCode (function code)}. Logo após vem o campo \textit{Data}, onde devem ser indicado o endereço inicial do mapa de memória, quantos registradores deseja-se requisitar e quais dados serão escritos (no caso de escrita).
+        Cada modo possui alguma diferença, porém o meio que as informações são organizadas e enviadas é o mesmo. Na figura \ref{fig:modbus-frame} é possível observar que em ambas implementações é necessária a definição de um \textit{FCode (function code)}. Logo após vem o campo \textit{Data}, onde devem ser indicados o endereço inicial do mapa de memória, quantos registradores deseja-se requisitar e quais dados serão escritos (no caso de escrita).
 
         \begin{figure}[H]
           \begin{center}
@@ -159,44 +159,44 @@
     \subsection{WSDL e SOAP}
     \label{methodology:tools:wsdlsoap}
 
-      O WSDL \cite{w3c-spec-wsdl} permite descrever serviços web por meio de um arquivo \ac{XML}. É possível definir os \textit{endpoints} - pontos de entrada para requisições - com o que devem retornar e o que devem receber como parâmetros. Isso permite que um serviço web seja desenvolvido por uma equipe que, posteriormente, exporta um WSDL descrevendo de maneira fácil quais são seus endpoints, facilitando a criação de clientes ou servidores compatíveis com o serviço.
+      O WSDL \cite{w3c-spec-wsdl} permite descrever serviços web por meio de um arquivo \textit{\ac{XML}}. É possível definir os \textit{endpoints} - pontos de entrada para requisições - com o que devem retornar e o que devem receber como parâmetros. Isso permite que um serviço \textit{web} seja desenvolvido por uma equipe que, posteriormente, exporta um \textit{\ac{WSDL}} descrevendo de maneira fácil quais são seus \textit{endpoints}, o que facilita a criação de clientes ou servidores compatíveis com o serviço.
 
-      Os arquivos WSDL definem suas interfaces em SOAP \cite{w3c-spec-soa}, um protocolo que permite trocas de informações entre clientes e servidores de forma padronizada. Ele é baseado em \ac{XML} e é montado em três partes:
+      Os arquivos WSDL definem suas interfaces em \textit{SOAP} \cite{w3c-spec-soa}, um protocolo que permite trocas de informações entre clientes e servidores de forma padronizada. Sendo baseado em \textit{\ac{XML}}, é montado em três partes:
       \begin{itemize}
-        \item Envolpe: identifica o que é a mensagem e como processá-la
+        \item Envelope: identifica o que é a mensagem e como processá-la
         \item Cabeçalho: define informações extras sobre a mensagem
         \item Corpo: define o procedimento a ser chamado e os dados de sua resposta
       \end{itemize}
 
-      Como ele foi idealizado em \ac{XML}, ele é facilmente processado por qualquer linguagem de programação, o que garante uma boa portabilidade.
+      Como o \textit{\ac{WSDL}} foi idealizado em \textit{\ac{XML}}, é facilmente processado por qualquer linguagem de programação, o que garante uma boa portabilidade.
 
     \subsection{JUnit e Automação de testes}
     \label{methodology:tools:junit}
 
-      O JUnit é um framework que facilita a criação de código para a automação de testes com apresentação dos resultados. Com ele, pode ser verificado se cada método de uma classe funciona da forma esperada, exibindo possíveis erros ou falhas podendo ser utilizado tanto para a execução de baterias de testes como para extensão \cite{wikipedia-junit}.
+      MUDAR ESTE PARÁGRAFO: O \textit{JUnit} é um \textit{framework} que facilita a criação de código para a automação de testes unitários. Pode ser verificado se cada método de uma classe funciona da forma esperada, identificando possíveis erros, podendo ser utilizado tanto para a execução de baterias de testes como para extensão \cite{developer-junit}.
 
-      Caso os testes falhem, o projeto não é enviado para o ambiente de produção (exemplo: servidor ou placa de desenvolvimento). Isso é de extrema importância para casos onde a equipe precisa modificar diversas classes, porém precisa manter suas funcionalidades. Assim, caso alguma modificação criar alguma falha nos testes, o desenvolvedor rapidamente poderá analisar e corrigir o erro, não deixando este se propagar no meio de produção, minimizando a chance de \textit{bugs}.
+      Caso os testes falhem, o projeto não é enviado para o ambiente de produção (exemplo: servidor ou placa de desenvolvimento). Isso é de extrema importância para casos onde a equipe precisa modificar diversas classes, porém precisa manter suas funcionalidades. Assim, caso alguma modificação gerar alguma falha durante os testes, o desenvolvedor rapidamente poderá analisar e corrigir a falha, não deixando este se propagar no meio de produção, minimizando a chance de \textit{bugs}.
 
-      Um dos problemas da utilização de frameworks de automação de teste é que é exigida uma boa dedicação para a criação dos testes, algo nem sempre possível devido a limitações de projeto, como prazos de entrega. Outro é que é necessária uma boa experiência para a criação de testes úteis e assertivos, pois é necessário um balanço entre quanto tempo dedicar e quais funcionalidades são críticas (e devem ser testadas).
+      Um dos problemas da utilização de \textit{frameworks} de automação de teste é que é exigida uma boa dedicação para a criação dos testes, algo nem sempre possível devido a limitações de projeto, como prazos de entrega. Outro é que é necessária uma boa experiência para a criação de testes úteis e assertivos, pois é necessário um balanço entre quanto tempo dedicar e quais funcionalidades são críticas (e devem ser testadas). Além disso, o ideal seria que um terceiro instrumentasse as classes utilizando o \textit{framework}, e não desenvolvedor, pois este estará viciado em seu código, enquanto um terceiro procurará por situações não observados pelo desenvolvedor.
 
     \subsection{Guice e Injeção de Dependências}
     \label{methodology:tools:guice}
 
-      A injeção de dependências permite que as classes sejam pouco acopladas acopladas entre si. Para tal, a lógicas de instanciação das dependências não é gerenciada pela classe que as utiliza. O desenvolvedor só necessitará declarar quais dependências (outras classes) deseja e se preocupar em como utilizá-las na classe.
+      A injeção de dependências permite que as classes sejam pouco acopladas entre si. Para tal, a lógica de instanciação das dependências não é gerenciada pela classe que as utiliza. O desenvolvedor só necessitará declarar quais dependências (outras classes) deseja e se preocupar em como utilizá-las na classe.
 
-      A tarefa de instanciação e injeção dessas dependências é feita por um \textit{service container}, retirando a responsabilidade das instanciações das classes (o que as torna menos acopladas). Existem algumas ferramentas disponíveis que implementam isso de forma eficiente. A escolhida foi a \textit{Guice}, desenvolvida e mantida pelo \textit{Google}.
+      A tarefa de instanciação e injeção dessas dependências é feita por um \textit{service container}, retirando a responsabilidade das instanciações das classes (o que as torna menos acopladas). Existem algumas ferramentas disponíveis que implementam isso de forma eficiente, como o \textit{Guice} e o \textit{Spring} \cite{developer-guice}. A escolhida foi o \textit{Guice}, desenvolvida e mantida pelo \textit{Google}.
 
   \section{Estrutura do Projeto}
   \label{methodology:structure}
 
     A figura \ref{fig:proj-diagram} apresenta o diagrama de conexão dos dispositivos. Como todos os dispositivos são compatíveis com MODBUS, esse foi o protocolo escolhido para a comunicação entre eles. Para a comunicação entre servidor e estação, foi escolhido o protocolo \ac{OCPP} 1.5. O \textit{software} foi desenvolvido em \textit{Java} 7.
 
-    A estação possui dois medidores, sendo um de carregamento normal/lento e outro de carregamento rápido. Cada conector possui seu próprio medidor de energia, porém seus controles se dão de forma diferente: o de carregamento rápido utiliza o controlador Phoenix, enquanto o conector normal é controlado pela \textit{BeagleBone} e um relê, visto que ele é somente uma tomada comum e não necessita de nada muito elaborado para inicializar carregamentos (diferente do rápido, onde há um protocolo entre estação e carro).
+    A estação possui dois medidores, sendo um de carregamento normal/lento (Med. Kron \#1) e outro de carregamento rápido (Med. Kron \#2). Cada conector possui seu próprio medidor de energia, porém seus controles se dão de forma diferente: o de carregamento rápido utiliza o controlador \textit{Phoenix} em conjunto com um conector Mennekes, enquanto o conector normal é controlado pela \textit{BeagleBone} e um relé, visto que esse é somente uma tomada comum e não necessita de nada muito elaborado para inicializar carregamentos (diferente do rápido, onde há um protocolo entre estação e carro).
 
     \begin{figure}[H]
       \begin{center}
         \includegraphics[width=0.8\textwidth,natwidth=400,natheight=288]{assets/images/devices-diagram.png}
-        \caption{Diagrama de conexão entre os dispositivos da \ac{EVSE}}
+        \caption{Diagrama de conexão entre os dispositivos da EVSE}
         \label{fig:proj-diagram}
       \end{center}
     \end{figure}
@@ -206,12 +206,12 @@
 
       TODO: Escrever sobre a parte elétrica da estação e suas especificações
 
-      Como a ideia do projeto é o aprendizado e implementação de \textit{softwares} para \ac{EVSE}, o conector Mennekes não foi implementado nesse projeto acadêmico devido ao tempo limitado de execução. Ele já está presente na estação protótipo e posteriormente será integrado ao \textit{software} desenvolvido.
+      Como a ideia do projeto é o aprendizado e implementação de \textit{software} para \textit{\ac{EVSE}}, o conector Mennekes não foi implementado nesse projeto acadêmico devido ao tempo limitado de execução, embora já esteja presente na estação protótipo.
 
     \subsection{Sistema operacional}
     \label{methodology:structure:os}
 
-      O sistema que roda na BeagleBone é o Debian 8.6 (Jessie) com kernel Linux específico para a \textit{BeagleBone}. Foi instalado o Java 1.7 e houveram modificações em sua \textit{device tree} para permitir a manipulação das entradas e saídas digitais.
+      O sistema que roda na BeagleBone é o Debian 8.6 (Jessie) com kernel Linux específico para a \textit{BeagleBone}. Foi instalado o Java 7 e houveram modificações em sua \textit{device tree} para permitir a manipulação das entradas e saídas digitais.
 
       Foram adicionados alguns scripts no boot do sistema para ativar o acesso à internet e executar o programa logo após a inicialização do sistema.
 
@@ -223,13 +223,13 @@
     \subsection{Comunicação entre estação e servidores}
     \label{methodology:structure:ocpp}
 
-      A estação implementa o protocolo \ac{OCPP} 1.5, ao qual é suportado por outras estações comerciais vendidas no Brasil, permitindo comunicação com equipamentos e \textit{softwares} já existentes. A \ac{OCA}, responsável pelo protocolo, disponibiliza um arquivo WSDL, onde é possível criar tanto um servidor quanto um cliente OCPP facilmente.
+      A estação implementa o protocolo \textit{\ac{OCPP}} 1,5, ao qual é suportado por outras estações comerciais vendidas no Brasil, permitindo comunicação com equipamentos e \textit{software} já existentes. A \ac{OCA}, responsável pelo protocolo, disponibiliza um arquivo WSDL, onde é possível criar tanto um servidor quanto um cliente \textit{\ac{OCPP}} facilmente.
 
-      Para a utilização desse arquivo em Java, foi utilizada a ferramenta \textit{wsimport}. Ela importa os arquivos e cria classes \textit{Java} correspondentes a cada \textit{endpoint}. Nem todas funções especificadas pelo protocolo foram implementadas, sendo que somente as da tabela \ref{table:ocpp} são suportadas.
+      Para a utilização desse arquivo em Java, foi utilizada a ferramenta \textit{wsimport}. Essa ferramenta importa os arquivos e cria classes \textit{Java} correspondentes a cada \textit{endpoint}. Nem todas funções especificadas pelo protocolo foram implementadas, sendo que somente as da tabela \ref{table:ocpp} são suportadas.
 
       \begin{table}[]
         \centering
-        \caption{Operações OCPP suportadas pela \ac{EVSE}}
+        \caption{Operações OCPP suportadas pela EVSE}
         \label{table:ocpp}
         \begin{tabular}{@{}ll@{}}
           \toprule
@@ -249,7 +249,7 @@
         \end{tabular}
       \end{table}
 
-    \subsection{\ac{IHM} e do sistema central}
+    \subsection{IHM e do sistema central}
     \label{methodology:structure:others}
 
       O desenvolvimento da IHM e do sistema central não foi desenvolvido pelo acadêmico, porém são de importância fundamental para o projeto.
@@ -262,25 +262,25 @@
     Devido a complexidade do projeto de software e suas diversas classes e implementações, a lista abaixo resume as principais classes que permitem o funcionamento da estação. Essas serão referidas nas seguintes seções sobre o funcionamento da estação. 
 
         \subsubsection{AuthHandler}
-          Gerencia autenticação via RFID. Primeiramente checa se o usuário está habilitado por meio de uma \textit{whitelist} e, caso não encontre nenhum dado nela, faz uma requisição ao servidor OCPP para a verificação.
+          Gerencia autenticação via \textit{\ac{RFID}}. Primeiramente verifica se o usuário está habilitado por meio de uma \textit{whitelist} e, caso não encontre nenhum dado nela, faz uma requisição ao servidor \textit{\ac{OCPP}} para a verificação.
         \subsubsection{OcppManager}
           Roda em uma instância própria e, a cada período de tempo, executa a lista de comandos que foram criados pelo programa. Implementa o \textit{Dispatcher} do \textit{Command Pattern} \cite{book-gof}, onde os seus comandos são implementações das requisições da tabela \ref{table:ocpp}, e roda em uma instância individual.
         \subsubsection{ChargePointServer}
-          Implementação da classe \ac{WSDL} gerada pelo \textit{wsimport}. Roda em uma instância individual e cria um servidor ao qual o \textit{Central System} pode requisitar dados.
+          Implementação da classe \textit{\ac{WSDL}} gerada pelo \textit{wsimport}. Roda em uma instância individual e cria um servidor ao qual o \textit{Central System} pode requisitar dados.
         \subsubsection{ChargePointClient}
-          Implementação da classe \ac{WSDL} gerada pelo \textit{wsimport}. Permite enviar requisições para o \textit{Central System} e é chamado apenas por comandos despachados pelo \textit{OcppManager}.
+          Implementação da classe \textit{\ac{WSDL}} gerada pelo \textit{wsimport}. Permite enviar requisições para o \textit{Central System} e é chamado apenas por comandos despachados pelo \textit{OcppManager}.
         \subsubsection{HmiManager}
           Gerencia os estados da \ac{IHM}, sendo que todos estados são representados por classes. Implementa o \textit{Context} do \textit{State Pattern} \cite{book-gof}, sendo que cada estado (implementações da classe \textit{ScreenState}) pode modificar qual será o estado da próxima iteração por meio de informações adquiridas do dispositivo \ac{IHM} ou de dados vindos de outras dependências. Roda em uma instância própria.
         \subsubsection{ConnectorSupervisor}
           Roda em uma instância, onde checa periodicamente o status dos conectores, envia informações para o servidor sobre dados de medição destes e expira antigas reservas (esse último será implementado em versões futuras).
         \subsubsection{ConnectorManager e Connector}
-          Classe que armazena todos conectores, estes instancias da classe \textit{Connector}. As classes \textit{Connector} gerenciam cada conector da estação, o que possibilita a obtenção de dados e controle por meio de diferentes interfaces (\ac{IO} e MODBUS no momento).
+          Classe que armazena todos conectores, sendo cada conector um objeto \textit{Connector}. As classes \textit{Connector} gerenciam cada conector da estação, o que possibilita a obtenção de dados e controle por meio de diferentes interfaces (\ac{IO} e MODBUS no momento).
         \subsubsection{TransactionManager e Transaction}
-          Classe que armazena transações ativas, sendo que transações são instancias da classe \textit{Transaction}. Cada transação roda em uma instância individual, sendo que estas são responsáveis pelos processos de inicialização e finalização junto ao \ac{OCPP}, assim como envio periódico de dados da transação.
+          Classe que armazena transações ativas, sendo que transações são instâncias da classe \textit{Transaction}. Cada transação roda em uma instância individual, sendo que estas são responsáveis pelos processos de inicialização e finalização junto ao \textit{\ac{OCPP}}, assim como envio periódico de dados da transação.
 
     \subsection{Inicialização}
 
-      A figura \ref{fig:sw-init} apresenta como o programa é inicializado. Deve se levar em conta que a primeira coisa a ser executada, antes mesmo da sequência definida no \textit{main()}, é a inicialização do \textit{Guice}. Ele faz todos \textit{check-ups} iniciais para ver se não há nenhuma declaração errada em sua configuração.
+      A figura \ref{fig:sw-init} apresenta como o programa é inicializado. Deve-se levar em conta que a primeira coisa a ser executada, antes mesmo da sequência definida no \textit{main()}, é a inicialização do \textit{Guice}, onde todos \textit{check-ups} iniciais são feitos para verificar se não há nenhuma declaração errada em sua configuração.
 
       \begin{figure}[H]
         \begin{center}
@@ -290,7 +290,7 @@
         \end{center}
       \end{figure}
 
-      Todas classes que são instâncias independentes são inicializadas, menos a classe \textit{Transaction} que só é inicializada quando há uma transação à ser iniciada. Por fins de agilidade, as configurações dos conectores são declaradas no corpo da classe que contém o \textit{main()}, porém foi observado que poderia ser criada uma classe que adquirisse os dados da configuração do conector (atualmente em \textit{settings.properties}) e adicionasse esses conectores ao \textit{ConnectorManager}.
+      Todas classes que são instâncias independentes são inicializadas, menos a classe \textit{Transaction} que só é inicializada quando há uma transação à ser iniciada. Visando prover agilidade, as configurações dos conectores são declaradas no corpo da classe que contém o \textit{main()}, porém foi observado que poderia ser criada uma classe que adquirisse os dados da configuração do conector (atualmente em \textit{settings.properties}) e adicionasse esses conectores ao \textit{ConnectorManager}.
 
     \subsection{Inicialização e Finalização de Transações pelo Usuário}
 
@@ -332,7 +332,7 @@
 
       Foi criada então uma ferramenta para testes, disponível em \url{https://github.com/brnluiz/ocpp-tools}, que implementa parcialmente as funções de um sistema central. Todas operações apresentadas na tabela \ref{table:ocpp} foram implementadas.
 
-      Após aberta, a ferramenta ouve todas requisições das estações que estão conectadas à ela e responde com dados genéricos, o que possibilita o funcionamento da estação protótipo. Caso o desenvolvedor precise executar alguma requisição às estações, é possível utilizar a \ac{CLI} para tal (os comandos disponíveis são dados pelo manual da ferramenta).
+      Após aberta, a ferramenta ouve todas requisições das estações que conectadas e responde as requisições com dados genéricos, o que possibilita o funcionamento da estação protótipo. Caso o desenvolvedor precise executar alguma requisição às estações, é possível utilizar a \ac{CLI} para tal (os comandos disponíveis são dados pelo manual da ferramenta).
 
     \subsection{Implementações e testes iniciais}
     \label{methodology:tests:initial}
@@ -366,6 +366,6 @@
         \end{center}
       \end{figure}
 
-      Inicialmente, houveram problemas relativos à configurações de IP estático da BeagleBone da estação e endereçamento dos medidores de energia. O primeiro foi resolvido com entradas no arquivo /etc/network/interfaces do Linux embarcado. Já o segundo era um problema na configuração do endereço MODBUS e das configurações seriais, onde foi necessário readequar os parâmetros do sistema embarcado para os da \ac{EVSE}. 
+      Inicialmente, houveram problemas relativos à configurações de IP estático da BeagleBone da estação e endereçamento dos medidores de energia. O primeiro foi resolvido com a substituição do \textit{connman} e pelo \textit{Network Manager} do Linux embarcado. Já o segundo era um problema na configuração do endereço MODBUS e das configurações seriais, onde foi necessário readequar os parâmetros do sistema embarcado para os da \textit{\ac{EVSE}}. 
 
-      Após resolvidos, ela funcionou da mesma maneira que funcionava na bancada de testes, o que finaliza as entregas do projeto.
+      Após resolvidos, a \textit{\ac{EVSE}} funcionou da mesma maneira que funcionava na bancada de testes, o que finaliza as entregas do projeto.
