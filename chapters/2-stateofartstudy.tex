@@ -38,12 +38,12 @@
         \subsubsection{Modo 2 - Carregamento Lento}
         \label{stateofart:modes:europe:mode2}
 
-        É necessária uma caixa de controle no conector ou no cabo, sendo que esta faz a comunicação com o veículo por meio de \textit{\ac{PWM}}. Graças a essa comunicação, o carro pode informar o status de sua bateria e assim o carregamento pode ser adaptado de acordo com esse dado. Utiliza o mesmo conector do Modo 1 e possui as mesmas limitações elétricas de tensão, porém permite um máximo de até 32 A de corrente. Dentro dessa caixa de controle há também um circuito de proteção, o que permite o uso desse modo em locais não aterrados. É utilizado em alguns locais públicos da Europa e é considerado uma solução de transição nos EUA.
+        É necessário um equipamento de controle no conector ou no cabo, sendo que este faz a comunicação com o veículo por meio de \textit{\ac{PWM}}. Graças a essa comunicação, o carro pode informar o status de sua bateria e assim o carregamento pode ser adaptado de acordo com esse dado. Utiliza o mesmo conector do Modo 1 e possui as mesmas limitações elétricas de tensão, porém permite um máximo de até 32 A de corrente. Dentro dessa caixa de controle há também um circuito de proteção, o que permite o uso desse modo em locais não aterrados. É utilizado em alguns locais públicos da Europa e é considerado uma solução de transição nos EUA.
 
         \subsubsection{Modo 3 - Carregamento Rápido CA}
         \label{stateofart:modes:europe:mode3}
 
-        O cabo é conectado à uma \textit{\ac{EVSE}}, sendo que essa precisa estar habilitada à comunicação \textit{\ac{PWM}} e possuir uma proteção elétrica. O carregamento pode ser ajustado de acordo com os dados recebidos pelo pino de controle da estação, o que possibilita o ajuste do carregamento (lento ou rápido). Com o uso de 400 V trifásico com 63 A de corrente, é possível carregar certos carros em menos de uma hora. Esse modo está se tornando cada vez mais comum, porém requer um equipamento de eletrônica de potência adequado à tensão e corrente máxima desejadas. O desenvolvimento desse modo possui um grande investimento da empresa japonesa \textit{CHAdeMO}, sendo as vezes referido como padrão \textit{CHAdeMO} \cite{ieee-review-evse}.
+        O cabo é conectado à uma \textit{\ac{EVSE}}, sendo que essa precisa estar habilitada à comunicação \textit{\ac{PWM}} e possuir uma proteção elétrica. O carregamento pode ser ajustado de acordo com os dados recebidos pelo pino de controle da estação, o que possibilita o ajuste do carregamento (lento ou rápido). Com o uso de 400 V trifásico com 63 A de corrente, é possível carregar certos carros em menos de uma hora. Esse modo está se tornando cada vez mais comum, porém requer um equipamento de eletrônica de potência adequado à tensão e corrente máxima desejadas.
 
         \subsubsection{Modo 4 - Carregamento Rápido CC}
         \label{stateofart:modes:europe:mode4}
@@ -66,7 +66,7 @@
       \subsubsection{Indução}
       \label{stateofart:modes:other:induction}
 
-        O veículo pode ser carregado sem precisar estar conectado à uma estação, o que oferece maior segurança e comodidade para o motorista. Há três maneiras de realizar o carregamento:
+        O veículo pode ser carregado sem precisar estar conectado à uma estação, o que oferece maior segurança e comodidade para o motorista. Há três maneiras de realizar o carregamento \cite{ieee-review-evse}:
 
         \begin{itemize}
           \item Estática: veículo é carregado enquanto está estacionado
@@ -79,12 +79,12 @@
       \subsubsection{Troca de Baterias}
       \label{stateofart:modes:other:swap}
 
-        Há a possibilidade de carregamento por troca de baterias, onde o veículo para em uma estação e um sistema automatizado remove a bateria atual do carro e a substitui por uma carregada. Essa opção oferece segurança para o motorista e não sofre do problema de eficiência do carregamento por indução.
+        Há a possibilidade de carregamento por troca de baterias, onde o veículo para em uma estação e um sistema automatizado remove a bateria atual do carro e a substitui por uma carregada \cite{battery-swap}. Essa opção oferece segurança para o motorista e não sofre do problema de eficiência do carregamento por indução. 
 
       \subsubsection{Tesla Supercharge}
       \label{stateofart:modes:tesla}
 
-        Nos modos cabeados, ainda há o modo proprietário da fabricante Tesla, o \textit{Tesla Supercharge}, que permite o carregamento de 50\% da bateria do Tesla S (85kWh) em menos de 20 minutos. Para possibilitar tal carregamento, os carregamentos são realizados em corrente contínua, assim como o Modo 4 Europeu.
+        Nos modos cabeados, ainda há o modo proprietário da fabricante Tesla, o \textit{Tesla Supercharge}, que permite o carregamento de 50\% da bateria do Tesla S (até 120kWh) em até 30 minutos \cite{tesla-supercharge}. Para possibilitar tal carregamento, os carregamentos são realizados em corrente contínua, assim como o Modo 4 Europeu.
 
   \section{Padrões de Conectores}
   \label{stateofart:plugs}
@@ -109,7 +109,7 @@
       \subsection{Tipo 2 - CCS Combo}
       \label{stateofart:plugs:combo}
 
-        Permite carregamentos rápidos em \ac{CC} e \ac{CA}, sendo uma evolução do Tipo 2 - Mennekes. O conector possui o mesmo layout de pinos do Mennekes, porém é acrescido de dois pinos extras na sua parte inferior para permitir carregamentos \ac{CC}.
+        Permite carregamentos rápidos em \ac{CC} e \ac{CA}, sendo uma evolução do Tipo 2 - Mennekes. O conector possui o mesmo layout de pinos do Mennekes, porém é acrescido de dois pinos extras na sua parte inferior para permitir carregamentos \ac{CC} \cite{ieee-review-evse}.
 
         \begin{figure}[H]
           \begin{center}
@@ -135,7 +135,7 @@
       \subsection{Tesla Supercharger}
       \label{stateofart:plugs:tesla}
 
-        Fornecido pela \textit{Tesla Motors}, foca em carregamentos rápidos em \ac{CC} - modo 4 - e empresas como Nissan e BMW já negociam um acordo com a Tesla para a utilização do conector em seus veículos, o que permite que sua frota utilize a infra-estrutura de carregamentos \textit{Tesla Supercharge}.
+        Fornecido pela \textit{Tesla Motors}, foca em carregamentos rápidos em \ac{CC} - modo 4 - e empresas como Nissan e BMW já negociam um acordo com a Tesla para a utilização do conector em seus veículos, o que permite que sua frota utilize a infra-estrutura de carregamentos \textit{Tesla Supercharge} \cite{ieee-review-evse}.
 
         \begin{figure}[H]
           \begin{center}

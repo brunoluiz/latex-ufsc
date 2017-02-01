@@ -22,9 +22,12 @@
       \begin{itemize}
         \item Oito entradas digitais opto-acopladas
         \item Oito saídas digitais por meio de relés
-        \item Saída RS-485 integrada
+        \item Porta RS-485 integrada
+        \item Porta I2C integrada
         \item Alimentação de fontes externas com tensões entre 5 à 24V
       \end{itemize}
+
+      A utilização da cape permite um uso fácil das entradas e saídas digitais, assim como da comunicação RS-485. Caso não fosse utilizada, seria necessário planejar e fabricar uma placa com as proteções e acionamentos que necessários para as entradas e saídas, assim como montar um circuito para converter a saída \ac{UART} para RS-485. 
 
     \subsection{Medidor de Energia Kron Mult-K}
     \label{methodology:devices:kron}
@@ -42,7 +45,21 @@
     \subsection{Phoenix EM-CP-PP-ETH Controller}
     \label{methodology:devices:phoenix}
 
-      Os padrões de carregamento rápido utilizam protocolos de comunicação entre carro e estação e, visto a variedade destes, foi escolhido utilizar um controlador externo para agilizar o desenvolvimento do protótipo. O Phoenix EM-CP-PP-ETH permite gerenciar carregamentos AC trifásicos e realizar todo controle necessário para o sequenciamento de inicialização e finalização dos carregamentos.
+      Os padrões de carregamento rápido utilizam protocolos de comunicação entre carro e estação, podendo ser via \textit{\ac{PWM}} ou \textit{\ac{CAN}}. O Phoenix EM-CP-PP-ETH permite gerenciar carregamentos AC trifásicos por meio do \textit{\ac{PWM}} e variação dos níveis de tensão, o que permite realizar todo controle necessário entre a inicialização e finalização dos carregamentos \cite{phoenix}. 
+
+      Na figura \ref{fig:phoenix}, é possível ver um exemplo do sequenciamento de um carregamento gerenciado pelo Phoenix. No estado A, quando não há nada conectado, o conector apresenta uma saída de 12V constante. Assim que o veículo é conectado, a tensão cai para 9V e o estado muda para B. 
+
+      Enquanto se manter em 9V constante (estado B1), a estação ainda não está pronta para o carregamento, porém assim que começar a se comunicar via \textit{\ac{PWM}} (estado B2), a estação indica que está pronta. A tensão então cai para 6V ou 3V (estado C ou D) e o veículo inicia o carregamento. A corrente fornecida é indicada pelo valor do \textit{\ac{PWM}}. 
+
+      Ao termino do carregamento, o veículo desativa a PWM e a estação volta para o estado B. Após o conector ser removido pelo usuário, a estação vai para o estado A e permanece assim até o próximo carregamento.
+
+      \begin{figure}[H]
+        \begin{center}
+          \includegraphics[width=0.75\textwidth,natwidth=400,natheight=288]{assets/images/phoenix.jpg}
+          \caption{Exemplo de sequenciamento do Phoenix}
+          \label{fig:phoenix}
+        \end{center}
+      \end{figure}
 
     \subsection{IHM WEG MT}
     \label{methodology:devices:ihm}
@@ -211,7 +228,7 @@
     \subsection{Sistema operacional}
     \label{methodology:structure:os}
 
-      O sistema que roda na BeagleBone é o Debian 8.6 (Jessie) com kernel Linux específico para a \textit{BeagleBone}. Foi instalado o Java 7 e houveram modificações em sua \textit{device tree} para permitir a manipulação das entradas e saídas digitais.
+      O sistema que roda na BeagleBone é o Debian 8.6 (Jessie) com kernel Linux específico para a \textit{BeagleBone}. Foi instalado o Java e houveram modificações em sua \textit{device tree} para permitir a manipulação das entradas e saídas digitais.
 
       Foram adicionados alguns scripts no boot do sistema para ativar o acesso à internet e executar o programa logo após a inicialização do sistema.
 
@@ -252,7 +269,9 @@
     \subsection{IHM e do sistema central}
     \label{methodology:structure:others}
 
-      O desenvolvimento da IHM e do sistema central não foi desenvolvido pelo acadêmico, porém são de importância fundamental para o projeto.
+      O desenvolvimento da \ac{IHM} e do sistema central não foi desenvolvido pelo acadêmico, porém são de importância fundamental para o projeto. A escolha das telas foi realizada em equipe e implementada no software \textit{EasyBuilder 2000}. {}
+
+      A interface é atualizada a cada 200 milissegundos para evitar dados desatualizados ou respostas lentas à entradas do usuário. Ainda assim foram observados atrasos, ligados a capacidade de processamento da \ac{IHM} com requisições muito constantes a seus registradores. A comunicação e gerenciamento da \ac{IHM} se dá pelo \textit{HmiManager}, apresentado na seção \ref{methodology:structure:sw}.
 
   \section{Software}
   \label{methodology:structure:sw}
