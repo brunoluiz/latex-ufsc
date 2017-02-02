@@ -221,9 +221,10 @@
     \subsection{Especificações da estação}
     \label{methodology:structure:specs}
 
-      TODO: Escrever sobre a parte elétrica da estação e suas especificações
+      % FIXME: VERIFICAR OS DADOS QUE O KADU PASSOU
+      Como a ideia do projeto é o aprendizado e implementação de \textit{software} para \textit{\ac{EVSE}}, o conector Mennekes não foi implementado nesse projeto acadêmico ao tempo limitado de execução, embora já esteja presente na estação protótipo. Esse conector funciona em modo \ac{AC} trifásico, onde pode fornecer até \_\_ A sob tensão de 220 V. Devido a limitações do inversor e especificações de alguns carros, a corrente consumida pode ser menor do que o limite dado pela estação, como é o caso do BMW i3, que utiliza apenas uma das fases do conector e utiliza somente até \_\_ A. 
 
-      Como a ideia do projeto é o aprendizado e implementação de \textit{software} para \textit{\ac{EVSE}}, o conector Mennekes não foi implementado nesse projeto acadêmico devido ao tempo limitado de execução, embora já esteja presente na estação protótipo.
+      O outro conector, o qual foi utilizado nos testes, é uma tomada padrão ABNT padrão NBR 14136 \cite{nbr-14136} que pode fornecer até \_\_ A. Em carregamentos de carros, o cabo possui uma caixa de controle que se comunica com o veículo e controla a demanda de potência para o carregamento. Em alguns outros veículos, como bicicletas, o cabo possui também um inversor \ac{CA}-\ac{CC}, visto que o espaço nesses casos é reduzido.
 
     \subsection{Sistema operacional}
     \label{methodology:structure:os}

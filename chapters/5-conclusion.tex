@@ -3,9 +3,18 @@
 
   O objetivo de estudar o funcionamento de uma \textit{\ac{EVSE}} e como implementá-la foi alcançado com sucesso após os testes finais na estação protótipo. Embora essa primeira entrega não permita a utilização do conector Combo, já é possível realizar carregamentos em bicicletas e carros (modo lento), o que permite a utilização imediata da estação.
 
-  % FIXME: Falar um pouco mais do que aprendeu durante o projeto
-
+  % \item Desenvolver e aprender novas habilidades de engenharia de \textit{software}
   A complexidade do \textit{software}, assim como todas tecnologias utilizadas nele, permitiram que os objetivos relacionados à \textit{software} fossem alcançados também. Embora houveram problemas ao transferir a aplicação da bancada de testes para a estação, estes permitiram o aprendizado de métodos para resolução de problemas.
+
+  % \item Aprimorar técnicas de desenvolvimento de \textit{software} embarcado
+  Durante o projeto, alguns dos desafios encontrados foram relacionados a camadas de software entre o sistema operacional e o hardware. Embora tenham desacelerado um pouco o projeto, esses desafios permitiram o desenvolvimento de um conhecimento de Linux embarcado, que possui algumas peculiaridades quando comparado a versão \textit{desktop}, como \textit{Device Trees} e gerenciador de boot (\textit{GRUB} x \textit{uBoot}).
+
+  Uma das sugestões de modificação do projeto é a utilização de medidores integrados à BeagleBone por meio das entradas analógicas ou digitais (caso a saída do medidor for codificada). Alguns dos problemas que ocorreram foram devido a problemas da comunicação RS-485, sendo que uma integração as entradas da placa eliminaria tais problemas, assim como facilitaria o futuro desenvolvimento de uma placa mais enxuta, com todos dispositivos integrados à ela (micro-controlador, acionamentos e entradas).
+  
+  % \item Conhecer mais sobre as tecnologias envolvidas em sistemas de veículos elétricos
+  % \item Implementar um \textit{software} para controle de uma \textit{\ac{EVSE}}
+  % \item Explorar e implementar protocolos de comunicação de \textit{\ac{EVSE}}
+  O mercado de veículos elétricos se mostra uma área promissora para qualquer engenheiro eletricista, visto que apresenta desafios e oportunidades em diferentes competências. Embora o foco desse projeto tenha sido a implementação do protocolo e do \textit{software} de controle, ele permitiu não só aprender sobre isso, mas também sobre outros aspectos desse mercado, visto que no ambiente de trabalho houveram diversas conversas sobre assuntos relacionados (regulamentação, equipamentos, novas tecnologias, tendências e entre outros).
 
   Cabe um agradecimento à Fundação CERTI e CELESC, pois esse projeto acadêmico foi possibilitado por estas. O projeto, como um todo, faz parte do programa P\&D ANEEL, que busca promover a cultura da inovação no setor elétrico brasileiro.
   
