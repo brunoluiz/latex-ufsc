@@ -8,7 +8,7 @@
 
     Foi criada então uma ferramenta para testes, disponível em \url{https://github.com/brnluiz/ocpp-tools}, que implementa parcialmente as funções de um sistema central. Todas operações apresentadas na tabela \ref{table:ocpp} foram implementadas.
 
-    Após aberta, a ferramenta ouve todas requisições das estações que conectadas e responde as requisições com dados genéricos, o que possibilita o funcionamento da estação protótipo. Caso o desenvolvedor precise executar alguma requisição às estações, é possível utilizar a \ac{CLI} para tal (os comandos disponíveis são dados pelo manual da ferramenta).
+    Após aberta, a ferramenta ouve todas requisições das estações que conectadas e responde as requisições com dados genéricos, o que possibilita o funcionamento da estação protótipo. Caso o desenvolvedor precise executar alguma requisição às estações, é possível utilizar a \textit{\ac{CLI}} para tal (os comandos disponíveis são dados pelo manual da ferramenta).
 
   \section{Implementações e testes iniciais}
   \label{tests:initial}
@@ -17,7 +17,7 @@
 
     Alguns testes unitários foram desenvolvidos sob o \textit{framework} de testes \textit{JUnit}, o que permite o programa ser testado antes de ser embarcado. Assim que todos testes passam, o programa é enviado para a \textit{BeagleBone}, a qual está conectada aos dispositivos listados na seção \ref{tests:devices}, porém dispostos em uma bancada de testes (figura \ref{fig:setup-tests}).
 
-    Como as cargas utilizadas durante o teste consumiam pouca energia (fontes \ac{CA}-\ac{CC} de dispositivos de baixo consumo, como notebooks), o medidor de energia teve seu multiplicador de corrente configurado em 100, possibilitando assim simular um consumo alto de forma rápida (sem ter que aguardar várias horas para atingir 1 kWh).
+    Como as cargas utilizadas durante o teste consumiam pouca energia (fontes \ac{CA}-\ac{CC} de dispositivos de baixo consumo, como notebooks), o medidor de energia teve seu multiplicador de corrente configurado em 100, possibilitando assim simular um consumo alto de forma rápida (sem precisar aguardar um grande período de tempo para atingir 1 kWh).
 
     Todos arquivos, sistema operacional incluso, são colocados em um cartão SD, o que facilita a cópia desses dados para backup (criação de imagens) e permite o intercâmbio do sistema entre a bancada de testes e a estação protótipo.
 
@@ -42,6 +42,8 @@
       \end{center}
     \end{figure}
 
-    Inicialmente, houveram problemas relativos à configurações de IP estático da BeagleBone da estação e endereçamento dos medidores de energia. O primeiro foi resolvido com a substituição do \textit{connman} e pelo \textit{Network Manager} do Linux embarcado. Já o segundo era um problema na configuração do endereço MODBUS e das configurações seriais, onde foi necessário readequar os parâmetros do sistema embarcado para os da \textit{\ac{EVSE}}. 
+    Embora a previsão fosse de que a estação funcionaria igualmente a bancada de testes, não foi isso que ocorreu inicialmente, visto que alguns problemas ocorreram. Um deles foi relativo a conectividade da BeagleBone com outros dispositivos Ethernet, que foi resolvido com a substituição do \textit{connman} pelo \textit{Network Manager}. O \textit{connman} possui configurações atreladas a dados únicos de cada BeagleBoard, o que iria requerer que cada BeagleBone fosse configurada manualmente. Enquanto isso, o \textit{Network Manager} se baseia em configurações fixas no arquivo /etc/network/interfaces, sendo que esse não causou problemas quando levado para a estação
+
+    Os outros problemas foram relacionados a serial: um dos problemas foi devido as configurações seriais da bancada e da estação serem diferentes, porém isso foi rapidamente detectado e resolvido. Porém, um problema um pouco mais complicado surgiu logo após, quando notamos que o \textit{software} não estava funcionando adequadamente na estação pois não conectava ou perdia leituras. Foi descoberto que alguns circuitos integrados que transformam a saída \textit{\ac{UART}} para RS-485 possuem sua saída conectada a sua entrada, o que acabava gerando problemas na recepção de alguns dados. Após alguns dias analisando o problema, foi descoberto que isso se chamava \textit{echo} e isso pode ser  resolvido via \textit{software}. 
 
     Após resolvidos, a \textit{\ac{EVSE}} funcionou da mesma maneira que funcionava na bancada de testes, o que finaliza as entregas do projeto.

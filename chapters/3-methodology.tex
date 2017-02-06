@@ -178,7 +178,7 @@
 
       O WSDL \cite{w3c-spec-wsdl} permite descrever serviços web por meio de um arquivo \textit{\ac{XML}}. É possível definir os \textit{endpoints} - pontos de entrada para requisições - com o que devem retornar e o que devem receber como parâmetros. Isso permite que um serviço \textit{web} seja desenvolvido por uma equipe que, posteriormente, exporta um \textit{\ac{WSDL}} descrevendo de maneira fácil quais são seus \textit{endpoints}, o que facilita a criação de clientes ou servidores compatíveis com o serviço.
 
-      Os arquivos WSDL definem suas interfaces em \textit{SOAP} \cite{w3c-spec-soa}, um protocolo que permite trocas de informações entre clientes e servidores de forma padronizada. Sendo baseado em \textit{\ac{XML}}, é montado em três partes:
+      Os arquivos WSDL definem suas interfaces em \textit{\ac{SOAP}} \cite{w3c-spec-soap}, um protocolo que permite trocas de informações entre clientes e servidores de forma padronizada. Sendo baseado em \textit{\ac{XML}}, é montado em três partes:
       \begin{itemize}
         \item Envelope: identifica o que é a mensagem e como processá-la
         \item Cabeçalho: define informações extras sobre a mensagem
@@ -208,6 +208,7 @@
 
     A figura \ref{fig:proj-diagram} apresenta o diagrama de conexão dos dispositivos. Como todos os dispositivos são compatíveis com MODBUS, esse foi o protocolo escolhido para a comunicação entre eles. Para a comunicação entre servidor e estação, foi escolhido o protocolo \ac{OCPP} 1.5. O \textit{software} foi desenvolvido em \textit{Java} 7.
 
+    % FIXME: tentar melhorar a descrição dos conectores
     A estação possui dois medidores, sendo um de carregamento normal/lento (Med. Kron \#1) e outro de carregamento rápido (Med. Kron \#2). Cada conector possui seu próprio medidor de energia, porém seus controles se dão de forma diferente: o de carregamento rápido utiliza o controlador \textit{Phoenix} em conjunto com um conector Mennekes, enquanto o conector normal é controlado pela \textit{BeagleBone} e um relé, visto que esse é somente uma tomada comum e não necessita de nada muito elaborado para inicializar carregamentos (diferente do rápido, onde há um protocolo entre estação e carro).
 
     \begin{figure}[H]
@@ -222,14 +223,14 @@
     \label{methodology:structure:specs}
 
       % FIXME: VERIFICAR OS DADOS QUE O KADU PASSOU
-      Como a ideia do projeto é o aprendizado e implementação de \textit{software} para \textit{\ac{EVSE}}, o conector Mennekes não foi implementado nesse projeto acadêmico ao tempo limitado de execução, embora já esteja presente na estação protótipo. Esse conector funciona em modo \ac{AC} trifásico, onde pode fornecer até \_\_ A sob tensão de 220 V. Devido a limitações do inversor e especificações de alguns carros, a corrente consumida pode ser menor do que o limite dado pela estação, como é o caso do BMW i3, que utiliza apenas uma das fases do conector e utiliza somente até \_\_ A. 
+      Como a ideia do projeto é o aprendizado e implementação de \textit{software} para \textit{\ac{EVSE}}, o conector Mennekes não foi implementado nesse projeto acadêmico ao tempo limitado de execução, embora já esteja presente na estação protótipo. Esse conector funciona em modo \ac{CA} trifásico, onde pode fornecer até \_\_ A sob tensão de 220 V. Devido a limitações do inversor e especificações de alguns carros, a corrente consumida pode ser menor do que o limite dado pela estação, como é o caso do BMW i3, que utiliza apenas uma das fases do conector e utiliza somente até \_\_ A. 
 
       O outro conector, o qual foi utilizado nos testes, é uma tomada padrão ABNT padrão NBR 14136 \cite{nbr-14136} que pode fornecer até \_\_ A. Em carregamentos de carros, o cabo possui uma caixa de controle que se comunica com o veículo e controla a demanda de potência para o carregamento. Em alguns outros veículos, como bicicletas, o cabo possui também um inversor \ac{CA}-\ac{CC}, visto que o espaço nesses casos é reduzido.
 
     \subsection{Sistema operacional}
     \label{methodology:structure:os}
 
-      O sistema que roda na BeagleBone é o Debian 8.6 (Jessie) com kernel Linux específico para a \textit{BeagleBone}. Foi instalado o Java e houveram modificações em sua \textit{device tree} para permitir a manipulação das entradas e saídas digitais.
+      O sistema que roda na BeagleBone é o Debian 8.6 (Jessie) com kernel \textit{Linux} específico para a \textit{BeagleBone}. Foi instalado o \textit{Java} e houveram modificações em sua \textit{device tree} para permitir a manipulação das entradas e saídas digitais.
 
       Foram adicionados alguns scripts no boot do sistema para ativar o acesso à internet e executar o programa logo após a inicialização do sistema.
 
@@ -241,9 +242,9 @@
     \subsection{Comunicação entre estação e servidores}
     \label{methodology:structure:ocpp}
 
-      A estação implementa o protocolo \textit{\ac{OCPP}} 1,5, ao qual é suportado por outras estações comerciais vendidas no Brasil, permitindo comunicação com equipamentos e \textit{software} já existentes. A \ac{OCA}, responsável pelo protocolo, disponibiliza um arquivo WSDL, onde é possível criar tanto um servidor quanto um cliente \textit{\ac{OCPP}} facilmente.
+      A estação implementa o protocolo \textit{\ac{OCPP}} 1,5, ao qual é suportado por outras estações comerciais vendidas no Brasil, permitindo comunicação com equipamentos e \textit{software} já existentes. A \textit{\ac{OCA}}, responsável pelo protocolo, disponibiliza um arquivo WSDL, onde é possível criar tanto um servidor quanto um cliente \textit{\ac{OCPP}} facilmente.
 
-      Para a utilização desse arquivo em Java, foi utilizada a ferramenta \textit{wsimport}. Essa ferramenta importa os arquivos e cria classes \textit{Java} correspondentes a cada \textit{endpoint}. Nem todas funções especificadas pelo protocolo foram implementadas, sendo que somente as da tabela \ref{table:ocpp} são suportadas.
+      Para a utilização desse arquivo em \textit{Java}, foi utilizada a ferramenta \textit{wsimport}. Essa ferramenta importa os arquivos e cria classes \textit{Java} correspondentes a cada \textit{endpoint}. Nem todas funções especificadas pelo protocolo foram implementadas, sendo que somente as da tabela \ref{table:ocpp} são suportadas.
 
       \begin{table}[]
         \centering
@@ -320,7 +321,7 @@
 
       Após autenticar, o usuário precisa escolher um dos conectores disponíveis. Assim que escolhido, o \textit{HmiManager} chama o \textit{TransactionManager}, ao qual se encarrega de inicializar uma transação (\textit{Transaction}). Ao inicializar a transação, uma \textit{Thread} é criada. A primeira tarefa desta é habilitar o carregamento, chamando a classe \textit{Conector} relacionada para tal. Por fim, o servidor \ac{OCPP} é notificado da transação e o usuário recebe uma mensagem notificando que seu carregamento foi iniciado.
 
-      Também é possível inicializar uma transação por meio de um aplicativo, por exemplo. Nesse caso, o servidor OCPP mandará uma \textit{RemoteStartTransaction}, que iniciaria o mesmo processo como se fosse uma \textit{tag RFID}, porém feito por meio de um servidor e não fisicamente.
+      Também é possível inicializar uma transação por meio de um aplicativo. Nesse caso, o servidor OCPP mandará uma \textit{RemoteStartTransaction}, que iniciaria o mesmo processo como se fosse uma \textit{tag RFID}, porém feito por meio de um servidor e não fisicamente.
 
       A finalização de um carregamento é dada basicamente da mesma maneira e é apresentada na figura \ref{fig:sw-stoptransaction}. Uma das diferenças é que, após o usuário ser autenticado, é checado se ele possui uma transação ativa. Caso houver, aparecerá o conector que ele pode cancelar o carregamento. Os outros processos são o inverso da inicialização (para a \textit{Thread} e desabilita carregamento).
 
@@ -341,51 +342,3 @@
           \label{fig:sw-stoptransaction}
         \end{center}
       \end{figure}
-
-  \section{Testes e Resultados}
-  \label{methodology:tests}
-
-    \subsection{Ferramentas de teste}
-    \label{methodology:tests:tools}
-
-      Para testar a implementação realizada, é necessária uma ferramenta para simular um servidor central. Inicialmente, testou-se a ferramenta \href{http://www.gir.fr/ocppjs/}{GIR OCPPJS}, porém essa apresentou problemas ao lidar com algumas das requisições vindas da \ac{EVSE}.
-
-      Foi criada então uma ferramenta para testes, disponível em \url{https://github.com/brnluiz/ocpp-tools}, que implementa parcialmente as funções de um sistema central. Todas operações apresentadas na tabela \ref{table:ocpp} foram implementadas.
-
-      Após aberta, a ferramenta ouve todas requisições das estações que conectadas e responde as requisições com dados genéricos, o que possibilita o funcionamento da estação protótipo. Caso o desenvolvedor precise executar alguma requisição às estações, é possível utilizar a \ac{CLI} para tal (os comandos disponíveis são dados pelo manual da ferramenta).
-
-    \subsection{Implementações e testes iniciais}
-    \label{methodology:tests:initial}
-
-      O desenvolvimento inicial se deu no estudo da base de código anterior, que ainda não implementava nada da \ac{EVSE} funcionalmente, apenas possibilitava o teste de cada dispositivo isoladamente. Após esse período inicial, iniciou-se a implementação do software da estação.
-
-      Alguns testes unitários foram desenvolvidos sob o \textit{framework} de testes \textit{JUnit}, o que permite o programa ser testado antes de ser embarcado. Assim que todos testes passam, o programa é enviado para a \textit{BeagleBone}, a qual está conectada aos dispositivos listados na seção \ref{methodology:devices}, porém dispostos em uma bancada de testes (figura \ref{fig:setup-tests}).
-
-      Como as cargas utilizadas durante o teste consumiam pouca energia (fontes \ac{CA}-\ac{CC} de dispositivos de baixo consumo, como notebooks), o medidor de energia teve seu multiplicador de corrente configurado em 100, possibilitando assim simular um consumo alto de forma rápida (sem ter que aguardar várias horas para atingir 1 kWh).
-
-      Todos arquivos, sistema operacional incluso, são colocados em um cartão SD, o que facilita a cópia desses dados para backup (criação de imagens) e permite o intercâmbio do sistema entre a bancada de testes e a estação protótipo.
-
-      \begin{figure}[H]
-        \begin{center}
-          \includegraphics[width=0.6\textwidth,natwidth=2130,natheight=1420,angle=-90]{assets/images/setup-tests.jpg}
-          \caption{Disposição dos dispositivos na bancada de testes}
-          \label{fig:setup-tests}
-        \end{center}
-      \end{figure}
-
-    \subsection{Testes na estação protótipo}
-    \label{methodology:tests:evse}
-
-      Após diversos testes, o sistema foi levado para a \ac{EVSE} protótipo, situada no estacionamento da Fundação CERTI. A disposição dos dispositivos da estação difere com a da bancada de testes (figura \ref{fig:setup-evse}), porém visto que os dispositivos são os mesmos e o sistema embarcado foi colocado em um cartão SD, só é necessário inserir o cartão na BeagleBone da estação e configurá-la para dar boot pelo cartão, caso já não estiver configurada de fábrica assim.
-
-      \begin{figure}[H]
-        \begin{center}
-          \includegraphics[width=\textwidth,natwidth=1420,natheight=2130]{assets/images/setup-evse.jpg}
-          \caption{Disposição dos dispositivos na estação protótipo}
-          \label{fig:setup-evse}
-        \end{center}
-      \end{figure}
-
-      Inicialmente, houveram problemas relativos à configurações de IP estático da BeagleBone da estação e endereçamento dos medidores de energia. O primeiro foi resolvido com a substituição do \textit{connman} e pelo \textit{Network Manager} do Linux embarcado. Já o segundo era um problema na configuração do endereço MODBUS e das configurações seriais, onde foi necessário readequar os parâmetros do sistema embarcado para os da \textit{\ac{EVSE}}. 
-
-      Após resolvidos, a \textit{\ac{EVSE}} funcionou da mesma maneira que funcionava na bancada de testes, o que finaliza as entregas do projeto.
