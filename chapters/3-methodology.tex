@@ -190,9 +190,9 @@
     \subsection{JUnit e Automação de testes}
     \label{methodology:tools:junit}
 
-      MUDAR ESTE PARÁGRAFO: O \textit{JUnit} é um \textit{framework} que facilita a criação de código para a automação de testes unitários. Pode ser verificado se cada método de uma classe funciona da forma esperada, identificando possíveis erros, podendo ser utilizado tanto para a execução de baterias de testes como para extensão \cite{developer-junit}.
+      O \textit{JUnit} é um \textit{framework} que facilita a criação de código para a automação de testes unitários. Pode ser verificado se cada método de uma classe funciona da forma esperada, identificando possíveis erros antes de ser enviado para o ambiente de produção (exemplo: servidor ou placa de desenvolvimento) \cite{developer-junit}.
 
-      Caso os testes falhem, o projeto não é enviado para o ambiente de produção (exemplo: servidor ou placa de desenvolvimento). Isso é de extrema importância para casos onde a equipe precisa modificar diversas classes, porém precisa manter suas funcionalidades. Assim, caso alguma modificação gerar alguma falha durante os testes, o desenvolvedor rapidamente poderá analisar e corrigir a falha, não deixando este se propagar no meio de produção, minimizando a chance de \textit{bugs}.
+      Isso é de extrema importância para casos onde a equipe precisa modificar diversas classes, porém precisa manter suas funcionalidades. Assim, caso alguma modificação gerar alguma falha durante os testes, o desenvolvedor rapidamente poderá analisar e corrigir a falha, não deixando este se propagar no meio de produção, minimizando a chance de \textit{bugs}.
 
       Um dos problemas da utilização de \textit{frameworks} de automação de teste é que é exigida uma boa dedicação para a criação dos testes, algo nem sempre possível devido a limitações de projeto, como prazos de entrega. Outro é que é necessária uma boa experiência para a criação de testes úteis e assertivos, pois é necessário um balanço entre quanto tempo dedicar e quais funcionalidades são críticas (e devem ser testadas). Além disso, o ideal seria que um terceiro instrumentasse as classes utilizando o \textit{framework}, e não desenvolvedor, pois este estará viciado em seu código, enquanto um terceiro procurará por situações não observados pelo desenvolvedor.
 
@@ -208,8 +208,7 @@
 
     A figura \ref{fig:proj-diagram} apresenta o diagrama de conexão dos dispositivos. Como todos os dispositivos são compatíveis com MODBUS, esse foi o protocolo escolhido para a comunicação entre eles. Para a comunicação entre servidor e estação, foi escolhido o protocolo \ac{OCPP} 1.5. O \textit{software} foi desenvolvido em \textit{Java} 7.
 
-    % FIXME: tentar melhorar a descrição dos conectores
-    A estação possui dois medidores, sendo um de carregamento normal/lento (Med. Kron \#1) e outro de carregamento rápido (Med. Kron \#2). Cada conector possui seu próprio medidor de energia, porém seus controles se dão de forma diferente: o de carregamento rápido utiliza o controlador \textit{Phoenix} em conjunto com um conector Mennekes, enquanto o conector normal é controlado pela \textit{BeagleBone} e um relé, visto que esse é somente uma tomada comum e não necessita de nada muito elaborado para inicializar carregamentos (diferente do rápido, onde há um protocolo entre estação e carro).
+    A estação possui dois medidores, sendo um para o conector modo 2 (Med. Kron \#1) e outro para o conector modo 3 - Mennekes (Med. Kron \#2). O controle de cada conector se dá de forma diferente: o de conector Mennekes modo 3 utiliza o controlador \textit{Phoenix}, enquanto o conector modo 2 é controlado pela \textit{BeagleBone} e um relé, visto que esse é somente uma tomada comum e não necessita de nada muito elaborado para inicializar carregamentos.
 
     \begin{figure}[H]
       \begin{center}
@@ -222,10 +221,9 @@
     \subsection{Especificações da estação}
     \label{methodology:structure:specs}
 
-      % FIXME: VERIFICAR OS DADOS QUE O KADU PASSOU
-      Como a ideia do projeto é o aprendizado e implementação de \textit{software} para \textit{\ac{EVSE}}, o conector Mennekes não foi implementado nesse projeto acadêmico ao tempo limitado de execução, embora já esteja presente na estação protótipo. Esse conector funciona em modo \ac{CA} trifásico, onde pode fornecer até \_\_ A sob tensão de 220 V. Devido a limitações do inversor e especificações de alguns carros, a corrente consumida pode ser menor do que o limite dado pela estação, como é o caso do BMW i3, que utiliza apenas uma das fases do conector e utiliza somente até \_\_ A. 
+      Como a ideia do projeto é o aprendizado e implementação de \textit{software} para \textit{\ac{EVSE}}, o conector Mennekes não foi implementado nesse projeto acadêmico ao tempo limitado de execução, embora já esteja presente na estação protótipo. Esse conector funciona em modo \ac{CA} trifásico, onde pode fornecer até 32 A sob tensão de 220 V. Devido a limitações do inversor e especificações de alguns carros, a corrente consumida pode ser menor do que o limite dado pela estação, como é o caso do BMW i3, que utiliza apenas uma das fases do conector e utiliza somente até 25 A. 
 
-      O outro conector, o qual foi utilizado nos testes, é uma tomada padrão ABNT padrão NBR 14136 \cite{nbr-14136} que pode fornecer até \_\_ A. Em carregamentos de carros, o cabo possui uma caixa de controle que se comunica com o veículo e controla a demanda de potência para o carregamento. Em alguns outros veículos, como bicicletas, o cabo possui também um inversor \ac{CA}-\ac{CC}, visto que o espaço nesses casos é reduzido.
+      O outro conector, o qual foi utilizado nos testes, é uma tomada padrão ABNT padrão NBR 14136 \cite{nbr-14136} que pode fornecer até 20 A. Em carregamentos de carros, o cabo possui uma caixa de controle que se comunica com o veículo e controla a demanda de potência para o carregamento. Em alguns outros veículos, como bicicletas, o cabo possui também um inversor \ac{CA}-\ac{CC}, visto que o espaço nesses casos é reduzido.
 
     \subsection{Sistema operacional}
     \label{methodology:structure:os}
@@ -287,9 +285,9 @@
         \subsubsection{OcppManager}
           Roda em uma instância própria e, a cada período de tempo, executa a lista de comandos que foram criados pelo programa. Implementa o \textit{Dispatcher} do \textit{Command Pattern} \cite{book-gof}, onde os seus comandos são implementações das requisições da tabela \ref{table:ocpp}, e roda em uma instância individual.
         \subsubsection{ChargePointServer}
-          Implementação da classe \textit{\ac{WSDL}} gerada pelo \textit{wsimport}. Roda em uma instância individual e cria um servidor ao qual o \textit{Central System} pode requisitar dados.
+          Implementação da interface \textit{\ac{WSDL}} gerada pelo \textit{wsimport}. Roda em uma instância individual e cria um servidor ao qual o \textit{Central System} pode requisitar dados.
         \subsubsection{ChargePointClient}
-          Implementação da classe \textit{\ac{WSDL}} gerada pelo \textit{wsimport}. Permite enviar requisições para o \textit{Central System} e é chamado apenas por comandos despachados pelo \textit{OcppManager}.
+          Implementação da interface \textit{\ac{WSDL}} gerada pelo \textit{wsimport}. Permite enviar requisições para o \textit{Central System} e é chamado apenas por comandos despachados pelo \textit{OcppManager}.
         \subsubsection{HmiManager}
           Gerencia os estados da \ac{IHM}, sendo que todos estados são representados por classes. Implementa o \textit{Context} do \textit{State Pattern} \cite{book-gof}, sendo que cada estado (implementações da classe \textit{ScreenState}) pode modificar qual será o estado da próxima iteração por meio de informações adquiridas do dispositivo \ac{IHM} ou de dados vindos de outras dependências. Roda em uma instância própria.
         \subsubsection{ConnectorSupervisor}
