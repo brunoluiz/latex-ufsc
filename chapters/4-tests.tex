@@ -15,9 +15,11 @@
 
     O desenvolvimento inicial se deu no estudo da base de código anterior, que ainda não implementava nada da \ac{EVSE} funcionalmente, apenas possibilitava o teste de cada dispositivo isoladamente. Após esse período inicial, iniciou-se a implementação do software da estação.
 
-    Alguns testes unitários foram desenvolvidos sob o \textit{framework} de testes \textit{JUnit}, o que permite o programa ser testado antes de ser embarcado. Assim que todos testes passam, o programa é enviado para a \textit{BeagleBone}, a qual está conectada aos dispositivos listados na seção \ref{tests:devices}, porém dispostos em uma bancada de testes (figura \ref{fig:setup-tests}).
+    Alguns testes unitários foram desenvolvidos sob o \textit{framework} de testes \textit{JUnit}, o que permite o programa ser testado antes de ser embarcado. Assim que todos testes passam, o programa é enviado para a \textit{BeagleBone}, a qual está conectada aos dispositivos listados na seção \ref{methodology:devices}, porém dispostos em uma bancada de testes (figura \ref{fig:setup-tests}).
 
     Como as cargas utilizadas durante o teste consumiam pouca energia (fontes \ac{CA}-\ac{CC} de dispositivos de baixo consumo, como notebooks), o medidor de energia teve seu multiplicador de corrente configurado em 100, possibilitando assim simular um consumo alto de forma rápida (sem precisar aguardar um grande período de tempo para atingir 1 kWh).
+
+    Simulou-se a inicialização e finalização de cargas, onde foram seguidos fluxos similares as figuras \ref{fig:sw-starttransaction} e \ref{fig:sw-stoptransaction}, já que essas permitem checar diversos aspectos do sistema: autenticação, comunicação externa e com medidores, criação de transações, checagem de falhas e entre outras.
 
     Todos arquivos, sistema operacional incluso, são colocados em um cartão SD, o que facilita a cópia desses dados para backup (criação de imagens) e permite o intercâmbio do sistema entre a bancada de testes e a estação protótipo.
 
@@ -32,7 +34,7 @@
   \section{Testes na estação protótipo}
   \label{tests:evse}
 
-    Após diversos testes, o sistema foi levado para a \ac{EVSE} protótipo, situada no estacionamento da Fundação CERTI. A disposição dos dispositivos da estação difere com a da bancada de testes (figura \ref{fig:setup-evse}), porém visto que os dispositivos são os mesmos e o sistema embarcado foi colocado em um cartão SD, só é necessário inserir o cartão na BeagleBone da estação e configurá-la para dar boot pelo cartão, caso já não estiver configurada de fábrica assim.
+    Após executar os testes na bancada, o sistema foi levado para a \textit{\ac{EVSE}} protótipo, situada no estacionamento da Fundação CERTI. A disposição dos dispositivos da estação difere com a da bancada de testes (figura \ref{fig:setup-evse}), porém visto que os dispositivos são os mesmos e o sistema embarcado foi colocado em um cartão SD, só seria necessário inserir o cartão na BeagleBone da estação e configurá-la para dar boot pelo cartão, caso já não estiver configurada de fábrica assim.
 
     \begin{figure}[H]
       \begin{center}
@@ -42,8 +44,8 @@
       \end{center}
     \end{figure}
 
-    Embora a previsão fosse de que a estação funcionaria igualmente a bancada de testes, não foi isso que ocorreu inicialmente, visto que alguns problemas ocorreram. Um deles foi relativo a conectividade da BeagleBone com outros dispositivos Ethernet, que foi resolvido com a substituição do \textit{connman} pelo \textit{Network Manager}. O \textit{connman} possui configurações atreladas a dados únicos de cada BeagleBoard, o que iria requerer que cada BeagleBone fosse configurada manualmente. Enquanto isso, o \textit{Network Manager} se baseia em configurações fixas no arquivo /etc/network/interfaces, sendo que esse não causou problemas quando levado para a estação
+    Embora a previsão fosse de que a estação funcionaria igualmente a bancada de testes, não foi isso que ocorreu inicialmente, visto que alguns problemas ocorreram. Um deles foi relativo a conectividade da BeagleBone com outros dispositivos Ethernet, que foi resolvido com a substituição do \textit{connman} pelo \textit{Network Manager}. O \textit{connman} possui configurações atreladas a dados únicos de cada BeagleBoard, o que iria requerer que cada BeagleBone fosse configurada manualmente. Enquanto isso, o \textit{Network Manager} se baseia em configurações fixas no arquivo /etc/network/interfaces, sendo que esse não causou problemas quando executado na estação.
 
-    Os outros problemas foram relacionados a serial: um dos problemas foi devido as configurações seriais da bancada e da estação serem diferentes, porém isso foi rapidamente detectado e resolvido. Porém, um problema um pouco mais complicado surgiu logo após, quando notamos que o \textit{software} não estava funcionando adequadamente na estação pois não conectava ou perdia leituras. Foi descoberto que alguns circuitos integrados que transformam a saída \textit{\ac{UART}} para RS-485 possuem sua saída conectada a sua entrada, o que acabava gerando problemas na recepção de alguns dados. Após alguns dias analisando o problema, foi descoberto que isso se chamava \textit{echo} e isso pode ser  resolvido via \textit{software}. 
+    Os outros problemas foram relacionados a serial: um dos problemas foi devido as configurações seriais da bancada e da estação serem diferentes, porém isso foi rapidamente detectado e resolvido. Porém, um problema um pouco mais complicado surgiu logo após, quando notamos que o \textit{software} não estava funcionando adequadamente na estação pois não conectava ou perdia leituras. Foi descoberto que alguns circuitos integrados que transformam a saída \textit{\ac{UART}} para RS-485 possuem sua saída conectada a sua entrada, o que acabava gerando problemas na recepção de alguns dados. Após alguns dias analisando o problema, foi descoberto que isso se chamava \textit{echo} e pode ser resolvido via \textit{software} (parâmetro \textit{"echo"} da classe de conexão do Jamod). 
 
-    Após resolvidos, a \textit{\ac{EVSE}} funcionou da mesma maneira que funcionava na bancada de testes, o que finaliza as entregas do projeto.
+    Após resolvidos, a \textit{\ac{EVSE}} funcionou da mesma maneira que funcionava na bancada de testes.
