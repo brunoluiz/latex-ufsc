@@ -79,7 +79,7 @@
     \subsection{Leitor de RFID LotusSmart}
     \label{methodology:devices:rfid}
 
-      De acordo com a especificação do \ac{OCPP}, para iniciar o carregamento na estação é necessária a utilização de cartões \ac{RFID}, sendo necessário a utilização de um leitor compatível. O dispositivo escolhido, \textit{LotusSmart}, permite apenas a leitura de cartões de 13.56 MHz, visto que há uma variedade de frequências de operação.
+      De acordo com a especificação do \ac{OCPP}, para iniciar o carregamento na estação é necessária a utilização de cartões \ac{RFID}, sendo necessário a utilização de um leitor compatível. O dispositivo escolhido, \textit{LotusSmart}, permite apenas a leitura de cartões de 13,56 MHz, visto que há uma variedade de frequências de operação.
 
       Os dados da \textit{tag} são armazenados em um \textit{buffer}, semelhante ao \textit{buffer} de teclado de computadores, e enviados serialmente para o sistema, sendo entregues em formato \textit{ASCII}.
 
@@ -206,7 +206,7 @@
   \section{Estrutura do Projeto}
   \label{methodology:structure}
 
-    A figura \ref{fig:proj-diagram} apresenta o diagrama de conexão dos dispositivos. Como todos os dispositivos são compatíveis com MODBUS, esse foi o protocolo escolhido para a comunicação entre eles. Para a comunicação entre servidor e estação, foi escolhido o protocolo \ac{OCPP} 1.5. O \textit{software} foi desenvolvido em \textit{Java} 7.
+    A figura \ref{fig:proj-diagram} apresenta o diagrama de conexão dos dispositivos. Como todos os dispositivos são compatíveis com MODBUS, esse foi o protocolo escolhido para a comunicação entre eles. Para a comunicação entre servidor e estação, foi escolhido o protocolo \ac{OCPP} 1.5. O \textit{software} foi desenvolvido em \textit{Java}.
 
     A estação possui dois medidores, sendo um para o conector modo 2 (Med. Kron \#1) e outro para o conector modo 3 - Mennekes (Med. Kron \#2). O controle de cada conector se dá de forma diferente: o de conector Mennekes modo 3 utiliza o controlador \textit{Phoenix}, enquanto o conector modo 2 é controlado pela \textit{BeagleBone} e um relé, visto que esse é somente uma tomada comum e não necessita de nada muito elaborado para inicializar carregamentos.
 
