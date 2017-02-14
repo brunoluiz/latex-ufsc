@@ -36,7 +36,7 @@
   \section{Testes na estação protótipo}
   \label{tests:evse}
 
-    Após executar os testes na bancada, o sistema foi levado para a \textit{\ac{EVSE}} protótipo, situada no estacionamento da Fundação CERTI. A disposição dos dispositivos da estação difere com a da bancada de testes (figura \ref{fig:setup-evse}), porém visto que os dispositivos são os mesmos e o sistema embarcado foi colocado em um cartão SD, só seria necessário inserir o cartão na BeagleBone da estação e configurá-la para dar boot pelo cartão, caso já não estiver configurada de fábrica assim.
+    Após executar os testes na bancada, o sistema foi levado para a \textit{\ac{EVSE}} protótipo, situada no estacionamento da Fundação CERTI (figura \ref{fig:evse}). A disposição dos dispositivos da estação difere com a da bancada de testes (figura \ref{fig:setup-evse}), porém visto que os dispositivos são os mesmos e o sistema embarcado foi colocado em um cartão SD, só seria necessário inserir o cartão na BeagleBone da estação e configurá-la para dar boot pelo cartão, caso já não estiver configurada de fábrica assim.
 
     \begin{figure}[H]
       \begin{center}
@@ -46,11 +46,19 @@
       \end{center}
     \end{figure}
 
-    Embora a previsão fosse de que a estação funcionaria igualmente a bancada de testes, ao menos para o conector modo 2, não foi isso que ocorreu inicialmente. Um dos problemas que ocorreu foi relativo a conectividade da BeagleBone com outros dispositivos Ethernet, que foi resolvido com a substituição do \textit{connman} pelo \textit{Network Manager}. O \textit{connman} possui configurações atreladas a dados únicos de cada BeagleBoard, o que iria requerer que cada BeagleBone fosse configurada manualmente. Enquanto isso, o \textit{Network Manager} se baseia em configurações fixas no arquivo /etc/network/interfaces, sendo que esse não causou problemas quando executado na estação.
+    Embora a previsão fosse de que a estação funcionaria igualmente a bancada de testes, ao menos para o conector modo 2, não foi isso que ocorreu inicialmente. Um dos problemas que ocorreram foi relativo a conectividade da BeagleBone com outros dispositivos Ethernet, que foi resolvido com a substituição do \textit{connman} pelo \textit{Network Manager}. O \textit{connman} possui configurações atreladas a dados únicos de cada BeagleBoard, o que iria requerer que cada BeagleBone fosse configurada manualmente. Enquanto isso, o \textit{Network Manager} se baseia em configurações fixas no arquivo /etc/network/interfaces, sendo que esse não causou problemas quando executado na estação.
 
-    Os outros foram relacionados a serial: um foi devido as configurações seriais da bancada e da estação serem diferentes, porém isso foi rapidamente detectado e resolvido. Porém, um problema um pouco mais complicado surgiu logo após, quando notamos que o \textit{software} não estava funcionando adequadamente na estação pois não conectava ou perdia leituras. Foi descoberto que alguns circuitos integrados que transformam a saída \textit{\ac{UART}} para RS-485 possuem sua saída conectada a sua entrada, o que acabava gerando problemas na recepção de alguns dados. Após alguns dias foi descoberto que isso se chamava \textit{echo} e poderia ser resolvido via \textit{software} (parâmetro \textit{"echo"} da classe de conexão do Jamod).
+    Outros foram relacionados a serial: um foi devido as configurações seriais da bancada e da estação serem diferentes, porém isso foi rapidamente detectado e resolvido. Porém, um problema um pouco mais complicado surgiu logo após, quando notamos que o \textit{software} não estava funcionando adequadamente na estação pois não conectava ou perdia leituras. Foi descoberto que alguns circuitos integrados que transformam a saída \textit{\ac{UART}} para RS-485 possuem sua saída conectada a sua entrada, o que acabava gerando problemas na recepção de alguns dados. Após alguns dias foi descoberto que isso se chama \textit{echo} e poderia ser resolvido via \textit{software} (parâmetro \textit{"echo"} da classe de conexão do Jamod).
 
-    Além disso, surgiram problemas no conector modo 3 Mennekes. O conector do veículo de testes, Mitsubishi Miev, é do padrão americano. Para carregá-lo é necessário de um adaptador para o padrão Mennekes. Porém, tal adaptador acabou gerando falhas elétricas que impossibilitem o carregamento contínuo do veículo, como mal contato entre os pinos do adaptador com o conector. No momento em que alguma falha é percebida pelo \textit{Phoenix}, este desativa o carregamento imediatamente. Para resolver, o adaptador foi cortado em alguns milímetros para possibilitar que os pinos de contato ficassem mais próximos, além de o \textit{software} mandar um comando para o \textit{Phoenix} limitar a corrente máxima permitida (visto que há suspeita de que, devido ao adaptador, o carregamento não pode exigir muita potência).
+    \begin{figure}[H]
+      \begin{center}
+        \includegraphics[width=.75\textwidth,natwidth=4032,natheight=3024]{assets/images/evse.jpg}
+        \caption{Estação protótipo final com Mitsubishi Miev estacionado}
+        \label{fig:evse}
+      \end{center}
+    \end{figure}
+
+    Como não foi possível testar o conector modo 3 Mennekes previamente, alguns problemas surgiram também. O conector do veículo de testes, Mitsubishi Miev, utiliza o padrão americano. Portanto, é necessário um adaptador para o padrão Mennekes para carregá-lo. Porém, tal adaptador gerou falhas elétricas que impossibilitavam o carregamento contínuo do veículo, como mal contato entre os pinos do adaptador e do conector, visto que o \textit{Phoenix} desativa o carregamento imediatamente ao perceber alguma falha. Para resolver, o adaptador foi cortado em alguns milímetros para possibilitar que os pinos de contato ficassem mais próximos, além de o \textit{software} mandar um comando para o \textit{Phoenix} limitar a corrente máxima permitida (visto que há suspeita de que, devido ao adaptador, o carregamento não pode exigir muita potência).
 
     Após resolvidos todos problemas, a \textit{\ac{EVSE}} funcionou de maneira esperada e com ambos conectores habilitados.
 
@@ -64,7 +72,7 @@
       \end{center}
     \end{figure}
 
-    O programa gera saídas de texto para diversas operações que realiza internamente, o que permite a visualização do que está ocorrendo na estação por parte do desenvolvedor. Para fins de demonstração, foi realizada uma carga de menos de um minuto apenas para mostrar o funcionamento do sequenciamento da estação. A saída gerada está disponível no apêndice \ref{appendix:log} e é possível observar o \textit{software} realizando algumas das etapas mostradas nos sequenciamentos das figuras \ref{fig:sw-init}, \ref{fig:sw-starttransaction} e \ref{fig:sw-stoptransaction}.
+    O programa gera saídas de texto para diversas operações que realiza internamente, o que permite a visualização do que está ocorrendo na estação por parte do desenvolvedor. Para fins de demonstração, foi realizada uma carga de menos de um minuto apenas para mostrar o sequenciamento da estação. A saída gerada está disponível no apêndice \ref{appendix:log} e é possível observar o \textit{software} realizar algumas das etapas mostradas nos sequenciamentos das figuras \ref{fig:sw-init}, \ref{fig:sw-starttransaction} e \ref{fig:sw-stoptransaction}.
 
     \begin{itemize}
       \item Linha 34: usuário utiliza a \textit{\ac{RFID}}
