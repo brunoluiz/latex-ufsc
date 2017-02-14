@@ -52,7 +52,7 @@
 
     Além disso, surgiram problemas no conector modo 3 Mennekes. O conector do veículo de testes, Mitsubishi Miev, é do padrão americano. Para carregá-lo é necessário de um adaptador para o padrão Mennekes. Porém, tal adaptador acabou gerando falhas elétricas que impossibilitem o carregamento contínuo do veículo, como mal contato entre os pinos do adaptador com o conector. No momento em que alguma falha é percebida pelo \textit{Phoenix}, este desativa o carregamento imediatamente. Para resolver, o adaptador foi cortado em alguns milímetros para possibilitar que os pinos de contato ficassem mais próximos, além de o \textit{software} mandar um comando para o \textit{Phoenix} limitar a corrente máxima permitida (visto que há suspeita de que, devido ao adaptador, o carregamento não pode exigir muita potência).
 
-    Porém, em outros veículos, como o BMW i3, não houveram problemas similares e foi possível uma carga completa utilizando o conector Mennekes. A figura \ref{evse-charge} mostra tal carregamento, onde a estação chega a fornecer um máximo de 24.5 A e leva 4h30m para realizar o carregamento.
+    Porém, em um testes com um BMW i3, o carregamento não apresentou tais problemas e foi possível uma carga completa utilizando o conector Mennekes. A figura \ref{fig:evse-charge} mostra tal carregamento, onde a estação chega a fornecer um máximo de 24.5 A e leva 4h30m para realizar o carregamento. O carregamento poderia ser ainda mais rápido caso fosse utilizado um conector modo 4 (seção \ref{stateofart:modes:europe:mode4}).
 
     \begin{figure}[H]
       \begin{center}
