@@ -1,0 +1,106 @@
+sputnik@beaglebone:~$ /opt/evse/run.sh
+Listening for transport dt_socket at address: 6006
+19:22:41 [INFO ] app.App: Start of main program sequence!
+19:23:02 [INFO ] auth.WhitelistHandler: Whitelist has 8 entries. (version=1)
+Initialized pin P9.12 with direction OUT.
+Set GPIO P9.12 signal to LOW
+Stable Library
+=========================================
+Native lib Version = RXTX-2.2pre2
+Java lib Version   = RXTX-2.1-7
+WARNING:  RXTX Version mismatch
+	Jar version = RXTX-2.1-7
+	native lib Version = RXTX-2.2pre2
+RXTX Warning:  Removing stale lock file. /var/lock/LCK..ttyS1
+19:23:03 [INFO ] energy.EnergyCalculator: Starting EnergyCalculator and requester...
+19:23:03 [INFO ] energy.EnergyCalculator: EnergyCalculator started!
+19:23:04 [INFO ] connectors.CommonConnector: Kron Series number: 1868664
+19:23:04 [INFO ] connectors.ConnectorManager: Added one connector (PLUG_COMMON)! Actual size: 1
+19:23:05 [INFO ] connectors.PhoenixControllerConnector: Kron Series number: 1857627
+19:23:05 [INFO ] connectors.ConnectorManager: Added one connector (CONTROLLER_TYPE2PHOENIX)! Actual size: 2
+19:23:05 [INFO ] connectors.ConnectorsSupervisor: Starting supervisor...
+19:23:05 [INFO ] ocpp.OcppManager: Starting OcppManager...
+19:23:05 [INFO ] connectors.ConnectorsSupervisor: Supervisor started!
+19:23:05 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
+19:23:05 [INFO ] ocpp.OcppManager: OcppManager started
+19:23:05 [INFO ] ocpp.LocalChargePointClient15: Received ocpp.cs._2012._06.BootNotificationRequest
+19:23:05 [INFO ] failures.FailureSupervisor: Starting failure supervisor...
+19:23:05 [INFO ] failures.FailureSupervisor: Failure supervisor started!
+19:23:06 [INFO ] hmi.HmiManager: Starting Hmi...
+19:23:06 [INFO ] hmi.HmiManager: Hmi Started!
+19:23:07 [DEBUG] hmi.HmiManager: Hmi ScreenState changed from BOOT to DEFAULT
+19:23:07 [DEBUG] utils.SystemUtils: SYNCHORNIZING CLOCK: setting date to 2017-02-06 19:23:05
+19:23:10 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
+19:23:12 [DEBUG] ocpp.OcppManager: Starting to process the OCPP Commands Queue
+19:23:12 [DEBUG] ocpp.OcppManager: Finished OCPP Commands Queue processing
+19:23:15 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
+19:23:17 [DEBUG] hmi.HmiManager: Hmi ScreenState changed from DEFAULT to AUTH_SCREEN
+19:23:17 [DEBUG] ocpp.OcppManager: Starting to process the OCPP Commands Queue
+19:23:17 [DEBUG] ocpp.OcppManager: Finished OCPP Commands Queue processing
+19:23:20 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
+19:23:22 [DEBUG] hmi.WegHmiDevice: Got RFID tag: 4D16DC27
+19:23:22 [INFO ] auth.AuthHandler: Tag 4D16DC27 is whitelisted!
+19:23:22 [DEBUG] hmi.HmiManager: Hmi ScreenState changed from LOADING to AUTH_SUCCESSFUL
+19:23:22 [DEBUG] ocpp.OcppManager: Starting to process the OCPP Commands Queue
+19:23:23 [DEBUG] ocpp.OcppManager: Finished OCPP Commands Queue processing
+19:23:24 [DEBUG] hmi.HmiManager: Hmi ScreenState changed from AUTH_SUCCESSFUL to CONNECTOR_SELECTION
+19:23:25 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
+19:23:26 [DEBUG] hmi.WegHmiDevice: Got RFID tag: 4D16DC27
+19:23:26 [INFO ] transactions.TransactionManager: Starting charge via OCPP on connector 0. User ID tag: 4D16DC27
+19:23:26 [INFO ] transactions.TransactionImpl: Starting Transaction...
+19:23:26 [INFO ] transactions.TransactionImpl: Connector 0 - Starting charging operation #0
+Set GPIO P9.12 signal to HIGH
+19:23:26 [INFO ] transactions.TransactionImpl: Transaction Started!
+19:23:27 [DEBUG] hmi.HmiManager: Hmi ScreenState changed from CONNECTOR_SELECTION to CHARGING_STARTED
+19:23:28 [DEBUG] ocpp.OcppManager: Starting to process the OCPP Commands Queue
+19:23:28 [INFO ] ocpp.LocalChargePointClient15: Received ocpp.cs._2012._06.StatusNotificationRequest
+19:23:28 [INFO ] ocpp.LocalChargePointClient15: Connector: 0
+19:23:28 [INFO ] ocpp.LocalChargePointClient15: - Status: OCCUPIED
+19:23:28 [INFO ] ocpp.LocalChargePointClient15: - Error code: NO_ERROR
+19:23:28 [INFO ] ocpp.LocalChargePointClient15: - Info: 
+19:23:28 [INFO ] ocpp.LocalChargePointClient15: Received ocpp.cs._2012._06.StartTransactionRequest
+19:23:28 [INFO ] ocpp.LocalChargePointClient15: LocalChargePointClient15: transaction id = 1486409008
+19:23:28 [DEBUG] ocpp.OcppManager: Finished OCPP Commands Queue processing
+19:23:29 [DEBUG] hmi.HmiManager: Hmi ScreenState changed from CHARGING_STARTED to DEFAULT
+19:23:30 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
+19:23:33 [DEBUG] ocpp.OcppManager: Starting to process the OCPP Commands Queue
+19:23:33 [DEBUG] connectors.AbstractConnector: Sending meter values for connector 0
+19:23:33 [DEBUG] ocpp.OcppManager: Finished OCPP Commands Queue processing
+19:23:35 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
+19:23:38 [DEBUG] ocpp.OcppManager: Starting to process the OCPP Commands Queue
+19:23:38 [DEBUG] connectors.AbstractConnector: Sending meter values for connector 0
+19:23:38 [DEBUG] ocpp.OcppManager: Finished OCPP Commands Queue processing
+19:23:39 [DEBUG] hmi.HmiManager: Hmi ScreenState changed from DEFAULT to AUTH_SCREEN
+19:23:41 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
+19:23:41 [DEBUG] transactions.TransactionImpl: Transaction 1486409008: (charging time: 15)
+19:23:43 [DEBUG] ocpp.OcppManager: Starting to process the OCPP Commands Queue
+19:23:43 [DEBUG] connectors.AbstractConnector: Sending meter values for connector 0
+19:23:43 [DEBUG] connectors.AbstractConnector: Sending meter values for connector 0
+19:23:43 [DEBUG] ocpp.OcppManager: Finished OCPP Commands Queue processing
+19:23:46 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
+19:23:46 [DEBUG] transactions.TransactionImpl: Transaction 1486409008: (charging time: 20)
+19:23:48 [DEBUG] ocpp.OcppManager: Starting to process the OCPP Commands Queue
+19:23:48 [DEBUG] connectors.AbstractConnector: Sending meter values for connector 0
+19:23:48 [DEBUG] connectors.AbstractConnector: Sending meter values for connector 0
+19:23:48 [DEBUG] ocpp.OcppManager: Finished OCPP Commands Queue processing
+19:23:49 [DEBUG] hmi.HmiManager: Hmi ScreenState changed from AUTH_SCREEN to DEFAULT
+19:23:51 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
+19:23:51 [DEBUG] transactions.TransactionImpl: Transaction 1486409008: (charging time: 25)
+19:24:14 [INFO ] ocpp.LocalChargePointClient15: Received ocpp.cs._2012._06.HeartbeatRequest
+19:24:14 [DEBUG] utils.SystemUtils: SYNCHORNIZING CLOCK: setting date to 2017-02-06 19:24:14
+19:24:24 [DEBUG] ocpp.OcppManager: Starting to process the OCPP Commands Queue
+19:24:24 [DEBUG] connectors.AbstractConnector: Sending meter values for connector 0
+19:24:24 [DEBUG] ocpp.OcppManager: Finished OCPP Commands Queue processing
+19:24:28 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
+19:24:28 [INFO ] transactions.TransactionImpl: Connector 0 - Ending charging operation #1486409008
+Set GPIO P9.12 signal to LOW
+19:24:29 [DEBUG] ocpp.OcppManager: Starting to process the OCPP Commands Queue
+19:24:29 [INFO ] ocpp.LocalChargePointClient15: Received ocpp.cs._2012._06.StatusNotificationRequest
+19:24:29 [INFO ] ocpp.LocalChargePointClient15: Connector: 0
+19:24:29 [INFO ] ocpp.LocalChargePointClient15: - Status: AVAILABLE
+19:24:29 [INFO ] ocpp.LocalChargePointClient15: - Error code: NO_ERROR
+19:24:29 [INFO ] ocpp.LocalChargePointClient15: - Info: 
+19:24:29 [INFO ] ocpp.LocalChargePointClient15: Received ocpp.cs._2012._06.StopTransactionRequest
+19:24:29 [DEBUG] ocpp.OcppManager: Finished OCPP Commands Queue processing
+19:24:30 [DEBUG] hmi.HmiManager: Hmi ScreenState changed from AUTH_SCREEN to DEFAULT
+19:24:33 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
