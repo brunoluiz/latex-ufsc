@@ -52,7 +52,9 @@
 
     Além disso, surgiram problemas no conector modo 3 Mennekes. O conector do veículo de testes, Mitsubishi Miev, é do padrão americano. Para carregá-lo é necessário de um adaptador para o padrão Mennekes. Porém, tal adaptador acabou gerando falhas elétricas que impossibilitem o carregamento contínuo do veículo, como mal contato entre os pinos do adaptador com o conector. No momento em que alguma falha é percebida pelo \textit{Phoenix}, este desativa o carregamento imediatamente. Para resolver, o adaptador foi cortado em alguns milímetros para possibilitar que os pinos de contato ficassem mais próximos, além de o \textit{software} mandar um comando para o \textit{Phoenix} limitar a corrente máxima permitida (visto que há suspeita de que, devido ao adaptador, o carregamento não pode exigir muita potência).
 
-    Porém, em um testes com um BMW i3, o carregamento não apresentou tais problemas e foi possível uma carga completa utilizando o conector Mennekes. A figura \ref{fig:evse-charge} mostra tal carregamento, onde a estação chega a fornecer um máximo de 24.5 A e leva 4h30m para realizar o carregamento. O carregamento poderia ser ainda mais rápido caso fosse utilizado um conector modo 4 (seção \ref{stateofart:modes:europe:mode4}).
+    Após resolvidos todos problemas, a \textit{\ac{EVSE}} funcionou de maneira esperada e com ambos conectores habilitados.
+
+    Em um teste com um BMW i3, o carregamento não apresentou nenhum problemas e foi possível uma carga completa utilizando o conector Mennekes. A figura \ref{fig:evse-charge} mostra tal carregamento, onde a estação chega a fornecer um máximo de 24.5 A e leva 4h30m para realizar o carregamento. O carregamento poderia ser ainda mais rápido caso fosse utilizado um conector modo 4 (seção \ref{stateofart:modes:europe:mode4}).
 
     \begin{figure}[H]
       \begin{center}
@@ -62,4 +64,17 @@
       \end{center}
     \end{figure}
 
-    Após resolvidos todos problemas, a \textit{\ac{EVSE}} funcionou de maneira esperada e com ambos conectores habilitados.
+    O programa gera saídas de texto para diversas operações que realiza internamente, o que permite a visualização do que está ocorrendo na estação por parte do desenvolvedor. Para fins de demonstração, foi realizada uma carga de menos de um minuto apenas para mostrar o funcionamento do sequenciamento da estação. A saída gerada está disponível no apêndice \ref{appendix:log} e é possível observar o \textit{software} realizando algumas das etapas mostradas nos sequenciamentos das figuras \ref{fig:sw-init}, \ref{fig:sw-starttransaction} e \ref{fig:sw-stoptransaction}.
+
+    \begin{itemize}
+      \item Linha 34: usuário utiliza a \textit{\ac{RFID}}
+      \item Linha 35: \textit{\ac{RFID}} é autenticada (usuário habilitado para carregamento)
+      \item Linhas 39-46: \textit{software} aguarda usuário selecionar o conector
+      \item Linhas 41-45: inicia a \textit{Thread} da transação e habilita o carregamento
+      \item Linhas 48-54: notifica servidor \textit{\ac{OCPP}} sobre o início do carregamento
+      \item Linha 46: mostra mensagem para o usuário sobre o início do carregamento
+      \item Linhas 55-86: \textit{software} envia dados para servidor e alterna entre algumas telas na \ac{IHM}
+      \item Linhas 87-88: carregamento cancelado devido desconexão do veículo por parte do usuário
+      \item Linhas 89-95: notifica servidor \textit{\ac{OCPP}} sobre o término do carregamento
+      \item Linhas 96-99: aguarda novas iterações do usuário
+    \end{itemize}

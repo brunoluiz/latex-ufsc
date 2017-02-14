@@ -325,7 +325,7 @@
 
       A finalização de um carregamento é dada basicamente da mesma maneira e é apresentada na figura \ref{fig:sw-stoptransaction}. Uma das diferenças é que, após o usuário ser autenticado, é checado se ele possui uma transação ativa. Caso houver, aparecerá o conector que ele pode cancelar o carregamento. Os outros processos são o inverso da inicialização (para a \textit{Thread} e desabilita carregamento).
 
-      Um carregamento pode também ser automaticamente finalizado pelo \textit{ConnectorSupervisor}, caso algum erro for detectado ou se o veículo já não estiver mais consumindo nenhuma carga.
+      Um carregamento pode também ser finalizado, de forma automática, pelo \textit{ConnectorSupervisor}, em caso de algum erro durante a carga, ou se o veículo for desconectado pelo usuário, ou se o carregamento ter chegado ao fim (consumo próximo de zero).
 
       \begin{figure}[H]
         \begin{center}

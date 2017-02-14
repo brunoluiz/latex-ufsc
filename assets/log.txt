@@ -4,13 +4,6 @@ Listening for transport dt_socket at address: 6006
 19:23:02 [INFO ] auth.WhitelistHandler: Whitelist has 8 entries. (version=1)
 Initialized pin P9.12 with direction OUT.
 Set GPIO P9.12 signal to LOW
-Stable Library
-=========================================
-Native lib Version = RXTX-2.2pre2
-Java lib Version   = RXTX-2.1-7
-WARNING:  RXTX Version mismatch
-	Jar version = RXTX-2.1-7
-	native lib Version = RXTX-2.2pre2
 RXTX Warning:  Removing stale lock file. /var/lock/LCK..ttyS1
 19:23:03 [INFO ] energy.EnergyCalculator: Starting EnergyCalculator and requester...
 19:23:03 [INFO ] energy.EnergyCalculator: EnergyCalculator started!
@@ -45,7 +38,6 @@ RXTX Warning:  Removing stale lock file. /var/lock/LCK..ttyS1
 19:23:23 [DEBUG] ocpp.OcppManager: Finished OCPP Commands Queue processing
 19:23:24 [DEBUG] hmi.HmiManager: Hmi ScreenState changed from AUTH_SUCCESSFUL to CONNECTOR_SELECTION
 19:23:25 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
-19:23:26 [DEBUG] hmi.WegHmiDevice: Got RFID tag: 4D16DC27
 19:23:26 [INFO ] transactions.TransactionManager: Starting charge via OCPP on connector 0. User ID tag: 4D16DC27
 19:23:26 [INFO ] transactions.TransactionImpl: Starting Transaction...
 19:23:26 [INFO ] transactions.TransactionImpl: Connector 0 - Starting charging operation #0
