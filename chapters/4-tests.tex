@@ -19,7 +19,9 @@
 
     Como as cargas utilizadas durante o teste consumiam pouca energia (fontes \ac{CA}-\ac{CC} de dispositivos de baixo consumo, como notebooks), o medidor de energia teve seu multiplicador de corrente configurado em 100, possibilitando assim simular um consumo alto de forma rápida (sem precisar aguardar um grande período de tempo para atingir 1 kWh).
 
-    Simulou-se a inicialização e finalização de cargas, onde foram seguidos fluxos similares as figuras \ref{fig:sw-starttransaction} e \ref{fig:sw-stoptransaction}, já que essas permitem checar diversos aspectos do sistema: autenticação, comunicação externa e com medidores, criação de transações, checagem de falhas e entre outras.
+    Simulou-se a inicialização e finalização de cargas no conector modo 2, onde foram seguidos fluxos similares as figuras \ref{fig:sw-starttransaction} e \ref{fig:sw-stoptransaction}, já que essas permitem checar diversos aspectos do sistema: autenticação, comunicação externa e com medidores, criação de transações, checagem de falhas e entre outras.
+
+    O conector modo 3 Mennekes não pode ser testado na bancada de testes pois, para habilitar o carregamento, é necessário realizar todo sequenciamento apresentado na figura \ref{fig:phoenix} e este só seria possível se houvesse um veículo próximo a bancada. Portanto, este ficou para ser testado na própria estação protótipo.
 
     Todos arquivos, sistema operacional incluso, são colocados em um cartão SD, o que facilita a cópia desses dados para backup (criação de imagens) e permite o intercâmbio do sistema entre a bancada de testes e a estação protótipo.
 
@@ -44,8 +46,20 @@
       \end{center}
     \end{figure}
 
-    Embora a previsão fosse de que a estação funcionaria igualmente a bancada de testes, não foi isso que ocorreu inicialmente, visto que alguns problemas ocorreram. Um deles foi relativo a conectividade da BeagleBone com outros dispositivos Ethernet, que foi resolvido com a substituição do \textit{connman} pelo \textit{Network Manager}. O \textit{connman} possui configurações atreladas a dados únicos de cada BeagleBoard, o que iria requerer que cada BeagleBone fosse configurada manualmente. Enquanto isso, o \textit{Network Manager} se baseia em configurações fixas no arquivo /etc/network/interfaces, sendo que esse não causou problemas quando executado na estação.
+    Embora a previsão fosse de que a estação funcionaria igualmente a bancada de testes, ao menos para o conector modo 2, não foi isso que ocorreu inicialmente. Um dos problemas que ocorreu foi relativo a conectividade da BeagleBone com outros dispositivos Ethernet, que foi resolvido com a substituição do \textit{connman} pelo \textit{Network Manager}. O \textit{connman} possui configurações atreladas a dados únicos de cada BeagleBoard, o que iria requerer que cada BeagleBone fosse configurada manualmente. Enquanto isso, o \textit{Network Manager} se baseia em configurações fixas no arquivo /etc/network/interfaces, sendo que esse não causou problemas quando executado na estação.
 
-    Os outros problemas foram relacionados a serial: um dos problemas foi devido as configurações seriais da bancada e da estação serem diferentes, porém isso foi rapidamente detectado e resolvido. Porém, um problema um pouco mais complicado surgiu logo após, quando notamos que o \textit{software} não estava funcionando adequadamente na estação pois não conectava ou perdia leituras. Foi descoberto que alguns circuitos integrados que transformam a saída \textit{\ac{UART}} para RS-485 possuem sua saída conectada a sua entrada, o que acabava gerando problemas na recepção de alguns dados. Após alguns dias analisando o problema, foi descoberto que isso se chamava \textit{echo} e pode ser resolvido via \textit{software} (parâmetro \textit{"echo"} da classe de conexão do Jamod). 
+    Os outros foram relacionados a serial: um foi devido as configurações seriais da bancada e da estação serem diferentes, porém isso foi rapidamente detectado e resolvido. Porém, um problema um pouco mais complicado surgiu logo após, quando notamos que o \textit{software} não estava funcionando adequadamente na estação pois não conectava ou perdia leituras. Foi descoberto que alguns circuitos integrados que transformam a saída \textit{\ac{UART}} para RS-485 possuem sua saída conectada a sua entrada, o que acabava gerando problemas na recepção de alguns dados. Após alguns dias foi descoberto que isso se chamava \textit{echo} e poderia ser resolvido via \textit{software} (parâmetro \textit{"echo"} da classe de conexão do Jamod).
 
-    Após resolvidos, a \textit{\ac{EVSE}} funcionou da mesma maneira que funcionava na bancada de testes.
+    Além disso, surgiram problemas no conector modo 3 Mennekes. O conector do veículo de testes, Mitsubishi Miev, é do padrão americano. Para carregá-lo é necessário de um adaptador para o padrão Mennekes. Porém, tal adaptador acabou gerando falhas elétricas que impossibilitem o carregamento contínuo do veículo, como mal contato entre os pinos do adaptador com o conector. No momento em que alguma falha é percebida pelo \textit{Phoenix}, este desativa o carregamento imediatamente. Para resolver, o adaptador foi cortado em alguns milímetros para possibilitar que os pinos de contato ficassem mais próximos, além de o \textit{software} mandar um comando para o \textit{Phoenix} limitar a corrente máxima permitida (visto que há suspeita de que, devido ao adaptador, o carregamento não pode exigir muita potência).
+
+    Porém, em outros veículos, como o BMW i3, não houveram problemas similares e foi possível uma carga completa utilizando o conector Mennekes. A figura \ref{evse-charge} mostra tal carregamento, onde a estação chega a fornecer um máximo de 24.5 A e leva 4h30m para realizar o carregamento.
+
+    \begin{figure}[H]
+      \begin{center}
+        \includegraphics[width=\textwidth,natwidth=1420,natheight=2130]{assets/images/setup-evse.jpg}
+        \caption{Gráfico Corrente x Tempo para carregamento do BMW i3 utilizando o conector modo 3 Mennekes}
+        \label{fig:evse-charge}
+      \end{center}
+    \end{figure}
+
+    Após resolvidos todos problemas, a \textit{\ac{EVSE}} funcionou de maneira esperada e com ambos conectores habilitados.

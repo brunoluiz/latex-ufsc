@@ -206,7 +206,9 @@
   \section{Estrutura do Projeto}
   \label{methodology:structure}
 
-    A figura \ref{fig:proj-diagram} apresenta o diagrama de conexão dos dispositivos. Como todos os dispositivos são compatíveis com MODBUS, esse foi o protocolo escolhido para a comunicação entre eles. Para a comunicação entre servidor e estação, foi escolhido o protocolo \ac{OCPP} 1.5. O \textit{software} foi desenvolvido em \textit{Java}.
+    A figura \ref{fig:proj-diagram} apresenta o diagrama de conexão dos dispositivos. Como todos os dispositivos são compatíveis com MODBUS, esse foi o protocolo escolhido para a comunicação entre eles. Para a comunicação entre servidor e estação, foi escolhido o protocolo \ac{OCPP} 1.5. 
+
+    O \textit{software} foi desenvolvido em \textit{Java}, visto a facilidade de implementar uma \textit{API} \textit{\ac{SOAP}} a partir de um \textit{\ac{WSDL}}, o conhecimento de outros membros do projeto sobre a linguagem, a quantidade de recursos de suporte na web e a portabilidade fácil do código.
 
     A estação possui dois medidores, sendo um para o conector modo 2 (Med. Kron \#1) e outro para o conector modo 3 - Mennekes (Med. Kron \#2). O controle de cada conector se dá de forma diferente: o de conector Mennekes modo 3 utiliza o controlador \textit{Phoenix}, enquanto o conector modo 2 é controlado pela \textit{BeagleBone} e um relé, visto que esse é somente uma tomada comum e não necessita de nada muito elaborado para inicializar carregamentos.
 
@@ -221,9 +223,9 @@
     \subsection{Especificações da estação}
     \label{methodology:structure:specs}
 
-      Como a ideia do projeto é o aprendizado e implementação de \textit{software} para \textit{\ac{EVSE}}, o conector Mennekes não foi implementado nesse projeto acadêmico ao tempo limitado de execução, embora já esteja presente na estação protótipo. Esse conector funciona em modo \ac{CA} trifásico, onde pode fornecer até 32 A sob tensão de 220 V. Devido a limitações do inversor e especificações de alguns carros, a corrente consumida pode ser menor do que o limite dado pela estação, como é o caso do BMW i3, que utiliza apenas uma das fases do conector e utiliza somente até 25 A. 
+      O conector Mennekes funciona em modo \ac{CA} trifásico, onde pode fornecer até 32 A sob tensão de 220 V. Devido a limitações do inversor e especificações de alguns carros, a corrente consumida pode ser menor do que o limite dado pela estação, como é o caso do BMW i3, que utiliza apenas uma das fases do conector e utiliza somente até 25 A. 
 
-      O outro conector, o qual foi utilizado nos testes, é uma tomada padrão ABNT padrão NBR 14136 \cite{nbr-14136} que pode fornecer até 20 A. Em carregamentos de carros, o cabo possui uma caixa de controle que se comunica com o veículo e controla a demanda de potência para o carregamento. Em alguns outros veículos, como bicicletas, o cabo possui também um inversor \ac{CA}-\ac{CC}, visto que o espaço nesses casos é reduzido.
+      O outro conector, é uma tomada padrão ABNT padrão NBR 14136 \cite{nbr-14136} que pode fornecer até 20 A. Em carregamentos de carros, o cabo possui uma caixa de controle que se comunica com o veículo e controla a demanda de potência para o carregamento. Em alguns outros veículos, como bicicletas, o cabo possui também um inversor \ac{CA}-\ac{CC}, visto que o espaço nesses casos é reduzido.
 
     \subsection{Sistema operacional}
     \label{methodology:structure:os}
