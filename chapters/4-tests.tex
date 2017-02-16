@@ -60,11 +60,9 @@
       \end{center}
     \end{figure}
 
-    Como não foi possível testar o conector modo 3 \textit{Mennekes} previamente, alguns problemas surgiram também. O conector do veículo de testes, Mitsubishi Miev, utiliza o padrão americano. Portanto, é necessário um adaptador para o padrão \textit{Mennekes} para carregá-lo. Porém, tal adaptador gerou falhas elétricas que impossibilitavam o carregamento contínuo do veículo, como mal contato entre os pinos do adaptador e do conector, visto que o \textit{Phoenix} desativa o carregamento imediatamente ao perceber alguma falha. Para resolver, o adaptador foi cortado em alguns milímetros para possibilitar que os pinos de contato ficassem mais próximos, além de o \textit{software} mandar um comando para o \textit{Phoenix} limitar a corrente máxima permitida (visto que há suspeita de que, devido ao adaptador, o carregamento não pode exigir muita potência).
+    Como não foi possível testar o conector modo 3 \textit{Mennekes} previamente, alguns problemas surgiram também. O conector do veículo de testes, Mitsubishi Miev, usa o padrão americano. Portanto, é necessário um adaptador para o padrão \textit{Mennekes} para carregá-lo. Porém, tal adaptador gerou falhas elétricas que impossibilitavam o carregamento contínuo do veículo, como mal contato entre os pinos do adaptador e do conector, visto que o \textit{Phoenix} desativa o carregamento imediatamente ao perceber alguma falha. Para resolver, o adaptador foi cortado em alguns milímetros para possibilitar que os pinos de contato ficassem mais próximos, além de o \textit{software} mandar um comando para o \textit{Phoenix} limitar a corrente máxima permitida (visto que há suspeita de que, devido ao adaptador, o carregamento não pode exigir muita potência). Deste modo foi possível fazer alguns carregamentos experimentais, porém nenhum longo foi realizado devido a limitações de tempo e problemas com o veículo.
 
-    Após resolvidos todos problemas, a \textit{\ac{EVSE}} funcionou de maneira esperada e com ambos conectores habilitados.
-
-    Em um teste com um BMW i3, o carregamento não apresentou nenhum problema e foi possível uma carga longa (mais que alguns minutos) utilizando o conector \textit{Mennekes}. A figura \ref{fig:evse-charge} mostra a curva de corrente x tempo do carregamento, onde a estação chega a fornecer um máximo de 25,1 A e levou aproximadamente 4h30m para finalizar o carregamento. Poderia ser ainda mais rápido caso a estação possuísse um conector modo 4 (seção \ref{stateofart:modes:europe:mode4}).
+    Em um teste anterior com um BMW i3 sem o \textit{software} de controle, foi realizado um carregamento longo, sem nenhuma falha, com o conector \textit{Mennekes}. A figura \ref{fig:evse-charge} mostra a curva de corrente x tempo do carregamento, onde a estação chega a fornecer um máximo de 25,1 A e levou aproximadamente 4h30m para finalizar o carregamento. Poderia ser ainda mais rápido caso a estação possuísse um conector modo 4 (seção \ref{stateofart:modes:europe:mode4}).
 
     \begin{figure}[H]
       \begin{center}
@@ -74,7 +72,7 @@
       \end{center}
     \end{figure}
 
-    Além do carregamento realizado com o BMW i3, foi realizada uma carga de menos de um minuto apenas para mostrar o sequenciamento da estação, visto que o programa gera saídas de texto para diversas operações que realiza internamente, e esse permite a visualização do que está ocorrendo na estação. A saída gerada está disponível no apêndice \ref{appendix:log} e é possível observar o \textit{software} realizar algumas das etapas mostradas nos sequenciamentos das figuras \ref{fig:sw-init}, \ref{fig:sw-starttransaction} e \ref{fig:sw-stoptransaction}.
+    Foi realizada uma carga de menos de um minuto apenas para mostrar o sequenciamento da estação, visto que o programa gera saídas de texto para diversas operações que realiza internamente, e esse permite a visualização do que está ocorrendo na estação. A saída gerada está disponível no apêndice \ref{appendix:log} e é possível observar o \textit{software} realizar algumas das etapas mostradas nos sequenciamentos das figuras \ref{fig:sw-init}, \ref{fig:sw-starttransaction} e \ref{fig:sw-stoptransaction}.
 
     \begin{itemize}
       \item Linha 3-23: inicialização do programa
