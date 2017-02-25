@@ -8,22 +8,22 @@
 
     Foi criada então uma ferramenta para testes, disponível em \url{https://github.com/brnluiz/ocpp-tools}, que implementa parcialmente as funções de um sistema central. Todas operações apresentadas na tabela \ref{table:ocpp} foram implementadas.
 
-    Após aberta, a ferramenta ouve todas requisições das estações que conectadas e responde as requisições com dados genéricos, o que possibilita o funcionamento da estação protótipo. Caso o desenvolvedor precise executar alguma requisição às estações, é possível utilizar a \textit{\ac{CLI}} para tal (os comandos disponíveis são dados pelo manual da ferramenta).
+    Após aberta, a ferramenta recebe requisições das estações conectadas e responde as requisições com dados genéricos, o que possibilita o funcionamento da estação protótipo. Caso o desenvolvedor precise realizar alguma requisição às estações, é possível utilizar a \textit{\ac{CLI}} para tal (os comandos disponíveis são dados pelo manual da ferramenta).
 
   \section{Implementações e testes iniciais}
   \label{tests:initial}
 
-    O desenvolvimento inicial se deu no estudo da base de código anterior, que ainda não implementava nada da \ac{EVSE} funcionalmente, apenas possibilitava o teste de cada dispositivo isoladamente. Após esse período inicial, iniciou-se a implementação do software da estação.
+    O desenvolvimento inicial foi realizado a partir de código fonte existente, no qual não havia implementação funcional da EVSE e  apenas possibilitava o teste de cada dispositivo isoladamente. Após esse período inicial, iniciou-se a implementação do software da estação.
 
-    Alguns testes unitários foram desenvolvidos sob o \textit{framework} de testes \textit{JUnit}, o que permite o programa ser testado antes de ser embarcado. Assim que todos testes passam, o programa é enviado para a \textit{BeagleBone}, a qual está conectada aos dispositivos listados na seção \ref{methodology:devices}, porém dispostos em uma bancada de testes (figura \ref{fig:setup-tests}).
+    Alguns testes unitários foram desenvolvidos sob o \textit{framework} de testes \textit{JUnit}, o que permite o programa ser testado antes de ser embarcado. Após concluir com sucesso a etapa de verificação do software, ou seja, quando os testes não detectam erros, o programa é enviado para a \textit{BeagleBone}. Conforme apresentado na Figura \ref{fig:setup-tests}, a BeagleBone está conectada aos dispositivos listados na seção \ref{methodology:devices}, porém dispostos em uma bancada de testes.
 
     Como as cargas utilizadas durante o teste consumiam pouca energia (fontes \ac{CA}-\ac{CC} de dispositivos de baixo consumo, como notebooks), o medidor de energia teve seu multiplicador de corrente configurado em 100, possibilitando assim simular um consumo alto de forma rápida (sem precisar aguardar um grande período de tempo para atingir 1 kWh).
 
-    Simulou-se a inicialização e finalização de cargas no conector modo 2, onde foram seguidos fluxos similares as figuras \ref{fig:sw-starttransaction} e \ref{fig:sw-stoptransaction}, já que essas permitem checar diversos aspectos do sistema: autenticação, comunicação externa e com medidores, criação de transações, checagem de falhas e entre outras.
+    Simulou-se a inicialização e finalização de cargas no conector modo 2, onde foram seguidos fluxos similares as figuras \ref{fig:sw-starttransaction} e \ref{fig:sw-stoptransaction}, já que essas permitem verificar diversos aspectos do sistema: autenticação, comunicação externa e com medidores, criação de transações, verificação de falhas, entre outras.
 
     O conector modo 3 \textit{Mennekes} não pode ser testado na bancada de testes pois, para habilitar o carregamento, é necessário realizar todo sequenciamento apresentado na figura \ref{fig:phoenix} e este só seria possível se houvesse um veículo próximo a bancada. Portanto, este ficou para ser testado na própria estação protótipo.
 
-    Todos arquivos, sistema operacional incluso, são colocados em um cartão SD, o que facilita a cópia desses dados para backup (criação de imagens) e permite o intercâmbio do sistema entre a bancada de testes e a estação protótipo.
+    Todos arquivos, incluindo o sistema operacional, são colocados em um cartão SD, o que facilita a cópia desses dados para a realização de cópias de segurança (criação de imagens), possibilitando o intercâmbio do sistema entre a bancada de testes e a estação protótipo.
 
     \begin{figure}[H]
       \begin{center}
@@ -36,9 +36,9 @@
   \section{Testes na estação protótipo}
   \label{tests:evse}
 
-    Após executar os testes na bancada, o sistema foi levado para a \textit{\ac{EVSE}} protótipo, situada no estacionamento da Fundação CERTI (figura \ref{fig:evse}). A disposição dos dispositivos da estação difere com a da bancada de testes (figura \ref{fig:setup-evse}), porém visto que os dispositivos são os mesmos e o sistema embarcado foi colocado em um cartão SD, só seria necessário inserir o cartão na BeagleBone da estação e configurá-la para dar boot pelo cartão, caso já não estiver configurada de fábrica assim.
+    Após executar os testes na bancada, o sistema foi levado para a \textit{\ac{EVSE}} protótipo, situada no estacionamento da Fundação CERTI (figura \ref{fig:evse}). A disposição dos dispositivos da estação difere da bancada de testes (figura \ref{fig:setup-evse}), porém visto que os dispositivos são os mesmos e o sistema embarcado foi colocado em um cartão SD, só seria necessário inserir o cartão na BeagleBone da estação e configurá-la para realizar a inicialização a partir do cartão, caso já não estiver configurada de fábrica.
 
-    Visto que a estação, no momento da escrita deste projeto, se encontrava sem conectividade, foi utilizado o modo local dela. Nesse modo, o \textit{software} captura as chamadas que seriam enviadas para o \textit{Central System} e as responde localmente, permitindo seu funcionamento mesmo sem conectividade. 
+    Visto que a estação, no momento da escrita deste projeto, se encontrava sem conectividade, foi utilizado o modo local. Nesse modo, o \textit{software} captura as chamadas que seriam enviadas para o \textit{Central System} e as responde localmente, permitindo seu funcionamento mesmo sem conectividade. 
 
     \begin{figure}[H]
       \begin{center}
@@ -48,9 +48,9 @@
       \end{center}
     \end{figure}
 
-    Embora a previsão fosse de que a estação funcionaria igualmente a bancada de testes, ao menos para o conector modo 2, não foi isso que ocorreu inicialmente. Um dos problemas que ocorreram foi relativo a conectividade da BeagleBone com outros dispositivos Ethernet, que foi resolvido com a substituição do \textit{connman} pelo \textit{Network Manager}. O \textit{connman} possui configurações atreladas a dados únicos de cada dispositivo, o que requereria que cada BeagleBone fosse configurada manualmente. Enquanto isso, o \textit{Network Manager} se baseia em configurações fixas no arquivo /etc/network/interfaces, sendo que esse não causou problemas quando executado na estação.
+    Embora a previsão fosse de que a estação apresentasse o mesmo comportamento da bancada de testes, ao menos para o conector modo 2, não foi isso que ocorreu inicialmente. Um dos problemas observados foi relativo a conectividade da BeagleBone com outros dispositivos Ethernet, que foi resolvido com a substituição do \textit{connman} pelo \textit{Network Manager}. O \textit{connman} possui configurações atreladas a dados únicos de cada dispositivo, o que necessitaria que cada BeagleBone fosse configurada manualmente. Enquanto isso, o \textit{Network Manager} se baseia em configurações fixas no arquivo /etc/network/interfaces, sendo que esse não causou problemas quando executado na estação.
 
-    Outros foram relacionados a serial: um foi devido as configurações seriais da bancada e da estação serem diferentes, porém isso foi rapidamente detectado e resolvido. Porém, um problema um pouco mais complicado surgiu logo após, quando notamos que o \textit{software} não estava funcionando adequadamente na estação pois não conectava ou perdia leituras. Foi descoberto que alguns circuitos integrados que transformam a saída \textit{\ac{UART}} para RS-485 possuem sua saída conectada a sua entrada, o que acabava gerando problemas na recepção de alguns dados. Após alguns dias foi descoberto que isso se chama \textit{echo} e poderia ser resolvido via \textit{software} (parâmetro \textit{"echo"} da classe de conexão do Jamod).
+    Outros problemas observados estavam relacionados à comunicação serial: um foi devido as configurações seriais da bancada e da estação serem diferentes, porém isso foi rapidamente detectado e resolvido. Porém, um problema um pouco mais complicado surgiu logo após, quando notamos que o \textit{software} não estava funcionando adequadamente na estação pois não conectava ou perdia leituras. Foi descoberto que alguns circuitos integrados que transformam a saída \textit{\ac{UART}} para RS-485 possuem sua saída conectada a sua entrada, o que acabava gerando problemas na recepção de alguns dados. Após alguns dias foi descoberto que isso se chama \textit{echo} e poderia ser resolvido via \textit{software} (parâmetro \textit{"echo"} da classe de conexão do Jamod).
 
     \begin{figure}[H]
       \begin{center}
@@ -60,7 +60,7 @@
       \end{center}
     \end{figure}
 
-    Como não foi possível testar o conector modo 3 \textit{Mennekes} previamente, alguns problemas surgiram também. O conector do veículo de testes, Mitsubishi Miev, usa o padrão americano. Portanto, é necessário um adaptador para o padrão \textit{Mennekes} para carregá-lo. Porém, tal adaptador gerou falhas elétricas que impossibilitavam o carregamento contínuo do veículo, como mal contato entre os pinos do adaptador e do conector, visto que o \textit{Phoenix} desativa o carregamento imediatamente ao perceber alguma falha. Para resolver, o adaptador foi cortado em alguns milímetros para possibilitar que os pinos de contato ficassem mais próximos, além de o \textit{software} mandar um comando para o \textit{Phoenix} limitar a corrente máxima permitida (visto que há suspeita de que, devido ao adaptador, o carregamento não pode exigir muita potência). Deste modo foi possível fazer alguns carregamentos experimentais, porém nenhum longo foi realizado devido a limitações de tempo e problemas com o veículo.
+    Como não foi possível testar o conector modo 3 \textit{Mennekes} previamente, alguns problemas surgiram também. O conector do veículo de testes, Mitsubishi Miev, usa o padrão americano. Portanto, é necessário um adaptador para o padrão \textit{Mennekes} para carregá-lo. Porém, tal adaptador gerou falhas elétricas que impossibilitavam o carregamento contínuo do veículo, como mal contato entre os pinos do adaptador e do conector, visto que o \textit{Phoenix} desativa o carregamento imediatamente ao perceber alguma falha. Para resolver esse problema, o adaptador foi cortado em alguns milímetros para possibilitar que os pinos de contato ficassem mais próximos, além de o \textit{software} mandar um comando para o \textit{Phoenix} limitar a corrente máxima permitida (visto que há suspeita de que, devido ao adaptador, o carregamento não pode exigir muita potência). Deste modo foi possível fazer alguns carregamentos experimentais, porém nenhum longo foi realizado devido a limitações de tempo e problemas com o veículo.
 
     Em um teste anterior com um BMW i3 sem o \textit{software} de controle, foi realizado um carregamento longo, sem nenhuma falha, com o conector \textit{Mennekes}. A figura \ref{fig:evse-charge} mostra a curva de corrente x tempo do carregamento, onde a estação chega a fornecer um máximo de 25,1 A e levou aproximadamente 4h30m para finalizar o carregamento. Poderia ser ainda mais rápido caso a estação possuísse um conector modo 4 (seção \ref{stateofart:modes:europe:mode4}).
 
@@ -72,7 +72,7 @@
       \end{center}
     \end{figure}
 
-    Foi realizada uma carga de menos de um minuto apenas para mostrar o sequenciamento da estação, visto que o programa gera saídas de texto para diversas operações que realiza internamente, e esse permite a visualização do que está ocorrendo na estação. A saída gerada está disponível no apêndice \ref{appendix:log} e é possível observar o \textit{software} realizar algumas das etapas mostradas nos sequenciamentos das figuras \ref{fig:sw-init}, \ref{fig:sw-starttransaction} e \ref{fig:sw-stoptransaction}.
+    Foi realizada uma carga de menos de um minuto apenas para mostrar o sequenciamento da estação, visto que o programa gera saídas de texto para diversas operações realizadas internamente e isso permite a visualização do que está ocorrendo na estação. A saída gerada está disponível no apêndice \ref{appendix:log} e é possível observar o \textit{software} realizar algumas das etapas mostradas nos sequenciamentos das figuras \ref{fig:sw-init}, \ref{fig:sw-starttransaction} e \ref{fig:sw-stoptransaction}.
 
     \begin{itemize}
       \item Linha 3-23: inicialização do programa
