@@ -1,7 +1,7 @@
 \chapter{Introdução}
 \label{stateofart:intro}
 
-  Desde o início dessa década, as empresas automobilísticas perceberam o grande potencial que o mercado de veículos elétricos possui. Antes, esse mercado era limitado por questões tecnológicas relacionadas a bateria e sistemas embarcados, porém hoje essas limitações vem sendo superadas, o que re-aqueceu o setor. O carregamento desses veículos é dado por \textit{\ac{EVSE}}.
+  Desde o início dessa década, as empresas automobilísticas perceberam o grande potencial que o mercado de veículos elétricos possui. Antes, esse mercado era limitado por questões tecnológicas, como durabilidade e carga de baterias,  sistemas embarcados e eletrônica de potência. Porém, hoje essas limitações vem sendo superadas, o que re-aqueceu o setor. O carregamento desses veículos é dado por \textit{\ac{EVSE}}.
 
   Uma \textit{\ac{EVSE}} traz não só desafios na área de eletrônica de potência, mas também na área de sistemas embarcados e \textit{software} em geral, visto que a estação pode ser feita de múltiplos dispositivos que precisam comunicar-se entre si e com servidores na nuvem. Esse projeto explora a área do \textit{software} de uma \textit{\ac{EVSE}}.
 
@@ -15,9 +15,9 @@
   \section{Objetivos}
   \label{stateofart:intro:objectives}
 
-    Este Trabalho de Conclusão de Curso tem como objetivo apresentar e implementar um protótipo de estação de carregamento elétrica, que permitirá ao usuário iniciar e cancelar carregamentos, assim como visualizar os dados correspondentes.
+    Este Trabalho de Conclusão de Curso tem como objetivo apresentar e implementar um protótipo de estação de carregamento elétrica, que permitirá ao usuário iniciar e cancelar carregamentos, assim como visualizar dados do conector: status (carregando, disponível, veículo conectado) e, caso estiver em um carregamento, tempo total e consumo de energia.
 
-    A comunicação com o servidor também é implementada, de modo que este possa receber leituras dos sensores e atualizações dos carregamentos, assim como possibilitar o gerenciamento remoto da estação.
+    A comunicação com o servidor também é implementada, de modo que este possa receber leituras dos sensores e atualizações dos carregamentos, assim como possibilitar o gerenciamento remoto da estação. Essa comunicação permite a inicialização e finalização de carregamentos de modo remoto, o armazenamento de medições dos carregamentos (corrente, tensão, potência e energia), a verificação do estado dos conectores, a configuração de variáveis internas da estação entre outros. No futuro, tais medições poderão ser utilizadas para efetivar cobranças ao usuário, verificar e atuar remotamente em casos de falhas e permitir que usuários iniciem seus carregamentos por meio de aplicativos de celular.
 
     Para isso são utilizadas tanto tecnologias já consolidadas, assim como outras mais recentes. O projeto é implementado em uma placa de desenvolvimento que possibilita acesso remoto, rodando o sistema operacional \textit{Linux}.
 

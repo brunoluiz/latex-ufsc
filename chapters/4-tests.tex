@@ -4,7 +4,7 @@
   \section{Ferramentas de teste}
   \label{tests:tools}
 
-    Para testar a implementação realizada, é necessária uma ferramenta para simular um servidor central. Inicialmente, testou-se a ferramenta \href{http://www.gir.fr/ocppjs/}{GIR OCPPJS}, porém essa apresentou problemas ao lidar com algumas das requisições vindas da \ac{EVSE}.
+    Para testar a implementação realizada, foi necessária uma ferramenta para simular um servidor central. Inicialmente, testou-se a ferramenta \href{http://www.gir.fr/ocppjs/}{GIR OCPPJS}, porém essa apresentou problemas ao lidar com algumas das requisições vindas da \textit{\ac{EVSE}}. Entre esses problemas está o fato de ela não suportar reconexões (em caso do \textit{software} de \textit{\ac{EVSE}} reiniciar) e, após certo período, a ferramenta não respondia às requisições.
 
     Foi criada então uma ferramenta para testes, disponível em \url{https://github.com/brnluiz/ocpp-tools}, que implementa parcialmente as funções de um sistema central. Todas operações apresentadas na tabela \ref{table:ocpp} foram implementadas.
 
@@ -13,7 +13,7 @@
   \section{Implementações e testes iniciais}
   \label{tests:initial}
 
-    O desenvolvimento inicial foi realizado a partir de código fonte existente, no qual não havia implementação funcional da EVSE e  apenas possibilitava o teste de cada dispositivo isoladamente. Após esse período inicial, iniciou-se a implementação do software da estação.
+    O desenvolvimento inicial foi realizado a partir de código fonte existente, no qual não havia implementação funcional da EVSE e apenas possibilitava o teste de cada dispositivo isoladamente. Após essa etapa de revisão de código, iniciou-se a implementação do software da estação.
 
     Alguns testes unitários foram desenvolvidos sob o \textit{framework} de testes \textit{JUnit}, o que permite o programa ser testado antes de ser embarcado. Após concluir com sucesso a etapa de verificação do software, ou seja, quando os testes não detectam erros, o programa é enviado para a \textit{BeagleBone}. Conforme apresentado na Figura \ref{fig:setup-tests}, a BeagleBone está conectada aos dispositivos listados na seção \ref{methodology:devices}, porém dispostos em uma bancada de testes.
 
@@ -36,7 +36,7 @@
   \section{Testes na estação protótipo}
   \label{tests:evse}
 
-    Após executar os testes na bancada, o sistema foi levado para a \textit{\ac{EVSE}} protótipo, situada no estacionamento da Fundação CERTI (figura \ref{fig:evse}). A disposição dos dispositivos da estação difere da bancada de testes (figura \ref{fig:setup-evse}), porém visto que os dispositivos são os mesmos e o sistema embarcado foi colocado em um cartão SD, só seria necessário inserir o cartão na BeagleBone da estação e configurá-la para realizar a inicialização a partir do cartão, caso já não estiver configurada de fábrica.
+    Após executar os testes na bancada, o sistema foi levado para a \textit{\ac{EVSE}} protótipo, situada no estacionamento da Fundação CERTI (figura \ref{fig:evse}). O arranjo dos dispositivos da estação difere da bancada de testes (figura \ref{fig:setup-evse}), porém visto que os dispositivos são os mesmos e o sistema embarcado foi colocado em um cartão SD, só seria necessário inserir o cartão na BeagleBone da estação e configurá-la para realizar a inicialização a partir do cartão, caso já não estiver configurada de fábrica.
 
     Visto que a estação, no momento da escrita deste projeto, se encontrava sem conectividade, foi utilizado o modo local. Nesse modo, o \textit{software} captura as chamadas que seriam enviadas para o \textit{Central System} e as responde localmente, permitindo seu funcionamento mesmo sem conectividade. 
 

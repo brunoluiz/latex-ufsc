@@ -33,7 +33,7 @@
       \item Regulamentações exigindo os fabricantes automotores a reduzir emissões de CO$_2$
       \item Incentivos fiscais e financeiros para a aquisição de veículos e operações relacionadas
       \item Preços de combustíveis
-      \item Custos de baterias e evolução da tecnologia
+      \item Diminuição de custos de baterias e evolução da tecnologia
       \item Infraestrutura do ecossistema de veículos elétricos (pontos de carregamento e manutenção)
     \end{itemize}
 
@@ -165,10 +165,10 @@
   \section{Protocolo OCPP}
   \label{stateofart:ocpp}
 
-    As estações de carregamento normalmente se comunicam com um servidor central, que pode gerenciar N estações. Para tal tarefa, é necessário um protocolo de comunicação. Embora ainda não exista um padrão oficial, o \textit{\ac{OCPP}} é um padrão \textit{de facto} e já existem esforços para o tornar um padrão oficial junto a \ac{OASIS} \cite{ocpp-news-standardization}.
+    As estações de carregamento normalmente se comunicam com um servidor central, que pode gerenciar N estações. Para tal tarefa, é necessário um protocolo de comunicação. Embora ainda não exista um padrão oficial, o \textit{\ac{OCPP}} é um padrão \textit{de facto} e já existem esforços para o tornar um padrão oficial junto a \textit{\ac{OASIS}} \cite{ocpp-news-standardization}.
 
     Mantido e criado pela \textit{\ac{OCA}}, o \textit{\ac{OCPP}} está presente em mais de 50 países. Na Europa, todas estações comercializadas precisam ser compatíveis com o \textit{\ac{OCPP}} e, na América, o interesse da indústria aumentou nos últimos anos \cite{forbes-news-ocpp}.
 
     O protocolo prevê um sistema central que recebe dados de N estações. Caso for necessário, o sistema central pode atuar sob \textit{\ac{EVSE}} específicas com ações como reservar a estação, cancelar algum carregamento ou até desligá-la. Caso a estação perca conectividade, o protocolo prevê um modo de funcionamento autônomo, somente registrando alguns dados para envio posterior (início e finalização de carregamentos) \cite{ocpp-spec-15}.
 
-    As requisições da versão 1.5 podem ser via \textit{\ac{SOAP}} ou \textit{WebSocket}, enquanto a versão 1.6 já adiciona suporte a \textit{JSON}. A versão 2.0, em desenvolvimento, tem em mente a padronização do protocolo e retrocompatibilidade com versões anteriores.
+    As requisições da versão 1.5 podem ser via \textit{\ac{SOAP}} ou \textit{WebSocket}, enquanto a versão 1.6 já adiciona suporte a \textit{JSON}. A versão 2.0, em desenvolvimento, tem em mente a padronização do protocolo e compatibilidade com versões anteriores.
