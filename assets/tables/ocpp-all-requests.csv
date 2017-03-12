@@ -1,0 +1,26 @@
+Enviada/Recebida, Operação, Descrição
+Enviada pela Estação, Authorize, Verifica se o usuário está autorizado à usar a estação
+Enviada pela Estação, BootNotification, Notifica a inicialização da estação e checa se ela pode se conectar ao servidor
+Enviada pela Estação, DataTransfer, Requisita variáveis e requisições específicas que não são padronizadas pelo OCPP
+Enviada pela Estação, DiagnosticStatusNotification, Notifica o estado do envio dos dados de diagnósticos da estação
+Enviada pela Estação, FirmwareStatusNotification, Notifica o estado da atualização de \textit{firmware}
+Enviada pela Estação, Heartbeat, Notifica o servidor que a estação ainda está conectada
+Enviada pela Estação, MeterValues, Envia medições dos carregamentos da estação (corrente/tensão/potência...)
+Enviada pela Estação, StartTransaction, Notifica a inicialização de um carregamento
+Enviada pela Estação, StatusNotification, Notifica a mudança de estado de um conector
+Enviada pela Estação, StopTransaction, Notifica a finalização de um carregamento
+Recebida pela Estação, CancelReservation, Cancela a reserva do conector atual
+Recebida pela Estação, ChangeAvailability, Modifica a disponibilidade de um conector
+Recebida pela Estação, ChangeConfiguration, Modifica variáveis internas da estação
+Recebida pela Estação, ClearCache, Limpa o cache da estação (como a lista de usuários que foram autorizados)
+Recebida pela Estação, DataTransfer, Recebe requisições específicas que não são padronizadas pelo OCPP
+Recebida pela Estação, GetConfiguration, Requisita as variáveis internas da estação
+Recebida pela Estação, GetDiagnostics, Requisita dados de diagnóstico da estação
+Recebida pela Estação, GetLocalListVersion, Requisita a versão da \textit{whitelist} que está sendo utilizada na estação
+Recebida pela Estação, RemoteStartTransaction, Inicializa um carregamento remotamente
+Recebida pela Estação, RemoteStopTransaction, Finaliza um carregamento remotamente
+Recebida pela Estação, ReserveNow, Reserva um conector da estação
+Recebida pela Estação, Reset, Reinicia a estação
+Recebida pela Estação, SendLocalList, Envia uma nova \textit{whitelist} para a estação
+Recebida pela Estação, UnlockConnector, Destrava um conector (caso esse possua trava mecânica controlada pela estação)
+Recebida pela Estação, UpdateFirmware, Atualiza o \textit{firmware} da estação

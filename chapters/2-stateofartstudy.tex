@@ -171,4 +171,44 @@
 
     O protocolo prevê um sistema central que recebe dados de N estações. Caso for necessário, o sistema central pode atuar sob \textit{\ac{EVSE}} específicas com ações como reservar a estação, cancelar algum carregamento ou até desligá-la. Caso a estação perca conectividade, o protocolo prevê um modo de funcionamento autônomo, somente registrando alguns dados para envio posterior (início e finalização de carregamentos) \cite{ocpp-spec-15}.
 
-    As requisições da versão 1.5 podem ser via \textit{\ac{SOAP}} ou \textit{WebSocket}, enquanto a versão 1.6 já adiciona suporte a \textit{JSON}. A versão 2.0, em desenvolvimento, tem em mente a padronização do protocolo e compatibilidade com versões anteriores.
+    Hoje existem duas versões: 1.5 e 1.6. Em ambas versões o protocolo funciona como um \textit{web service}, um tipo de serviço \textit{web} que funciona sob o \textit{stack} \textit{TCP/IP} e pode possuir diferentes tipos de implementações, como \textit{WebSocket} e \textit{\ac{SOAP}}. A versão 1.5, por exemplo, pode ser servida por meio de \textit{WebSocket} ou \textit{\ac{SOAP}}, sendo que o segundo é servido sob protocolo \textit{\ac{HTTP}}. Já a versão 1.6 também pode ser servida via \textit{\ac{REST}}.
+
+    As versões 1.6 e 2.0 adicionam novos tipos de requisições, porém é a versão 1.5 que define as requisições base, visto que suas requisições também são suportadas nas versões mais novas. As requisições suportadas pela versão 1.5 são apresentadas na lista a seguir \cite{ocpp-spec-15}:
+
+    \begin{itemize}
+      \item \underline{Enviadas pela estação:}
+      \begin{itemize}
+        \item Authorize: verifica se o usuário está autorizado à usar a estação
+        \item BootNotification: notifica a inicialização da estação e checa se ela pode se conectar ao servidor
+        \item DataTransfer: requisita variáveis e requisições específicas que não são padronizadas pelo OCPP
+        \item DiagnosticStatusNotification: notifica o estado do envio dos dados de diagnósticos da estação
+        \item FirmwareStatusNotification: notifica o estado da atualização de \textit{firmware}
+        \item Heartbeat: notifica o servidor que a estação ainda está conectada
+        \item MeterValues: envia medições dos carregamentos da estação (corrente/tensão/potência...)
+        \item StartTransaction: notifica a inicialização de um carregamento
+        \item StatusNotification: notifica a mudança de estado de um conector
+        \item StopTransaction: notifica a finalização de um carregamento
+      \end{itemize}
+      \item \underline{Recebidas pela estação:}
+      \begin{itemize}
+        \item CancelReservation: cancela a reserva do conector atual
+        \item ChangeAvailability: modifica a disponibilidade de um conector
+        \item ChangeConfiguration: modifica variáveis internas da estação
+        \item ClearCache: limpa o cache da estação (como a lista de usuários que foram autorizados)
+        \item DataTransfer: recebe requisições específicas que não são padronizadas pelo OCPP
+        \item GetConfiguration: requisita as variáveis internas da estação
+        \item GetDiagnostics: requisita dados de diagnóstico da estação
+        \item GetLocalListVersion: requisita a versão da \textit{whitelist} que está sendo utilizada na estação
+        \item RemoteStartTransaction: inicializa um carregamento remotamente
+        \item RemoteStopTransaction: finaliza um carregamento remotamente
+        \item ReserveNow: reserva um conector da estação
+        \item Reset: reinicia a estação
+        \item SendLocalList: envia uma nova \textit{whitelist} para a estação
+        \item UnlockConnector: destrava um conector (caso esse possua trava mecânica controlada pela estação)
+        \item UpdateFirmware: atualiza o \textit{firmware} da estação
+      \end{itemize}
+    \end{itemize}
+
+    Os dados obtidos e as requisições permitidas abrem espaço para algumas aplicações. Com os MeterValues, StatusNotification, ChangeAvailability, StartTransaction e StopTransaction é possível obter um relatório dos carregamentos que ocorreram, realizar a cobrança destes, visto que as transações sempre estão associadas a um usuário, e até atuar no desligamento de um conector em caso de falhas. Requisições como ReserveNow, CancelReservation, RemoteStartTransaction e RemoteStopTransaction permitem que donos de veículos elétricos, por meios remotos (exemplo: aplicativos de celular), atuem na estação de modo à iniciar o carregamento do seu veículo ou agendar a estação para uso posterior. As outras requisições são mais focadas na administração e manutenção da estação, o que também é importante visto que nem sempre existirá uma equipe local para gerenciá-la.
+
+    Embora o protocolo implemente diversos tipos de requisições e aplicações, os fabricantes não são obrigados a implementar todas. Isso dá flexibilidade no momento do desenvolvimento da estação.
