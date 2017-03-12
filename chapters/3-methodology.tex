@@ -79,7 +79,7 @@
     \subsection{Leitor de RFID LotusSmart}
     \label{methodology:devices:rfid}
 
-      De acordo com a especificação do \ac{OCPP}, para iniciar o carregamento na estação é necessária a utilização de cartões \textit{\ac{RFID}}, sendo necessário a utilização de um leitor compatível. O dispositivo escolhido, \textit{LotusSmart}, permite apenas a leitura de cartões de 13,56 MHz, visto que há uma variedade de frequências de operação.
+      De acordo com a especificação do \textit{\ac{OCPP}}, para iniciar o carregamento na estação é necessária a utilização de cartões \textit{\ac{RFID}}, sendo necessário a utilização de um leitor compatível. O dispositivo escolhido, \textit{LotusSmart}, permite apenas a leitura de cartões de 13,56 MHz, visto que há uma variedade de frequências de operação.
 
       Os dados da \textit{tag} são armazenados em um \textit{buffer}, semelhante ao \textit{buffer} de teclado de computadores, e enviados serialmente para o sistema, sendo entregues em formato \textit{ASCII}.
 
@@ -233,11 +233,6 @@
       O sistema que roda na BeagleBone é o Debian 8.6 (Jessie) com kernel \textit{Linux} específico para a \textit{BeagleBone}. Foi instalado o \textit{Java} e houveram modificações em sua \textit{device tree} para permitir a manipulação das entradas e saídas digitais.
 
       Foram adicionados alguns scripts no boot do sistema para ativar o acesso à internet e executar o programa logo após a inicialização do sistema.
-
-    \subsection{Comunicação entre periféricos}
-    \label{methodology:structure:com}
-
-      Visto que todos dispositivos escolhidos suportam MODBUS, esse foi o protocolo escolhido como padrão. A biblioteca \textit{Jamod} foi utilizada para realizar a implementação do protocolo no projeto.
 
     \subsection{Comunicação entre estação e servidores}
     \label{methodology:structure:ocpp}
