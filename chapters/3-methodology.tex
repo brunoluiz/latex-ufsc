@@ -282,19 +282,27 @@
         \subsubsection{AuthHandler}
           Gerencia autenticação via \textit{\textit{\ac{RFID}}}. Primeiramente verifica se o usuário está habilitado por meio de uma \textit{whitelist} e, caso não encontre nenhum dado nela, faz uma requisição ao servidor \textit{\ac{OCPP}} para a verificação.
         \subsubsection{OcppManager}
-          Roda em uma instância própria e, a cada período de tempo, executa a lista de comandos que foram criados pelo programa. Implementa o \textit{Dispatcher} do \textit{Command Pattern} \cite{book-gof}, onde os seus comandos são implementações das requisições da tabela \ref{table:ocpp}, e roda em uma instância individual.
+          Roda em uma instância própria e, a cada período de tempo, executa a lista de comandos que foram adicionados à sua fila (possui um método público queue() que permite isso). Implementa o \textit{Dispatcher} do \textit{Command Pattern} \cite{book-gof}, onde os seus comandos são implementações das requisições da tabela \ref{table:ocpp}, e roda em uma instância individual.
         \subsubsection{ChargePointServer}
-          Implementação da interface \textit{\ac{WSDL}} gerada pelo \textit{wsimport}. Roda em uma instância individual e cria um servidor ao qual o \textit{Central System} pode requisitar dados.
+          Implementação da interface \textit{\ac{WSDL}} gerada pelo \textit{wsimport}. Roda em uma instância individual e cria um servidor ao qual o \textit{Central System} pode requisitar dados. Esse servidor permite que o \textit{Central System} modifique configurações internas da estação, inicialize e finalize carregamentos, modifique estados de conectores dentre outros.
         \subsubsection{ChargePointClient}
           Implementação da interface \textit{\ac{WSDL}} gerada pelo \textit{wsimport}. Permite enviar requisições para o \textit{Central System} e é chamado apenas por comandos despachados pelo \textit{OcppManager}.
         \subsubsection{HmiManager}
-          Gerencia os estados da \ac{IHM}, sendo que todos estados são representados por classes. Implementa o \textit{Context} do \textit{State Pattern} \cite{book-gof}, sendo que cada estado (implementações da classe \textit{ScreenState}) pode modificar qual será o estado da próxima iteração por meio de informações adquiridas do dispositivo \ac{IHM} ou de dados vindos de outras dependências. Roda em uma instância própria.
+          Gerencia os estados da \ac{IHM}, sendo que todos estados são representados por classes. Implementa o \textit{Context} do \textit{State Pattern} \cite{book-gof}, sendo que cada estado (implementações da classe \textit{ScreenState}) pode modificar qual será o estado da próxima iteração por meio de informações adquiridas do dispositivo \ac{IHM} ou de dados vindos de outras dependências. Os principais estados são: DefaultScreenState, que mostra ao usuário os dados das \textit{Transactions} atuais e permite a autenticação, e o ConnectorSelectionScreenState, que permite a inicialização ou finalização do carregamento por parte do usuário. Roda em uma instância própria.
         \subsubsection{ConnectorSupervisor}
           Roda em uma instância, onde checa periodicamente o status dos conectores, envia informações para o servidor sobre dados de medição destes e expira antigas reservas (esse último será implementado em versões futuras).
         \subsubsection{ConnectorManager e Connector}
-          Classe que armazena todos conectores, sendo cada conector um objeto \textit{Connector}. As classes \textit{Connector} gerenciam cada conector da estação, o que possibilita a obtenção de dados e controle por meio de diferentes interfaces (\ac{IO} e MODBUS no momento).
+          Classe que armazena todos conectores, sendo cada conector um objeto \textit{Connector}. As classes \textit{Connector} gerenciam cada conector da estação, o que possibilita a obtenção de dados e controle por meio de diferentes interfaces (\textit{\ac{IO}} e MODBUS no momento).
         \subsubsection{TransactionManager e Transaction}
           Classe que armazena transações ativas, sendo que transações são instâncias da classe \textit{Transaction}. Cada transação roda em uma instância individual, sendo que estas são responsáveis pelos processos de inicialização e finalização junto ao \textit{\ac{OCPP}}, assim como envio periódico de dados da transação.
+
+        \begin{figure}[H]
+          \begin{center}
+            \includegraphics[width=\textwidth,natwidth=400,natheight=288]{assets/images/uml.jpg}
+            \caption{Diagrama UML simplificado do projeto}
+            \label{fig:uml}
+          \end{center}
+        \end{figure}
 
     \subsection{Inicialização}
 
@@ -332,7 +340,7 @@
 
       \begin{figure}[H]
         \begin{center}
-          \includegraphics[height=\textheight]{assets/pdfs/sw-starttransaction.pdf}
+          \includegraphics[height=0.8\textheight]{assets/pdfs/sw-starttransaction.pdf}
           \caption{Diagrama de Inicialização de uma Transação pelo usuário}
           \label{fig:sw-starttransaction}
         \end{center}
@@ -340,7 +348,7 @@
 
       \begin{figure}[H]
         \begin{center}
-          \includegraphics[height=\textheight]{assets/pdfs/sw-stoptransaction.pdf}
+          \includegraphics[height=0.8\textheight]{assets/pdfs/sw-stoptransaction.pdf}
           \caption{Diagrama de Finalização de uma Transação pelo usuário}
           \label{fig:sw-stoptransaction}
         \end{center}
