@@ -230,9 +230,17 @@
     \subsection{Sistema operacional}
     \label{methodology:structure:os}
 
-      O sistema que roda na BeagleBone é o Debian 8.6 (Jessie) com kernel \textit{Linux} específico para a \textit{BeagleBone}. Foi instalado o \textit{Java} e houveram modificações em sua \textit{device tree} para permitir a manipulação das entradas e saídas digitais.
+      O sistema operacional utilizado é o Debian 8.6 (Jessie) com um kernel \textit{Linux} específico para a \textit{BeagleBone}. Foi instalada a versão mais recente do \textit{\ac{JRE}}, visto que o projeto utiliza Java, e houveram modificações em sua \textit{device tree}.
 
-      Foram adicionados alguns scripts no boot do sistema para ativar o acesso à internet e executar o programa logo após a inicialização do sistema.
+      A \textit{device tree} é um recurso que permite o usuário configurar as \textit{\ac{GPIO}} do sistema para se adequar aos usos do projeto. No caso da \textit{\ac{EVSE}}, as saídas e entradas são re-configuradas para que a \textit{OSSO Cape} possa ser utilizada. Além dessa, é necessário ativar outra que habilita a utilização da saída \textit{\ac{UART}}. 
+
+      Para utilizar essas \textit{device trees}, é necessário baixar arquivos dts, que descrevem como cada \textit{\ac{GPIO}} deve ser configurada. Após isso é necessário compilar os arquivos dts e gerar arquivos dtb, tarefa facilmente executada pela ferramenta dtc (inclusa na maioria das distribuições \textit{Linux}). 
+
+      Após compiladas e instaladas, é necessário ativar essas \textit{device trees} na inicialização. Isso pode ser feito por meio do \textit{uBoot}, o gerenciador de inicialização que vem embarcado na BeagleBone. É necessária a edição do arquivo uEnv.txt, normalmente situado na pasta /boot do sistema, para ativar as \textit{device trees} desejadas.
+
+      Foi adicionado também um \textit{script} na pasta /etc/init.d/ para ativar o acesso à internet e executar o programa logo após a inicialização do sistema. Essa pasta é utilizada pelo \textit{System V}, que é um tradicional gerenciador de serviços para o Linux, sendo responsável por inicializar serviços dependendo do nível de inicialização que o sistema se encontra.
+
+      O nível 0 representa o desligamento do sistema. O nível 1 representa um modo mínimo, sem conectividade e de usuário único. Já do modo 2 ao 5, o sistema possui conectividade, permite múltiplos usuários e pode possuir \textit{\ac{GUI}} (normalmente nível 5). É nesses modos que o \textit{script} de inicialização da \textit{\ac{EVSE}} é executado. Ainda existe o nível 6, que representa uma reinicialização do sistema.
 
     \subsection{Comunicação entre estação e servidores}
     \label{methodology:structure:ocpp}
