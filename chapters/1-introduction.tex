@@ -15,11 +15,13 @@
   \section{Objetivos}
   \label{stateofart:intro:objectives}
 
-    Este Trabalho de Conclusão de Curso tem como objetivo apresentar e implementar um protótipo de estação de carregamento elétrica, que permitirá ao usuário iniciar e cancelar carregamentos, assim como visualizar dados do conector: status (carregando, disponível, veículo conectado) e, caso estiver em um carregamento, tempo total e consumo de energia.
+    Este Trabalho de Conclusão de Curso tem como objetivo apresentar e implementar um protótipo de estação de carregamento elétrica, que permitirá ao usuário iniciar e cancelar carregamentos, assim como visualizar dados do conector: status (carregando, disponível, veículo conectado) e, caso estiver em um carregamento, tempo total e consumo de energia. Os carregamentos fornecidos pela estação são \ac{AC} e esses podem ser realizados somente em veículos que estejam conforme a norma IEC 62196 \cite{iec-62196}. A estação não fornece carregamentos \ac{CC}, o que permitiria carregamentos mais rápidos porém subiria os custos do protótipo.
 
     A comunicação com o servidor também é implementada, de modo que este possa receber leituras dos sensores e atualizações dos carregamentos, assim como possibilitar o gerenciamento remoto da estação. Essa comunicação permite a inicialização e finalização de carregamentos de modo remoto, o armazenamento de medições dos carregamentos (corrente, tensão, potência e energia), a verificação do estado dos conectores, a configuração de variáveis internas da estação entre outros. No futuro, tais medições poderão ser utilizadas para efetivar cobranças ao usuário, verificar e atuar remotamente em casos de falhas e permitir que usuários iniciem seus carregamentos por meio de aplicativos de celular.
 
     Para isso são utilizadas tanto tecnologias já consolidadas, assim como outras mais recentes. O projeto é implementado em uma placa de desenvolvimento que possibilita acesso remoto, rodando o sistema operacional \textit{Linux}.
+
+    O objetivo do acadêmico neste projeto não é implementar a parte elétrica da estação, mas sim seu \textit{software}. A parte elétrica foi desenvolvida por outra equipe.
 
   \section{Objetivos Específicos}
   \label{stateofart:intro:specificobjectives}
