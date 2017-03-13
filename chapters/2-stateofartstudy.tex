@@ -50,22 +50,22 @@
         \subsubsection{Modo 1 - Carregamento Lento}
         \label{stateofart:modes:europe:mode1}
 
-        Utiliza o conector de tomada residenciais, o qual não pode exceder 16 A de corrente e 250 V \ac{CA} monofásica ou 480 V \ac{CA} de tensão trifásica. Normalmente demanda de 6 à 8 horas para carregar completamente o veículo, o que é considerado um carregamento lento. Como é utilizada uma tomada comum, não é necessária uma \textit{\ac{EVSE}} para fazer o controle desse carregamento. Porém, como esse padrão utiliza uma proteção diferencial e requer uma proteção aterrada na residência, muitos países não o adotam, visto que boa parte das residências não possuem aterramento.
+        Utiliza o conector de tomada residenciais, o qual não pode exceder 16 A de corrente e 250 V \ac{CA} monofásica ou 480 V \ac{CA} de tensão trifásica. Normalmente demanda de 6 à 8 horas para carregar completamente o veículo, o que é considerado um carregamento lento. Como é utilizada uma tomada comum, não é necessária uma \textit{\ac{EVSE}} para fazer o controle desse carregamento, mas somente uma extensão que conecta a tomada ao veículo. Porém, como esse padrão utiliza uma proteção diferencial e requer uma proteção aterrada na residência, muitos países não o adotam, visto que boa parte das residências não possuem aterramento. Nesse modo, o veículo precisa possuir com um inversor interno para a conversão \ac{CA}-\ac{CC}.
 
         \subsubsection{Modo 2 - Carregamento Lento}
         \label{stateofart:modes:europe:mode2}
 
-        É necessário um equipamento de controle no conector ou no cabo, sendo que este faz a comunicação com o veículo por meio de \textit{\ac{PWM}}. Graças a essa comunicação, o carro pode informar o status de sua bateria e assim o carregamento pode ser adaptado de acordo com esse dado. Utiliza o mesmo conector do Modo 1 e possui as mesmas limitações elétricas de tensão, porém permite um máximo de até 32 A de corrente. Dentro dessa caixa de controle há também um circuito de proteção, o que permite o uso desse modo em locais não aterrados. É utilizado em alguns locais públicos da Europa e é considerado uma solução de transição nos EUA.
+        É necessário um equipamento de controle no conector ou no cabo, sendo que este equipamento fará o sequenciamento elétrico com o veículo (descrito na seção \ref{stateofart:pwm-seq}). Utiliza o mesmo conector do Modo 1 e possui as mesmas limitações elétricas de tensão, porém permite um máximo de até 32 A de corrente. Dentro desse equipamento de controle há também um circuito de proteção, o que permite o uso desse modo em locais não aterrados. É utilizado em alguns locais públicos da Europa e é considerado uma solução de transição nos EUA. Algumas fabricantes disponibilizam um carregador modo 2 para ser utilizado em casa, visto que é somente um cabo com uma caixa de controle. Nesse modo, o veículo precisa possuir com um inversor interno para a conversão \ac{CA}-\ac{CC}.
 
         \subsubsection{Modo 3 - Carregamento Rápido CA}
         \label{stateofart:modes:europe:mode3}
 
-        O cabo é conectado à uma \textit{\ac{EVSE}}, sendo que essa precisa estar habilitada à comunicação \textit{\ac{PWM}} e possuir uma proteção elétrica. O carregamento pode ser ajustado de acordo com os dados recebidos pelo pino de controle da estação, o que possibilita o ajuste do carregamento (lento ou rápido). Com o uso de 400 V trifásico com 63 A de corrente, é possível carregar certos carros em menos de uma hora. Esse modo está se tornando cada vez mais comum, porém requer um equipamento de eletrônica de potência adequado à tensão e corrente máxima desejadas.
+        O cabo é conectado à uma \textit{\ac{EVSE}}, sendo que essa precisa estar habilitada à realizar \textit{\ac{PWM}} e possuir uma proteção elétrica interna. O carregamento é ajustado de acordo com o sinal recebido via \textit{\ac{PWM}}, sendo que seu sequenciamento é explicado na seção \ref{stateofart:pwm-seq}. Com o uso de 400 V trifásico com 63 A de corrente (especificações máximas deste modo), é possível carregar certos carros em menos de uma hora. Esse modo está se tornando cada vez mais comum, porém - para obter aproveitamento máximo - o veículo precisa possuir um inversor adequado corrente máxima da especificação, o que geralmente não ocorre e acaba limitando a velocidade do carregamento.
 
         \subsubsection{Modo 4 - Carregamento Rápido CC}
         \label{stateofart:modes:europe:mode4}
 
-        Este modo ultra-rápido permite tensões de 400 V e corrente de 200 A, utilizando \ac{CC} para tal. Esse modo requer um inversor para converter a entrada da rede de \ac{CA} para \ac{CC}. Estações que permitem carregamento no modo 4 custam mais caro que estações modo 3, devido aos requisitos de segurança e a necessidade de um bom inversor. Porém, essas estão se tornando cada vez mais atrativas devido a velocidade de seus carregamentos.
+        Este modo ultra-rápido permite tensões de 400 V e corrente de 200 A, utilizando \ac{CC} para tal. Como a estação é a responsável pela conversão \ac{CA}-\ac{CC}, esse modo requer que esta possua um inversor, sendo desnecessário o inversor do veículo. Estações que permitem carregamento no modo 4 custam mais caro que estações modo 3, devido aos requisitos de segurança e a necessidade de um bom inversor para atingir potências elevadas. Porém, essas estão se tornando cada vez mais atrativas devido a velocidade de seus carregamentos.
 
     \subsection{Modos Americanos}
     \label{stateofart:modes:us}
@@ -102,6 +102,27 @@
       \label{stateofart:modes:tesla}
 
         Nos modos cabeados, ainda há o modo proprietário da fabricante Tesla, o \textit{Tesla Supercharge}, que permite o carregamento de 50\% da bateria do Tesla S (até 120kWh) em até 30 minutos \cite{tesla-supercharge}. Para possibilitar tal carregamento, os carregamentos são realizados em corrente contínua, assim como o Modo 4 Europeu.
+
+  \section{Sequenciamento elétrico de carregamentos CA}
+  \label{stateofart:pwm-seq}
+    Como descrito na seção \ref{stateofart:modes:europe}, os carregamentos modo 2 e 3 requerem um sequenciamento para a inicialização e finalização de seus carregamentos, definidos pela \cite{iec-62196}. Esse sequenciamento é dado por meio de \textit{\ac{PWM}} e variações dos níveis de tensão, o que permite realizar todo controle necessário.
+
+    Na figura \ref{fig:phoenix}, é possível ver um exemplo do sequenciamento de um carregamento gerenciado por dispositivos da Phoenix Contact. No estado A, quando não há um veículo conectado, o conector apresenta uma saída de 12V~-12V constante. Assim que é conectado, a tensão cai para 9V~-12V e o estado muda para B. 
+
+    Enquanto for mantido 9V constante (estado B1), a estação ainda não está pronta para o carregamento, porém assim que começar houver um sinal modulado por \textit{\ac{PWM}} (estado B2), a estação indica que está pronta. A tensão então cai para 6V~-12V ou 3V~-12V (estado C ou D) e o veículo inicia o carregamento. Pelo \textit{duty cicle} do \textit{\ac{PWM}}, a estação pode informar ao veículo quanta corrente pode ser disponibilizada, sendo que durante o carregamento esse \textit{duty cicle} pode ser re-ajustado. 
+
+    Ao termino do carregamento, o veículo desativa o \textit{\ac{PWM}} e a estação volta para o estado B. Após o conector ser removido pelo usuário, a estação vai para o estado A e permanece assim até o próximo carregamento.
+
+    Caso houver uma falha em alguma dessas etapas, o nível de tensão pode ir para 0~-12V ou o sinal é interrompido.
+
+    \begin{figure}[H]
+      \begin{center}
+        \includegraphics[width=0.75\textwidth,natwidth=400,natheight=288]{assets/images/phoenix.jpg}
+        \caption{Exemplo de sequenciamento para carregamentos CA}
+        \label{fig:phoenix}
+      \end{center}
+    \end{figure}
+
 
   \section{Padrões de Conectores}
   \label{stateofart:plugs}

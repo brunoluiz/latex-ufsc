@@ -45,21 +45,7 @@
     \subsection{Phoenix EM-CP-PP-ETH Controller}
     \label{methodology:devices:phoenix}
 
-      Os padrões de carregamento rápido utilizam protocolos de comunicação entre carro e estação, podendo ser via \textit{\ac{PWM}} ou \textit{\ac{CAN}}. O Phoenix EM-CP-PP-ETH permite gerenciar carregamentos AC trifásicos por meio do \textit{\ac{PWM}} e variação dos níveis de tensão, o que permite realizar todo controle necessário entre a inicialização e finalização dos carregamentos \cite{phoenix}. 
-
-      Na figura \ref{fig:phoenix}, é possível ver um exemplo do sequenciamento de um carregamento gerenciado pelo Phoenix. No estado A, quando não há nada conectado, o conector apresenta uma saída de 12V constante. Assim que o veículo é conectado, a tensão cai para 9V e o estado muda para B. 
-
-      Enquanto se manter em 9V constante (estado B1), a estação ainda não está pronta para o carregamento, porém assim que começar a se comunicar via \textit{\ac{PWM}} (estado B2), a estação indica que está pronta. A tensão então cai para 6V ou 3V (estado C ou D) e o veículo inicia o carregamento. A corrente fornecida é indicada pelo valor do \textit{\ac{PWM}}. 
-
-      Ao termino do carregamento, o veículo desativa a PWM e a estação volta para o estado B. Após o conector ser removido pelo usuário, a estação vai para o estado A e permanece assim até o próximo carregamento.
-
-      \begin{figure}[H]
-        \begin{center}
-          \includegraphics[width=0.75\textwidth,natwidth=400,natheight=288]{assets/images/phoenix.jpg}
-          \caption{Exemplo de sequenciamento do Phoenix}
-          \label{fig:phoenix}
-        \end{center}
-      \end{figure}
+      Os padrões de carregamento \ac{CA} requerem um sequenciamento elétrico entre carro e estação. O Phoenix EM-CP-PP-ETH permite gerenciar carregamentos AC trifásicos por meio do \textit{\ac{PWM}} e variação dos níveis de tensão, o que permite realizar todo controle necessário entre a inicialização e finalização dos carregamentos \cite{phoenix}. O processo utilizado por esse dispositivo é o mesmo descrito na seção \ref{stateofart:pwm-seq}.
 
     \subsection{IHM WEG MT}
     \label{methodology:devices:ihm}
