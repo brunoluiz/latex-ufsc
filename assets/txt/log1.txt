@@ -1,0 +1,21 @@
+19:22:41 [INFO ] app.App: Start of main program sequence!
+19:23:02 [INFO ] auth.WhitelistHandler: Whitelist has 8 entries. (version=1)
+Initialized pin P9.12 with direction OUT.
+Set GPIO P9.12 signal to LOW
+RXTX Warning:  Removing stale lock file. /var/lock/LCK..ttyS1
+19:23:03 [INFO ] energy.EnergyCalculator: Starting EnergyCalculator and requester...
+19:23:03 [INFO ] energy.EnergyCalculator: EnergyCalculator started!
+19:23:04 [INFO ] connectors.CommonConnector: Kron Series number: 1868664
+19:23:04 [INFO ] connectors.ConnectorManager: Added one connector (PLUG_COMMON)! Actual size: 1
+19:23:05 [INFO ] connectors.PhoenixControllerConnector: Kron Series number: 1857627
+19:23:05 [INFO ] connectors.ConnectorManager: Added one connector (CONTROLLER_TYPE2PHOENIX)! Actual size: 2
+19:23:05 [INFO ] connectors.ConnectorsSupervisor: Starting supervisor...
+19:23:05 [INFO ] ocpp.OcppManager: Starting OcppManager...
+19:23:05 [INFO ] connectors.ConnectorsSupervisor: Supervisor started!
+19:23:05 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
+19:23:05 [INFO ] ocpp.OcppManager: OcppManager started
+19:23:05 [INFO ] ocpp.LocalChargePointClient15: Received ocpp.cs._2012._06.BootNotificationRequest
+19:23:05 [INFO ] failures.FailureSupervisor: Starting failure supervisor...
+19:23:05 [INFO ] failures.FailureSupervisor: Failure supervisor started!
+19:23:06 [INFO ] hmi.HmiManager: Starting Hmi...
+19:23:06 [INFO ] hmi.HmiManager: Hmi Started!

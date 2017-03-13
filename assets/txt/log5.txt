@@ -1,0 +1,4 @@
+19:23:26 [INFO ] transactions.TransactionImpl: Starting Transaction...
+19:23:26 [INFO ] transactions.TransactionImpl: Connector 0 - Starting charging operation #0
+Set GPIO P9.12 signal to HIGH
+19:23:26 [INFO ] transactions.TransactionImpl: Transaction Started!

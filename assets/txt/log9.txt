@@ -1,0 +1,2 @@
+19:24:28 [INFO ] transactions.TransactionImpl: Connector 0 - Ending charging operation #1486409008
+Set GPIO P9.12 signal to LOW

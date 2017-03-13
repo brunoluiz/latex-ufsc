@@ -1,0 +1,1 @@
+19:23:27 [DEBUG] hmi.HmiManager: Hmi ScreenState changed from CONNECTOR_SELECTION to CHARGING_STARTED

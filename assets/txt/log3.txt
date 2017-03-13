@@ -1,0 +1,5 @@
+19:23:22 [INFO ] auth.AuthHandler: Tag 4D16DC27 is whitelisted!
+19:23:22 [DEBUG] hmi.HmiManager: Hmi ScreenState changed from LOADING to AUTH_SUCCESSFUL
+19:23:22 [DEBUG] ocpp.OcppManager: Starting to process the OCPP Commands Queue
+19:23:23 [DEBUG] ocpp.OcppManager: Finished OCPP Commands Queue processing
+19:23:24 [DEBUG] hmi.HmiManager: Hmi ScreenState changed from AUTH_SUCCESSFUL to CONNECTOR_SELECTION

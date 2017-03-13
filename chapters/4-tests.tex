@@ -25,7 +25,7 @@
 
     O desenvolvimento inicial foi realizado a partir de código fonte existente, no qual não havia implementação funcional da EVSE e apenas possibilitava o teste de cada dispositivo isoladamente. Após essa etapa de revisão de código, iniciou-se a implementação do software da estação.
 
-    Alguns testes unitários foram desenvolvidos sob o \textit{framework} de testes \textit{JUnit}, o que permite o programa ser testado antes de ser embarcado. Após concluir com sucesso a etapa de verificação do software, ou seja, quando os testes não detectam erros, o programa é enviado para a \textit{BeagleBone}. Conforme apresentado na Figura \ref{fig:setup-tests}, a BeagleBone está conectada aos dispositivos listados na seção \ref{methodology:devices}, porém dispostos em uma bancada de testes.
+    Alguns testes unitários foram desenvolvidos sob o \textit{framework} de testes \textit{JUnit}, o que permite o programa ser testado antes de ser embarcado. Após concluir com sucesso a etapa de verificação do software, ou seja, quando os testes unitários não detectam erros, o programa é enviado para a \textit{BeagleBone}. Conforme apresentado na Figura \ref{fig:setup-tests}, a BeagleBone está conectada aos dispositivos listados na seção \ref{methodology:devices}, porém dispostos em uma bancada de testes.
 
     Como as cargas utilizadas durante o teste consumiam pouca energia (fontes \ac{CA}-\ac{CC} de dispositivos de baixo consumo, como notebooks), o medidor de energia teve seu multiplicador de corrente configurado em 100, possibilitando assim simular um consumo alto de forma rápida (sem precisar aguardar um grande período de tempo para atingir 1 kWh).
 
@@ -82,18 +82,36 @@
       \end{center}
     \end{figure}
 
-    Foi realizada uma carga de menos de um minuto apenas para mostrar o sequenciamento da estação, visto que o programa gera saídas de texto para diversas operações realizadas internamente e isso permite a visualização do que está ocorrendo na estação. A saída gerada está disponível no apêndice \ref{appendix:log} e é possível observar o \textit{software} realizar algumas das etapas mostradas nos sequenciamentos das figuras \ref{fig:sw-init}, \ref{fig:sw-starttransaction} e \ref{fig:sw-stoptransaction}.
+    Foi realizada uma carga de menos de um minuto apenas para mostrar o sequenciamento da estação, visto que o programa gera saídas de texto para diversas operações realizadas internamente e isso permite a visualização do que está ocorrendo na estação. A saída completa está disponível no apêndice \ref{appendix:log}. Nos trechos abaixo, é possível observar o \textit{software} realizar algumas das etapas mostradas nos sequenciamentos das figuras \ref{fig:sw-init}, \ref{fig:sw-starttransaction} e \ref{fig:sw-stoptransaction}.
 
     \begin{itemize}
-      \item Linha 3-23: inicialização do programa
+      \item Linha 3-23: inicialização do programa 
+      \lstinputlisting[basicstyle=\ttfamily\scriptsize]{assets/txt/log1.txt}
+
       \item Linha 34: usuário utiliza a \textit{\ac{RFID}}
-      \item Linha 35: \textit{\ac{RFID}} é autenticada (usuário habilitado para carregamento)
-      \item Linhas 39-46: \textit{software} aguarda usuário selecionar o conector
-      \item Linhas 41-45: inicia a \textit{Thread} da transação e habilita o carregamento
-      \item Linhas 48-54: notifica servidor \textit{\ac{OCPP}} sobre o início do carregamento
+      \lstinputlisting[basicstyle=\ttfamily\scriptsize]{assets/txt/log2.txt}
+
+      \item Linha 35-39: \textit{\ac{RFID}} é autenticada (usuário habilitado para carregamento)
+      \lstinputlisting[basicstyle=\ttfamily\scriptsize]{assets/txt/log3.txt}
+
+      \item Linhas 39-41: \textit{software} aguarda usuário selecionar o conector
+      \lstinputlisting[basicstyle=\ttfamily\scriptsize]{assets/txt/log4.txt}
+
+      \item Linhas 42-45: inicia a \textit{Thread} da transação e habilita o carregamento
+      \lstinputlisting[basicstyle=\ttfamily\scriptsize]{assets/txt/log5.txt}
+
       \item Linha 46: mostra mensagem para o usuário sobre o início do carregamento
+      \lstinputlisting[basicstyle=\ttfamily\scriptsize]{assets/txt/log6.txt}
+
+      \item Linhas 48-54: notifica servidor \textit{\ac{OCPP}} sobre o início do carregamento
+      \lstinputlisting[basicstyle=\ttfamily\scriptsize]{assets/txt/log7.txt}
+
       \item Linhas 55-86: \textit{software} envia dados para servidor e alterna entre algumas telas na \ac{IHM}
+      \lstinputlisting[basicstyle=\ttfamily\scriptsize]{assets/txt/log8.txt}
+
       \item Linhas 87-88: carregamento cancelado devido desconexão do veículo por parte do usuário
+      \lstinputlisting[basicstyle=\ttfamily\scriptsize]{assets/txt/log9.txt}
+
       \item Linhas 89-95: notifica servidor \textit{\ac{OCPP}} sobre o término do carregamento
-      \item Linhas 96-99: aguarda novas iterações do usuário
+      \lstinputlisting[basicstyle=\ttfamily\scriptsize]{assets/txt/log10.txt}
     \end{itemize}

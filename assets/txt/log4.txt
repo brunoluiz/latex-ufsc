@@ -1,0 +1,3 @@
+19:23:24 [DEBUG] hmi.HmiManager: Hmi ScreenState changed from AUTH_SUCCESSFUL to CONNECTOR_SELECTION
+19:23:25 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
+19:23:26 [INFO ] transactions.TransactionManager: Starting charge via OCPP on connector 0. User ID tag: 4D16DC27

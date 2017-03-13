@@ -1,0 +1,31 @@
+19:23:29 [DEBUG] hmi.HmiManager: Hmi ScreenState changed from CHARGING_STARTED to DEFAULT
+19:23:30 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
+19:23:33 [DEBUG] ocpp.OcppManager: Starting to process the OCPP Commands Queue
+19:23:33 [DEBUG] connectors.AbstractConnector: Sending meter values for connector 0
+19:23:33 [DEBUG] ocpp.OcppManager: Finished OCPP Commands Queue processing
+19:23:35 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
+19:23:38 [DEBUG] ocpp.OcppManager: Starting to process the OCPP Commands Queue
+19:23:38 [DEBUG] connectors.AbstractConnector: Sending meter values for connector 0
+19:23:38 [DEBUG] ocpp.OcppManager: Finished OCPP Commands Queue processing
+19:23:39 [DEBUG] hmi.HmiManager: Hmi ScreenState changed from DEFAULT to AUTH_SCREEN
+19:23:41 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
+19:23:41 [DEBUG] transactions.TransactionImpl: Transaction 1486409008: (charging time: 15)
+19:23:43 [DEBUG] ocpp.OcppManager: Starting to process the OCPP Commands Queue
+19:23:43 [DEBUG] connectors.AbstractConnector: Sending meter values for connector 0
+19:23:43 [DEBUG] connectors.AbstractConnector: Sending meter values for connector 0
+19:23:43 [DEBUG] ocpp.OcppManager: Finished OCPP Commands Queue processing
+19:23:46 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
+19:23:46 [DEBUG] transactions.TransactionImpl: Transaction 1486409008: (charging time: 20)
+19:23:48 [DEBUG] ocpp.OcppManager: Starting to process the OCPP Commands Queue
+19:23:48 [DEBUG] connectors.AbstractConnector: Sending meter values for connector 0
+19:23:48 [DEBUG] connectors.AbstractConnector: Sending meter values for connector 0
+19:23:48 [DEBUG] ocpp.OcppManager: Finished OCPP Commands Queue processing
+19:23:49 [DEBUG] hmi.HmiManager: Hmi ScreenState changed from AUTH_SCREEN to DEFAULT
+19:23:51 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors
+19:23:51 [DEBUG] transactions.TransactionImpl: Transaction 1486409008: (charging time: 25)
+19:24:14 [INFO ] ocpp.LocalChargePointClient15: Received ocpp.cs._2012._06.HeartbeatRequest
+19:24:14 [DEBUG] utils.SystemUtils: SYNCHORNIZING CLOCK: setting date to 2017-02-06 19:24:14
+19:24:24 [DEBUG] ocpp.OcppManager: Starting to process the OCPP Commands Queue
+19:24:24 [DEBUG] connectors.AbstractConnector: Sending meter values for connector 0
+19:24:24 [DEBUG] ocpp.OcppManager: Finished OCPP Commands Queue processing
+19:24:28 [DEBUG] connectors.ConnectorsSupervisor: Reading measurements from all transaction connectors

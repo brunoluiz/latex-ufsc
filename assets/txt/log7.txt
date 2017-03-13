@@ -1,0 +1,7 @@
+19:23:28 [INFO ] ocpp.LocalChargePointClient15: Received ocpp.cs._2012._06.StatusNotificationRequest
+19:23:28 [INFO ] ocpp.LocalChargePointClient15: Connector: 0
+19:23:28 [INFO ] ocpp.LocalChargePointClient15: - Status: OCCUPIED
+19:23:28 [INFO ] ocpp.LocalChargePointClient15: - Error code: NO_ERROR
+19:23:28 [INFO ] ocpp.LocalChargePointClient15: - Info: 
+19:23:28 [INFO ] ocpp.LocalChargePointClient15: Received ocpp.cs._2012._06.StartTransactionRequest
+19:23:28 [INFO ] ocpp.LocalChargePointClient15: LocalChargePointClient15: transaction id = 1486409008

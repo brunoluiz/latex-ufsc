@@ -1,0 +1,7 @@
+19:24:29 [DEBUG] ocpp.OcppManager: Starting to process the OCPP Commands Queue
+19:24:29 [INFO ] ocpp.LocalChargePointClient15: Received ocpp.cs._2012._06.StatusNotificationRequest
+19:24:29 [INFO ] ocpp.LocalChargePointClient15: Connector: 0
+19:24:29 [INFO ] ocpp.LocalChargePointClient15: - Status: AVAILABLE
+19:24:29 [INFO ] ocpp.LocalChargePointClient15: - Error code: NO_ERROR
+19:24:29 [INFO ] ocpp.LocalChargePointClient15: - Info: 
+19:24:29 [INFO ] ocpp.LocalChargePointClient15: Received ocpp.cs._2012._06.StopTransactionRequest

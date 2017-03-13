@@ -1,0 +1,1 @@
+19:23:22 [DEBUG] hmi.WegHmiDevice: Got RFID tag: 4D16DC27
