@@ -31,7 +31,7 @@
 
     Simulou-se a inicialização e finalização de cargas no conector modo 2, onde foram seguidos fluxos similares as figuras \ref{fig:sw-starttransaction} e \ref{fig:sw-stoptransaction}, já que essas permitem verificar diversos aspectos do sistema: autenticação, comunicação externa e com medidores, criação de transações, verificação de falhas, entre outras.
 
-    O conector modo 3 \textit{Mennekes} não pode ser testado na bancada de testes pois, para habilitar o carregamento, é necessário realizar todo sequenciamento apresentado na figura \ref{fig:phoenix} e este só seria possível se houvesse um veículo próximo a bancada. Portanto, este ficou para ser testado na própria estação protótipo.
+    O conector modo 3 não pode ser testado na bancada de testes pois, para habilitar o carregamento, é necessário realizar todo sequenciamento apresentado na figura \ref{fig:phoenix} e este só seria possível se houvesse um veículo próximo a bancada. Portanto, este ficou para ser testado na própria estação protótipo.
 
     Todos arquivos, incluindo o sistema operacional, são colocados em um cartão SD, o que facilita a cópia desses dados para a realização de cópias de segurança (criação de imagens), possibilitando o intercâmbio do sistema entre a bancada de testes e a estação protótipo.
 
@@ -70,14 +70,14 @@
       \end{center}
     \end{figure}
 
-    Como não foi possível testar o conector modo 3 \textit{Mennekes} previamente, alguns problemas surgiram também. O conector do veículo de testes, Mitsubishi Miev, usa o padrão americano. Portanto, é necessário um adaptador para o padrão \textit{Mennekes} para carregá-lo. Porém, tal adaptador gerou falhas elétricas que impossibilitavam o carregamento contínuo do veículo, como mal contato entre os pinos do adaptador e do conector, visto que o \textit{Phoenix} desativa o carregamento imediatamente ao perceber alguma falha. Para resolver esse problema, o adaptador foi cortado em alguns milímetros para possibilitar que os pinos de contato ficassem mais próximos, além de o \textit{software} mandar um comando para o \textit{Phoenix} limitar a corrente máxima permitida (visto que há suspeita de que, devido ao adaptador, o carregamento não pode exigir muita potência). Deste modo foi possível fazer alguns carregamentos experimentais, porém nenhum longo foi realizado devido a limitações de tempo e problemas com o veículo.
+    Como não foi possível testar o conector modo 3 previamente, alguns problemas surgiram também. O conector do veículo de testes, Mitsubishi Miev, usa o padrão americano. Portanto, é necessário um adaptador para o padrão \textit{Mennekes} para carregá-lo. Porém, tal adaptador gerou falhas elétricas que impossibilitavam o carregamento contínuo do veículo, como mal contato entre os pinos do adaptador e do conector, visto que o \textit{Phoenix} desativa o carregamento imediatamente ao perceber alguma falha. Para resolver esse problema, o adaptador foi cortado em alguns milímetros para possibilitar que os pinos de contato ficassem mais próximos, além de o \textit{software} mandar um comando para o \textit{Phoenix} limitar a corrente máxima permitida (visto que há suspeita de que, devido ao adaptador, o carregamento não pode exigir muita potência). Deste modo foi possível fazer alguns carregamentos experimentais, porém nenhum longo foi realizado devido a limitações de tempo e problemas com o veículo.
 
-    Em um teste anterior com um BMW i3 sem o \textit{software} de controle, foi realizado um carregamento longo, sem nenhuma falha, com o conector \textit{Mennekes}. A figura \ref{fig:evse-charge} mostra a curva de corrente x tempo do carregamento, onde a estação chega a fornecer um máximo de 25,1 A e levou aproximadamente 4h30m para finalizar o carregamento. Poderia ser ainda mais rápido caso a estação possuísse um conector modo 4 (seção \ref{stateofart:modes:europe:mode4}).
+    Em um teste anterior com um BMW i3 sem o \textit{software} de controle, foi realizado um carregamento longo, sem nenhuma falha, com o conector modo 3. A figura \ref{fig:evse-charge} mostra a curva de corrente x tempo do carregamento, onde a estação chega a fornecer um máximo de 25,1 A e levou aproximadamente 4h30m para finalizar o carregamento. Poderia ser ainda mais rápido caso a estação possuísse um conector modo 4 (seção \ref{stateofart:modes:europe:mode4}).
 
     \begin{figure}[H]
       \begin{center}
         \includegraphics[width=\textwidth,natwidth=1420,natheight=2130]{assets/images/evse-charge.png}
-        \caption{Gráfico Corrente x Tempo para carregamento do BMW i3 utilizando o conector modo 3 \textit{Mennekes}}
+        \caption{Gráfico Corrente x Tempo para carregamento do BMW i3 utilizando o conector modo 3}
         \label{fig:evse-charge}
       \end{center}
     \end{figure}
