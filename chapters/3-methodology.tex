@@ -176,14 +176,22 @@
     \subsection{WSDL e SOAP}
     \label{methodology:tools:wsdlsoap}
 
-      O WSDL \cite{w3c-spec-wsdl} permite descrever serviços web por meio de um arquivo \textit{\ac{XML}}. É possível definir os \textit{endpoints} - pontos de entrada para requisições - com o que devem retornar e o que devem receber como parâmetros. Isso permite que um serviço \textit{web} seja desenvolvido por uma equipe que, posteriormente, exporta um \textit{\ac{WSDL}} descrevendo de maneira fácil quais são seus \textit{endpoints}, o que facilita a criação de clientes ou servidores compatíveis com o serviço.
+      O WSDL \cite{w3c-spec-wsdl} permite descrever serviços web por meio de um arquivo \textit{\ac{XML}}. É possível definir os \textit{endpoints} - pontos de entrada para requisições - com o que devem retornar e o que devem receber como parâmetros. Isso permite que um serviço \textit{web} seja desenvolvido por uma equipe que, posteriormente, exporta um \textit{\ac{WSDL}} descrevendo de maneira fácil quais são seus \textit{endpoints}. Isso facilita a criação de clientes ou servidores compatíveis com o serviço criado.
 
-      Os arquivos WSDL definem suas interfaces em \textit{\ac{SOAP}} \cite{w3c-spec-soap}, um protocolo que permite trocas de informações entre clientes e servidores de forma padronizada. Sendo baseado em \textit{\ac{XML}}, é montado em três partes:
+      Os arquivos \textit{\ac{WSDL}} definem suas interfaces em \textit{\ac{SOAP}} \cite{w3c-spec-soap}, um protocolo que permite trocas de informações entre clientes e servidores de forma padronizada, baseada em \textit{\ac{XML}}. As mensagens \textit{\ac{SOAP}} são montadas em três partes, que são representadas na figura \ref{fig:soap}.
       \begin{itemize}
         \item Envelope: identifica o que é a mensagem e como processá-la
-        \item Cabeçalho: define informações extras sobre a mensagem
-        \item Corpo: define o procedimento a ser chamado e os dados de sua resposta
+        \item Cabeçalho (\textit{Header}): define informações extras sobre a mensagem
+        \item Corpo (\textit{Body}): define o procedimento a ser chamado e os dados de sua resposta
       \end{itemize}
+
+      \begin{figure}[H]
+          \begin{center}
+            \includegraphics[width=0.5\textwidth,natwidth=585,natheight=180]{assets/images/soap.png}
+            \caption{Organização de mensagem \textit{SOAP}}
+            \label{fig:soap}
+          \end{center}
+        \end{figure}
 
       Como o \textit{\ac{WSDL}} foi idealizado em \textit{\ac{XML}}, é facilmente processado por qualquer linguagem de programação, o que garante uma boa portabilidade.
 
